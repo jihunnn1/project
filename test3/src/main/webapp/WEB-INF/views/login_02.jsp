@@ -137,36 +137,34 @@
 .Easy-sgin-in-wrap4 .sign-button-list4 li button i {
 	font-size: 25px;
 }
+
 </style>
 <script type="text/javascript">
+	//로그인
+	function Login() {
 
-  //로그인
-  function Login()
-  {       
-	  
-          var form = document.checkLogin;
-          //아이디 검사 ---------------------------------------------------------------------------
-          if (form.id.value == "")
-          {
-               alert("아이디를 입력해주세요!");
-               form.id.focus();//포커스를 id박스로 이동.
- 
-          }else if (form.pwd.value == "")//패스워드 검사 -------------------------------------------------------------------------
-           {
-                alert("비밀번호를 입력해주세요!");
-                form.pwd.focus();//포커스를 Password박스로 이동.
-           }else{
+		var form = document.checkLogin;
+		//아이디 검사 ---------------------------------------------------------------------------
+		if (form.id.value == "") {
+			alert("아이디를 입력해주세요!");
+			form.id.focus();//포커스를 id박스로 이동.
 
-               form.submit();
+		} else if (form.pwd.value == "")//패스워드 검사 -------------------------------------------------------------------------
+		{
+			alert("비밀번호를 입력해주세요!");
+			form.pwd.focus();//포커스를 Password박스로 이동.
+		} else {
 
-               
-           }
-   }
-  </script>
+			form.submit();
+
+		}
+	}
+</script>
 </head>
 <title>주문결제창</title>
 <body>
-<section class="ftco-section testimony-section"
+
+	<section class="ftco-section testimony-section"
 		style="padding-top: 50px;">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3"
@@ -227,8 +225,8 @@
 									value="on"> <label id="id_pwd_save" for="saveIdPwd"
 									class="on">아이디/비밀번호 저장</label> <span id="find_id_pwd">
 									<button onclick="location.href='Login-03.jsp'"
-										style="border: 1px solid grey; color: black; margin-right: 1px;" class="btn_member_id_pwd">아이디/비밀번호찾기
-									</button>
+										style="border: 1px solid grey; color: black; margin-right: 1px;"
+										class="btn_member_id_pwd">아이디/비밀번호찾기</button>
 								</span>
 							</div>
 							<span id="btn_submit_login"> <input type="submit"
@@ -237,7 +235,8 @@
 							</span>
 							<section class="Easy-sgin-in-wrap3">
 								<ul class="sign-button-list3" style="list-style: none;">
-									<li><button onclick="location.href='#'"
+									<li><button id="naver_id_login"
+											onclick="location.href='${url}'"
 											style="background-color: #212529; color: white; width: 349px; margin-bottom: 10px;">
 											<img
 												src="${contextPath}/resources/images/login/logo-naver.jpg"
@@ -277,6 +276,7 @@
 			</section>
 		</div>
 	</section>
+
 
 </body>
 </html>
