@@ -10,23 +10,28 @@
     
 		 
 		<!--글쓰기 유효형 검사-->
-		$("#form01").on("click", function()){
+		function CS_write() {
+			var form = document.Checkwrite;
 			
-			var category=$("#category").val();
-			var title=$("#title").val();
-			var content=$("#content").val();
-			var img=$("#img").val();
-			
-			if(category==""){
-				alert("카테고리를 선택해주세요");
-			} else if(title=""){
-				alert("제목을 써주세요");
-			} else if(content=""){
-				alert("내용을 입력해주세요");
+			if(form.category.value=="") {
+				alert("문의유형을 선택해주세요")
+				form.category.focus();
+				return false;
 			}
 			
+			if (form.title.value == "") {
+				alert("글 제목을 입력해주세요")
+				document.form.title.focus();
+			}
 			
-	</script>
+			if (form.content.value == "") {
+				alert("글 내용을 입력해주세요")
+				document.form.content.focus();
+			}
+			form.submit();
+		}
+			
+</script>			
 <style>
 
 #buttonmy {
@@ -105,7 +110,7 @@
 			</div>
 				
 			<!-- 내용 -->
-			<form id="form01"  method="post">
+			<form name="Checkwrite" action=""  method="post">
 				<table class=table style="padding-top: 50px; border-top: #212529;">
 
 					<tr style="background-color: #212529; margin-top: 20px;"
@@ -115,7 +120,7 @@
 					<tr style="border-top: 1px solid #212529;">
 						<td
 							style="padding-left: 95px; font-weight: bold; padding-right: 100px;">문의유형</td>
-						<td style="background-color: white;"><select id="category"
+						<td style="background-color: white;"><select name="category"
 							style="height: 28px;">
 								<option value="">선택</option>
 								<option value="배송문의">배송문의</option>
@@ -127,14 +132,14 @@
 						<td
 							style="padding-left: 95px; font-weight: bold; padding-top: 25px;">제목</td>
 						<td style="padding-top: 25px; background-color: white;"><input
-							type=text id="title" name="title" size=60
+							type=text name="title" size=60 value=""
 							style="height: 28px; border: 1px solid #aaaaaa; border-radius: 3px;"></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 95px; font-weight: bold;">내용</td>
 						<td style="padding-top: 25px; background-color: white;"><input
-							type="text" id="content" name="content"
-							style="width: 510px; height: 300px" name=content
+							type="text" name="content" value=""
+							style="width: 510px; height: 300px" 
 							style="padding-top:25px; border-color:	#aaaaaa;"></td>
 					</tr>
 					<tr>
@@ -146,7 +151,7 @@
 				</table>
 				<hr style="border-color: #212529;; width: 100%;">
 				<div>
-					<button type="button" onclick="write();" class="btn btn-dark "
+					<button type="button" onclick="CS_write();" class="btn btn-dark "
 						id="buttonmy" style="margin-left: 630px; margin-top: 30px;">등록</button>
 
 					<button type="button" onclick="location.href=''"
