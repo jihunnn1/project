@@ -1,4 +1,4 @@
-package com.myspring.test3;
+package com.myspring.test3.member.controller;
 import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;

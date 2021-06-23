@@ -362,7 +362,7 @@ h3 {
 				</ul>
 			</div>
 
-			<form name="CheckJoin" action="join-02.jsp" method="post">
+			<form name="CheckJoin" action="${contextPath}/member/addMember.do" method="post">
 				<section class="ftco-section testimony-section" id="sect"
 					style="padding-top: 50px; padding-left: 170px;">
 
@@ -565,7 +565,7 @@ h3 {
 	</section>
 
 	<div style="text-align: center; padding-bottom: 70px">
-		<input type="button" name="modify" value="회원가입 "
+		<input type="submit" name="modify" value="회원가입 "
 			style="padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" onclick="Check_Join()"> <input
 			type="reset" name="reset" value="취    소" style="width: 75px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;"
 			onclick="location.href='/Main'">
