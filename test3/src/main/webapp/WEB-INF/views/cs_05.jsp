@@ -6,34 +6,32 @@
 <html lang="en">
 <head>
 
-<script type="text/javascript"> 
-    
-		 
-		<!--글쓰기 유효형 검사-->
-		function CS_write() {
-			var form = document.Checkwrite;
-			
-			if(form.category.value=="") {
-				alert("문의유형을 선택해주세요")
-				form.category.focus();
-				return false;
-			}
-			
-			if (form.title.value == "") {
-				alert("글 제목을 입력해주세요")
-				document.form.title.focus();
-			}
-			
-			if (form.content.value == "") {
-				alert("글 내용을 입력해주세요")
-				document.form.content.focus();
-			}
-			form.submit();
-		}
-			
-</script>			
-<style>
+<script type="text/javascript">
+<!--글쓰기 유효형 검사-->
+	function CS_write() {
+		var form = document.Checkwrite;
 
+		if (form.category.value == "") {
+			alert("문의유형을 선택해주세요")
+			form.category.focus();
+			return false;
+		}
+
+		if (form.title.value == "") {
+			alert("글 제목을 입력해주세요")
+			document.form.title.focus();
+			return false;
+		}
+
+		if (form.content.value == "") {
+			alert("글 내용을 입력해주세요")
+			document.form.content.focus();
+			return false;
+		}
+		form.submit();
+	}
+</script>
+<style>
 #buttonmy {
 	width: 80px;
 	height: 30px;
@@ -58,8 +56,8 @@
 				</div>
 			</div>
 			<!-- 타이틀 끝 -->
-			
-			
+
+
 			<!-- 최근 본 상품 -->
 			<div id="recentlyProduct"
 				style="position: absolute; width: 120px; height: 310px; margin-left: 1370px; border: 1px solid #d2d2d2; margin-top: -100px;">
@@ -108,9 +106,9 @@
 						style="font-size: 25px; border: none; color: #5a5a5a; background-color: white;">*A/S센터</button>
 				</div>
 			</div>
-				
+
 			<!-- 내용 -->
-			<form name="Checkwrite" action=""  method="post">
+			<form name="Checkwrite" action="" method="post">
 				<table class=table style="padding-top: 50px; border-top: #212529;">
 
 					<tr style="background-color: #212529; margin-top: 20px;"
@@ -139,7 +137,7 @@
 						<td style="padding-left: 95px; font-weight: bold;">내용</td>
 						<td style="padding-top: 25px; background-color: white;"><input
 							type="text" name="content" value=""
-							style="width: 510px; height: 300px" 
+							style="width: 510px; height: 300px"
 							style="padding-top:25px; border-color:	#aaaaaa;"></td>
 					</tr>
 					<tr>
@@ -162,6 +160,6 @@
 		</div>
 	</section>
 	<!-- 내용 끝 -->
-	
+
 </body>
 </html>

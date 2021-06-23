@@ -5,6 +5,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script type="text/javascript">
+<!--글쓰기 유효성 검사-->
+	function CS_write(){
+		var form = document.Checkwrite;
+		
+		if(form.writer.value=="") {
+			alert("작성자를 입력해주세요")
+			form.writer.focus();
+			return false;
+		}
+		
+		if(form.title.value==""){
+			alert("제목을 입력해주세요")
+			form.title.focus();
+			return false;
+		}
+		
+		if(form.content.value==""){
+			alert("글 내용을 입력해주세요")
+			document.form.content.focus();
+			return false;
+		}
+		form.submit();
+		
+	}
+
+
+
+
+</script>
+
 <style>
 .page_wrap {
 	text-align: center;
@@ -141,6 +173,7 @@
 						style="font-size: 28px; font-weight: bold; border: none; color: #5a5a5a; background-color: white;">*A/S센터</button>
 				</div>
 			</div>
+			<form name="Checkwrite" action="" method="post">
 			<table class=table style="padding-top: 50px; border-top: #212529;">
 
 				<tr style="background-color: #212529; margin-top: 20px;"
@@ -151,28 +184,29 @@
 					<td
 						style="padding-left: 95px; font-weight: bold; padding-right: 100px; padding-top: 20px;">작성자</td>
 					<td style="padding-top: 25px; background-color: white;"><input
-						type=text name=title size=60
+						type=text name="writer" value="" size=60
 						style="height: 28px; border: 1px solid #aaaaaa; border-radius: 3px; width: 150px;"></td>
 				</tr>
 				<tr>
 					<td
 						style="padding-left: 95px; font-weight: bold; padding-top: 25px;">제목</td>
 					<td style="padding-top: 25px; background-color: white;"><input
-						type=text name=title size=60
+						type=text name="title" value="" size=60
 						style="height: 28px; border: 1px solid #aaaaaa; border-radius: 3px;"></td>
 				</tr>
 				<tr>
 					<td
-						style="padding-left: 95px; font-weight: bold; padding-top: 200px;">내용</td>
-					<td style="padding-top: 25px; background-color: white;"><textarea
-							name=content cols=105 rows=15
-							style="padding-top: 25px; border-color: #aaaaaa; border-radius: 3px;"></textarea></td>
+						style="padding-left: 95px; font-weight: bold; vertical-align:middle; ">내용</td>
+					<td style="padding-top: 25px; background-color: white;"><input
+							type="text" name="content" value=""
+							style="width: 510px; height: 300px" 
+							style="padding-top:25px; border-color:	#aaaaaa;"></td>
 				</tr>
 				<tr>
 					<td
-						style="padding-left: 95px; font-weight: bold; padding-top: 20px;">비밀번호</td>
+						style="padding-left: 95px;  font-weight: bold; padding-top: 20px;">비밀번호</td>
 					<td style="padding-top: 25px; background-color: white;"><input
-						type=text name=title size=60
+						type=text name="pwd" size=60
 						style="height: 28px; border: 1px solid #aaaaaa; border-radius: 3px; width: 150px;"></td>
 				</tr>
 				<tr>
@@ -182,9 +216,10 @@
 						onchange="readURL(this);" style="padding-top: 25px;"></td>
 				</tr>
 			</table>
+			</form>
 			<hr style="border-color: #212529;; width: 100%;">
 			<div>
-				<button type="submit" class="btn btn-dark " id="buttonmy"
+				<button type="button" onclick="CS_write()" class="btn btn-dark " id="buttonmy"
 					style="margin-left: 630px; margin-top: 30px;">등록</button>
 				<button type="submit" class="btn btn-dark " id="buttonmy"
 					style="margin-left: 730px; margin-top: -30px;">목록</button>

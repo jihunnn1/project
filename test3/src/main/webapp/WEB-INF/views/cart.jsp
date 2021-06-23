@@ -183,17 +183,6 @@
 						class="btn btn-dark" style="margin-left: 20px; width: 120px;">전체상품주문</button>
 				</div>
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
 		</div>
 	</section>
 </body>
