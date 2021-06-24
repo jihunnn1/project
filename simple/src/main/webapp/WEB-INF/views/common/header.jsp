@@ -11,7 +11,7 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="" class="nav-link"  style="margin-bottom:100px;">LOGIN</a></li>
+	        	<li class="nav-item active"><a href="${ContextPath}/WEB-INF/views/login_01.jsp" class="nav-link"  style="margin-bottom:100px;">LOGIN</a></li>
 	        	<li class="nav-item"><a href="" class="nav-link">JOIN</a></li>
 	        	<li class="nav-item"><a href="" class="nav-link">MYPAGE</a></li>
 	        	<li class="nav-item"><a href="" class="nav-link">매장안내</a></li>
