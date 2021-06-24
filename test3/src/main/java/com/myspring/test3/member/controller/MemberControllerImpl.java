@@ -57,7 +57,7 @@ public class MemberControllerImpl implements MemberController  {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "cart";
+		return "join_01";
 	}
 	
 	@Override
@@ -65,7 +65,6 @@ public class MemberControllerImpl implements MemberController  {
 	public ModelAndView addMember(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
 		int result=0;
 		result = memberService.addMember(member);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMember.do");

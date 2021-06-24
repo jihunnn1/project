@@ -45,7 +45,7 @@
 	<beans:bean id="naverLoginBO" class="com.myspring.test3.member.controller.NaverLoginBO" />
 	
 	
-	<context:component-scan base-package="com.myspring.test3.member.controller" />
+	<context:component-scan base-package="com.myspring.test3" />
 	
 	
 	

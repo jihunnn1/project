@@ -362,7 +362,7 @@ h3 {
 				</ul>
 			</div>
 
-			<form name="CheckJoin" action="${contextPath}/member/addMember.do" method="post">
+			<form name="CheckJoin" action="${contextPath}/member/addMembers.do" method="post">
 				<section class="ftco-section testimony-section" id="sect"
 					style="padding-top: 50px; padding-left: 170px;">
 
@@ -377,7 +377,7 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="user_name" style="padding-left: 10px;">
-											<input type="text" name="user_name" size="20" value="" style="margin-bottom: 10px;">
+											<input type="text" name="memName" size="20" value="" style="margin-bottom: 10px;">
 										</td>
 									</tr>
 									<tr>
@@ -387,7 +387,7 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="user_id" style="padding-left: 10px;">
-											<input type="text" name="user_id" size="30" value="" style="margin-bottom: 10px;">
+											<input type="text" name="memId" size="30" value="" style="margin-bottom: 10px;">
 											<input type="button" name="check_id_overlap" value="중복확인"
 											onclick="id_check()"> <input type="hidden"
 											name="idDuplication" value="idUncheck">
@@ -401,7 +401,7 @@ h3 {
 										</td>
 										<td colspan="3" class="user_password1"
 											style="padding-left: 10px;"><input type="password"
-											name="user_password1" size="30" value=""></td>
+											name="memPwd" size="30" value=""></td>
 									</tr>
 									<tr>
 										<td class="user_password2">
@@ -411,7 +411,7 @@ h3 {
 										</td>
 										<td colspan="3" class="user_password2"
 											style="padding-left: 10px;"><input type="password"
-											name="user_password2" size="30" value=""></td>
+											name="memPwd1" size="30" value=""></td>
 									</tr>
 									<tr>
 										<td class="email">
@@ -420,8 +420,8 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="email" style="padding-left: 10px;">
-											<input type="text" name="email1" value="" size="13" style="margin-bottom: 10px;">
-											@ <select name="email2"  id="selcet1"
+											<input type="text" name="memEmail" value="" size="13" style="margin-bottom: 10px;">
+											@ <select name="memEmail"  id="selcet1"
 											style="height: 34px;">
 												<option value="naver.com">naver.com</option>
 												<option value="gmail.com">gmail.com</option>
@@ -438,7 +438,7 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="phone" style="padding-left: 10px;">
-											<select name="phone1"  id="selcet1"
+											<select name="memPhoneNum"  id="selcet1"
 											style="height: 34px;margin-bottom: 10px;">
 												<option value="">선택</option>
 												<option value="010">010</option>
@@ -447,8 +447,8 @@ h3 {
 												<option value="017">017</option>
 												<option value="019">019</option>
 												<option value="010">010</option>
-										</select>- <input type="text" name="phone2" value="" size="3">-
-											<input type="text" name="phone3" value="" size="3"> <input
+										</select>- <input type="text" name="memPhoneNum" value="" size="3">-
+											<input type="text" name="memPhoneNum" value="" size="3"> <input
 											type="button" name="phone_certification"
 											onclick="phone_check()" value="핸드폰인증">
 										</td>
@@ -460,7 +460,7 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="addr1" style="padding-left: 10px;">
-											<input type="text" name="zipcode" id="sample6_postcode" readonly size="10" style="margin-bottom: 10px;"> 
+											<input type="text" name="memAdr" id="sample6_postcode" readonly size="10" style="margin-bottom: 10px;"> 
 											<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 										</td>
 									</tr>
@@ -469,7 +469,7 @@ h3 {
 											<div align="right"></div>
 										</td>
 										<td colspan="3" class="addr2" style="padding-left: 10px;">
-											<input type="text" style="margin-bottom: 10px;" name="address1" id="sample6_address" size="30" value=""><input type="text" name="address2" id="sample6_address2" size="30" value="">
+											<input type="text" style="margin-bottom: 10px;" name="memAdr" id="sample6_address" size="30" value=""><input type="text" name="address2" id="sample6_address2" size="30" value="">
 										</td>
 											
 		
@@ -560,16 +560,17 @@ h3 {
 						</div>
 					</div>
 				</section>
+				<div style="text-align: center; padding-bottom: 70px">
+					<input type="submit" name="modify" value="회원가입 "
+						style="padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" > <input
+						type="reset" name="reset" value="취    소" style="width: 75px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;"
+						onclick="location.href='/Main'">
+				</div>
 			</form>
 		</div>
 	</section>
 
-	<div style="text-align: center; padding-bottom: 70px">
-		<input type="submit" name="modify" value="회원가입 "
-			style="padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" onclick="Check_Join()"> <input
-			type="reset" name="reset" value="취    소" style="width: 75px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;"
-			onclick="location.href='/Main'">
-	</div>
+	
 
 
 
