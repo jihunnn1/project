@@ -60,11 +60,13 @@ public class MemberControllerImpl implements MemberController  {
 		return "join_01";
 	}
 	
+	
 	@Override
 	@RequestMapping(value="/member/addMembers.do", method=RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
 		int result=0;
 		result = memberService.addMember(member);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMember.do");
