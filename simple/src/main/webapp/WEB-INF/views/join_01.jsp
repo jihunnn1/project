@@ -73,142 +73,142 @@ h3 {
 	function Check_Join() {
 		var form = document.CheckJoin;
 
-		if (form.user_name.value == "") {
+		if (form.memName.value == "") {
 			alert("이름을 입력하지 않았습니다.")
-			form.user_name.focus();
+			form.memName.focus();
 			return false;
 		}
 
-		if (form.user_name.value.length < 2) {
+		if (form.memName.value.length < 2) {
 			alert("이름을 2자 이상 입력해주십시오.")
-			document.form.user_name.focus();
+			document.form.memName.focus();
 			return false;
 		}
 
 		//아이디 입력여부 검사
-		if (form.user_id.value == "") {
+		if (form.memId.value == "") {
 			alert("아이디를 입력해주세요!")
-			form.user_id.focus();
+			form.memId.focus();
 			return false;
 		}
 		//아이디 유효성 검사 (영문소문자, 숫자만 허용)
-		for (var i = 0; i < form.user_id.value.length; i++) {
-			ch = form.user_id.value.charAt(i)
+		for (var i = 0; i < form.memId.value.length; i++) {
+			ch = form.memId.value.charAt(i)
 			if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')
 					&& !(ch >= 'A' && ch <= 'Z')) {
 				alert("아이디는 영문 대소문자, 숫자만 입력가능합니다.")
-				form.user_id.focus();
-				form.user_id.select();
+				form.memId.focus();
+				form.memId.select();
 				return false;
 			}
 		}
 
 		//아이디에 공백 사용하지 않기
-		if (form.user_id.value.indexOf(" ") >= 0) {
+		if (form.memId.value.indexOf(" ") >= 0) {
 			alert("아이디에 공백을 사용할 수 없습니다.")
-			form.user_id.focus();
-			form.user_id.select();
+			form.memId.focus();
+			form.memId.select();
 			return false;
 		}
 		//아이디 길이 체크 (4~12자)
-		if (form.user_id.value.length<4 || form.user_id.value.length>12) {
+		if (form.memId.value.length<4 || form.memId.value.length>12) {
 			alert("아이디를 4~12자까지 입력해주세요.")
-			form.user_id.focus();
-			form.user_id.select();
+			form.memId.focus();
+			form.memId.select();
 			return false;
 		}
 
 		//비밀번호 입력여부 체크
-		if (form.user_password1.value == "") {
+		if (form.memPwd.value == "") {
 			alert("비밀번호를 입력하지 않았습니다.")
-			form.user_password1.focus();
+			form.memPwd.focus();
 			return false;
 
 		}
-		if (form.user_password1.value == form.user_id.value) {
+		if (form.memPwd.value == form.memId.value) {
 			alert("아이디와 비밀번호가 같습니다.")
-			form.user_password1.focus();
+			form.memPwd.focus();
 			return false;
 		}
 		//비밀번호 길이 체크(10자이상 허용)
-		if (form.user_password1.value.length < 9) {
+		if (form.memPwd.value.length < 9) {
 			alert("비밀번호를 10자이상 입력해주세요.")
-			form.user_password1.focus();
-			form.user_password1.select();
+			form.memPwd.focus();
+			form.memPwd.select();
 			return false;
 		}
 		//비밀번호 유효성 검사 (영문소문자, 숫자만 허용)
-		for (var i = 0; i < form.user_password1.value.length; i++) {
-			ch = form.user_password1.value.charAt(i)
+		for (var i = 0; i < form.memPwd.value.length; i++) {
+			ch = form.memPwd.value.charAt(i)
 			if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')
 					&& !(ch >= 'A' && ch <= 'Z')) {
 				alert("비밀번호는 영문 대소문자, 숫자만 입력가능합니다.")
-				form.user_password1.focus();
-				form.user_password1.select();
+				form.memPwd.focus();
+				form.memPwd.select();
 				return false;
 			}
 		}
 		//비밀번호와 비밀번호 확인 일치여부 체크
-		if (form.user_password1.value != form.user_password2.value) {
+		if (form.memPwd.value != form.memPwd1.value) {
 			alert("비밀번호가 일치하지 않습니다")
-			form.user_password2.value = ""
-			form.user_password2.focus();
+			form.memPwd1.value = ""
+			form.memPwd1.focus();
 			return false;
 		}
-		if (form.email1.value == "") {
+		if (form.memEmail.value == "") {
 			alert("이메일을 입력하지 않았습니다.")
-			form.email1.focus();
+			form.memEmail.focus();
 			return false;
 		}
 
-		for (var i = 0; i < form.email1.value.length; i++) {
-			chm = form.email1.value.charAt(i)
+		for (var i = 0; i < form.memEmail.value.length; i++) {
+			chm = form.memEmail.value.charAt(i)
 			if (!(chm >= '0' && chm <= '9') && !(chm >= 'a' && chm <= 'z')
 					&& !(chm >= 'A' && chm <= 'Z')) {
 				alert("이메일은 영문 대소문자, 숫자만 입력가능합니다.")
-				form.email1.focus();
-				form.email1.select();
+				form.memEmail.focus();
+				form.memEmail.select();
 				return false;
 			}
 		}
-		if (form.phone1.value == "") {
+		if (form.memPhoneNum.value == "") {
 			alert("핸드폰번호를 입력하지 않았습니다..")
-			form.phone1.focus();
+			form.memPhoneNum.focus();
 			return false;
 		}
 
-		if (form.phone2.value == "") {
+		if (form.memPhoneNum1.value == "") {
 			alert("핸드폰번호를 입력하지 않았습니다.")
-			form.phone2.focus();
+			form.memPhoneNum1.focus();
 			return false;
 		}
 
-		for (var i = 0; i < form.phone2.value.length; i++) {
-			ch = form.phone2.value.charAt(i)
+		for (var i = 0; i < form.memPhoneNum1.value.length; i++) {
+			ch = form.memPhoneNum1.value.charAt(i)
 			if (!(ch >= '0' && ch <= '9')) {
 				alert("핸드폰번호는 숫자만 입력가능합니다.")
-				form.phone2.focus();
-				form.phone2.select();
+				form.memPhoneNum1.focus();
+				form.memPhoneNum1.select();
 				return false;
 			}
 		}
-		if (form.phone3.value == "") {
+		if (form.memPhoneNum2.value == "") {
 			alert("핸드폰번호를 입력하지 않았습니다.")
-			form.phone3.focus();
+			form.memPhoneNum2.focus();
 			return false;
 		}
-		for (var i = 0; i < form.phone3.value.length; i++) {
-			ch = form.phone3.value.charAt(i)
+		for (var i = 0; i < form.memPhoneNum2.value.length; i++) {
+			ch = form.memPhoneNum2.value.charAt(i)
 			if (!(ch >= '0' && ch <= '9')) {
 				alert("핸드폰번호는 숫자만 입력가능합니다.")
-				form.phone3.focus();
-				form.phone3.select();
+				form.memPhoneNum2.focus();
+				form.memPhoneNum2.select();
 				return false;
 			}
 		}
-		if (form.address1.value == "") {
+		if (form.memAdr.value == "") {
 			alert("주소를 입력하지 않았습니다.")
-			form.address1.focus();
+			form.memAdr.focus();
 			return false;
 		}
 
@@ -421,7 +421,7 @@ h3 {
 										</td>
 										<td colspan="3" class="email" style="padding-left: 10px;">
 											<input type="text" name="memEmail" value="" size="13" style="margin-bottom: 10px;">
-											@ <select name="memEmail"  id="selcet1"
+											@ <select name="memEmail1"  id="selcet1"
 											style="height: 34px;">
 												<option value="naver.com">naver.com</option>
 												<option value="gmail.com">gmail.com</option>
@@ -447,8 +447,8 @@ h3 {
 												<option value="017">017</option>
 												<option value="019">019</option>
 												<option value="010">010</option>
-										</select>- <input type="text" name="memPhoneNum" value="" size="3">-
-											<input type="text" name="memPhoneNum" value="" size="3"> <input
+										</select>- <input type="text" name="memPhoneNum1" value="" size="3">-
+											<input type="text" name="memPhoneNum2" value="" size="3"> <input
 											type="button" name="phone_certification"
 											onclick="phone_check()" value="핸드폰인증">
 										</td>
@@ -459,7 +459,7 @@ h3 {
 												<a style="color: red; padding-right: 5px;">*</a>주소
 											</div>
 										</td>
-										<td colspan="3" class="addr1" style="padding-left: 10px;">
+										<td colspan="3" class="addr" style="padding-left: 10px;">
 											<input type="text" name="memAdr" id="sample6_postcode" readonly size="10" style="margin-bottom: 10px;"> 
 											<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 										</td>
@@ -468,8 +468,8 @@ h3 {
 										<td class="addr2">
 											<div align="right"></div>
 										</td>
-										<td colspan="3" class="addr2" style="padding-left: 10px;">
-											<input type="text" style="margin-bottom: 10px;" name="memAdr" id="sample6_address" size="30" value=""><input type="text" name="address2" id="sample6_address2" size="30" value="">
+										<td colspan="3" class="addr1" style="padding-left: 10px;">
+											<input type="text" style="margin-bottom: 10px;" name="memAdr1" id="sample6_address" size="30" value=""><input type="text" name="memAdr2" id="sample6_address2" size="30" value="">
 										</td>
 											
 		
@@ -561,8 +561,8 @@ h3 {
 					</div>
 				</section>
 				<div style="text-align: center; padding-bottom: 70px">
-					<input type="submit" name="modify" value="회원가입 "
-						style="padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" > <input
+					<input type="button" name="modify" value="회원가입 "
+						style="padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" onclick="Check_Join()"> <input
 						type="reset" name="reset" value="취    소" style="width: 75px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;"
 						onclick="location.href='/Main'">
 				</div>

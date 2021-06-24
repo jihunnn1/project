@@ -27,9 +27,10 @@
 		<![CDATA[ 
 
 			insert into simple.member(memId, memName, memPwd, memEmail, memPhoneNum, memAdr) 
-			values(#{memId},#{memName},#{memPwd},#{memEmail},#{memPhoneNum},#{memAdr});
+			values(#{memId},#{memName},#{memPwd},(select concat(#{memEmail},#{memEmail1})),(select concat(#{memPhoneNum},#{memPhoneNum1},#{memPhoneNum2})),(select concat(#{memAdr},#{memAdr1},#{memAdr2})));
 		]]>
 	</insert>
 
 </mapper>
+		
 		
