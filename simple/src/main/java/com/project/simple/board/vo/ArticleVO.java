@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component("articleVO")
 
 public class ArticleVO {
+	//notice 게시판
 	private int noticeNum;
 	private Date noticeDate;
 	private String noticeTitle;
@@ -20,6 +21,7 @@ public class ArticleVO {
 	private String noticeImg;
 
 	
+	//notice 게시판
 	public ArticleVO() {
 		System.out.println("ArticleVO 생성자");
 	}

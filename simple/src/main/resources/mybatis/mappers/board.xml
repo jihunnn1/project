@@ -25,7 +25,9 @@
 	
 	<select id="selectAllArticlesList" resultMap="articlesResult">
 	<![CDATA[
-		select*from t_board
+			
+			select noticeNum, noticeDate, noticeTitle, noticeWriter from notice;
+			
 
 	]]>
 	</select>

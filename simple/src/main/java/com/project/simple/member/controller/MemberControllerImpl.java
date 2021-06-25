@@ -57,7 +57,7 @@ public class MemberControllerImpl implements MemberController  {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "main";
+		return "join_01";
 	}
 	
 	@Override

@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="articlesList" value="${articlesList}" />
+<c:set var="section" value="${articlesMap.section}" />
+<c:set var="pageNum" value="${articlesMap.pageNum}" />
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,56 +159,31 @@
 						<td scope="col" width="150">작성일</td>
 						<td scope="col" width="80">조회수</td>
 					</tr>
-					<tr
+				<c:choose>
+					<c:when test="${empty articlesList}">
+						<tr height="200">
+							<td colspan="5" style="background-color:white; padding-top:100px;">
+								<p align="center">
+									<b><span style="color:black; ">등록된 글이 없습니다.</sapn></b>
+								</p>
+							</td>
+						</tr>	
+					</c:when>
+					<c:when test="${!empty articlesList}">
+					<c:forEach var="article" items="${articlesList}" >
+						<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">1</td>
+						<td scope="col" width="50">${article.noticeNum}</td>
 						<td align="left" scope="col" width="500"><a href=""
-							style="color: black; padding-left: 30px;">8월 신용카드 무이자 할부
-								이벤트!!</a></td>
-						<td scope="col" width="150">Simple</td>
-						<td scope="col" width="150">2021-08-12</td>
+							style="color: black; padding-left: 30px;">${article.noticeTitle}</a></td>
+						<td scope="col" width="150">${article.noticeWriter }</td>
+						<td scope="col" width="150">${article.noticeDate}</td>
 						<td scope="col" width="80">0</td>
 					</tr>
-					<tr
-						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">1</td>
-						<td align="left" scope="col" width="500"><a href=""
-							style="color: black; padding-left: 30px;"> 7월 신용카드 무이자 할부
-								이벤트!!</a></td>
-						<td scope="col" width="150">Simple</td>
-						<td scope="col" width="150">2021-07-12</td>
-						<td scope="col" width="80">0</td>
-					</tr>
-					<tr
-						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">1</td>
-						<td align="left" scope="col" width="500"><a href=""
-							style="color: black; padding-left: 30px;"> 6월 신용카드 무이자 할부
-								이벤트!!</a></td>
-						<td scope="col" width="150">Simple</td>
-						<td scope="col" width="150">2021-06-12</td>
-						<td scope="col" width="80">0</td>
-					</tr>
-					<tr
-						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">1</td>
-						<td align="left" scope="col" width="500"><a href=""
-							style="color: black; padding-left: 30px;">5월 신용카드 무이자 할부
-								이벤트!!</a></td>
-						<td scope="col" width="150">Simple</td>
-						<td scope="col" width="150">2021-05-12</td>
-						<td scope="col" width="80">0</td>
-					</tr>
-					<tr
-						style="border-bottom: 1px solid #32383e; background-color: white; color: black;">
-						<td scope="col" width="50">1</td>
-						<td align="left" scope="col" width="500"><a href=""
-							style="color: black; padding-left: 30px;">4월 신용카드 무이자 할부
-								이벤트!!</a></td>
-						<td scope="col" width="150">Simple</td>
-						<td scope="col" width="150">2021-04-12</td>
-						<td scope="col" width="80">0</td>
-					</tr>
+					</c:forEach>
+					</c:when>
+					</c:choose>
+				
 				</thead>
 			</table>
 		</div>
