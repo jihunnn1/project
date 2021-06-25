@@ -173,7 +173,7 @@
 						<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
 						<td scope="col" width="50">${noticeNum.count}</td>
-						<td align="left" scope="col" width="500"><a href=""
+						<td align="left" scope="col" width="500"><a href="${contextPath}/board/viewNotice.do?noticeNum=${notice.noticeNum}"
 							style="color: black; padding-left: 30px;">${notice.noticeTitle}</a></td>
 						<td scope="col" width="150">${notice.noticeWriter }</td>
 						<td scope="col" width="150"><fmt:formatDate value="${notice.noticeDate}" /></td>
