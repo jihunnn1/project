@@ -9,7 +9,7 @@ import com.project.simple.board.vo.ArticleVO;
 
 
 public interface BoardDAO{
-	public List selectAllArticlesList() throws DataAccessException;
+	public List selectAllNoticeList() throws DataAccessException;
 
 
 

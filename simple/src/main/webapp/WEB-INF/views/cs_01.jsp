@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="articlesList" value="${articlesList}" />
-<c:set var="section" value="${articlesMap.section}" />
-<c:set var="pageNum" value="${articlesMap.pageNum}" />
+
+
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -160,7 +159,7 @@
 						<td scope="col" width="80">조회수</td>
 					</tr>
 				<c:choose>
-					<c:when test="${empty articlesList}">
+					<c:when test="${empty noticeList}">
 						<tr height="200">
 							<td colspan="5" style="background-color:white; padding-top:100px;">
 								<p align="center">
@@ -169,15 +168,15 @@
 							</td>
 						</tr>	
 					</c:when>
-					<c:when test="${!empty articlesList}">
-					<c:forEach var="article" items="${articlesList}" >
+					<c:when test="${!empty noticeList}">
+					<c:forEach var="notice" items="${noticeList}" varStatus="noticeNum">
 						<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">${article.noticeNum}</td>
+						<td scope="col" width="50">${noticeNum.count}</td>
 						<td align="left" scope="col" width="500"><a href=""
-							style="color: black; padding-left: 30px;">${article.noticeTitle}</a></td>
-						<td scope="col" width="150">${article.noticeWriter }</td>
-						<td scope="col" width="150">${article.noticeDate}</td>
+							style="color: black; padding-left: 30px;">${notice.noticeTitle}</a></td>
+						<td scope="col" width="150">${notice.noticeWriter }</td>
+						<td scope="col" width="150"><fmt:formatDate value="${notice.noticeDate}" /></td>
 						<td scope="col" width="80">0</td>
 					</tr>
 					</c:forEach>

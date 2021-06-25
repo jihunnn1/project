@@ -7,7 +7,7 @@ import com.project.simple.board.vo.ArticleVO;
 
 public interface BoardService {
 	
-	public List<ArticleVO> listArticles() throws Exception;
+	public List<ArticleVO> listNotice() throws Exception;
 
 
 

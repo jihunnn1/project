@@ -42,14 +42,12 @@ public class BoardControllerImpl implements BoardController{
 		private ArticleVO articleVO;
 		
 		@Override
-		@RequestMapping(value="board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView listArticles(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		@RequestMapping(value="board/listNotice.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView listNotice(HttpServletRequest request,HttpServletResponse response) throws Exception {
 			String viewName = (String)request.getAttribute("viewName");
-			List<ArticleVO> articlesList = boardService.listArticles();
+			List<ArticleVO> noticeList = boardService.listNotice();
 			ModelAndView mav = new ModelAndView(viewName);
-			mav.addObject("articlesList", articlesList);
-			System.out.println(articlesList);
-			System.out.println(mav);
+			mav.addObject("noticeList", noticeList);
 			return mav;
 		}
 }		
