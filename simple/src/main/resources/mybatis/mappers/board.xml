@@ -13,7 +13,8 @@
 		<result property="noticeContent" column="noticeContent"/>
 		<result property="noticeImg" column="noticeImg"/>
 	</resultMap>
-
+	
+	
 	<select id="selectAllNoticeList" resultMap="noticeResult">
 	<![CDATA[
 			
@@ -22,8 +23,16 @@
 
 	]]>
 	</select>
-	
+		
+	<select id="selectNotice" resultType="articleVO" parameterType="int"> 
+	<![CDATA[
+			
+			select * from notice
+			where noticeNum = #{noticeNum}
+			
 
+	]]>
+	</select>
 
 	
 

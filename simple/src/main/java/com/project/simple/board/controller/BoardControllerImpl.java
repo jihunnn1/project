@@ -35,7 +35,7 @@ import com.project.simple.member.vo.MemberVO;
 	
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController{
-		private static final String ARTICLE_IMAGE_REPO = "c:\\board\\article_image";
+		private static final String ARTICLE_IMAGE_REPO = "c:\\spring\\article_image";
 		@Autowired
 		private BoardService boardService;
 		@Autowired
@@ -50,4 +50,18 @@ public class BoardControllerImpl implements BoardController{
 			mav.addObject("noticeList", noticeList);
 			return mav;
 		}
+		
+		//한개 이미지 보여주기
+		@RequestMapping(value="/board/viewNotice.do", method=RequestMethod.GET)
+		public ModelAndView viewNotice(@RequestParam("noticeNum") int noticeNum,
+							HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = (String)request.getAttribute("viewName");
+			articleVO = boardService.viewNotice(noticeNum);
+			System.out.println(articleVO);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("notice", articleVO);
+			return mav;
+		}
+		
 }		

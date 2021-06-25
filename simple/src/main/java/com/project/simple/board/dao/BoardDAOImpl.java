@@ -23,5 +23,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return noticeList;
 	}
 	
+	@Override
+	public ArticleVO selectNotice(int noticeNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
+	}
+	
 
 }	

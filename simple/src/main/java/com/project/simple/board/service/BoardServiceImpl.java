@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.simple.board.dao.BoardDAO;
 import com.project.simple.board.vo.ArticleVO;
@@ -30,5 +32,15 @@ public class BoardServiceImpl implements BoardService{
 		List<ArticleVO> noticeList = boardDAO.selectAllNoticeList();
 		return noticeList;
 	}
+	
+	//단일 파일 보이기
+	@Override
+	public ArticleVO viewNotice(int noticeNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectNotice(noticeNum);
+		return articleVO;
+	}
+	
+	
+
 	
 }	
