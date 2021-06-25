@@ -41,33 +41,95 @@ public class MemberControllerImpl implements MemberController  {
 	private MemberVO memberVO;
 	
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "join_01";
+		return "main";
+	}
+	
+	
+	
+	
+	
+	//멤버로그인작업 ppt226
+	//@Override
+	@RequestMapping(value="/login.do", method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		memberVO = memberService.login(member);
+		if(memberVO != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("member", memberVO);
+				session.setAttribute("isLogOn", true);
+				mav.setViewName("redirect:/main.do");			
+			} else {
+				rAttr.addAttribute("result", "loginFailed");
+				mav.setViewName("redirect:/login_01.do");
+				}
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	private ModelAndView main(HttpServletRequest request, HttpServletResponse response)  {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/login_01.do", method = RequestMethod.GET)
+	private ModelAndView login_01(HttpServletRequest request, HttpServletResponse response)  {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage_01.do", method = RequestMethod.GET)
+	private ModelAndView mypage_01(HttpServletRequest request, HttpServletResponse response)  {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/join_02.do", method = RequestMethod.GET)
+	private ModelAndView join_02(HttpServletRequest request, HttpServletResponse response)  {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/join_01.do", method = RequestMethod.GET)
+	private ModelAndView join_01(HttpServletRequest request, HttpServletResponse response)  {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
+	throws Exception{
+		HttpSession session=request.getSession();
+		session.removeAttribute("member");
+		session.removeAttribute("isLogOn");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
 	}
 	
 	@Override
-	@RequestMapping(value="/member/addMembers.do", method=RequestMethod.POST)
+	@RequestMapping(value="/addMembers.do", method=RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		request.setCharacterEncoding("utf-8");
 		int result=0;
 		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMember.do");
+		ModelAndView mav = new ModelAndView("redirect:/join_02.do");
 		return mav;
 	}
 

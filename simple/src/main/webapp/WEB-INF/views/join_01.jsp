@@ -362,7 +362,7 @@ h3 {
 				</ul>
 			</div>
 
-			<form name="CheckJoin" action="${contextPath}/member/addMembers.do" method="post">
+			<form name="CheckJoin" action="${contextPath}/addMembers.do" method="post">
 				<section class="ftco-section testimony-section" id="sect"
 					style="padding-top: 50px; padding-left: 170px;">
 

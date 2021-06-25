@@ -156,7 +156,7 @@ h3 {
 					</div>
 					<div>
 						<div style="padding-right: 15px">
-							<button onclick="location.href='/Login-01'"
+							<button onclick="location.href='${contextPath}/login_01.do'"
 								style="width: 262px; background-color: #212529; color: white;">
 								<i class="go_login-06"></i><span>로그인으로 돌아가기</span>
 							</button>

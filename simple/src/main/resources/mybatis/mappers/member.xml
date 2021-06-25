@@ -30,6 +30,14 @@
 			values(#{memId},#{memName},#{memPwd},(select concat(#{memEmail},#{memEmail1})),(select concat(#{memPhoneNum},#{memPhoneNum1},#{memPhoneNum2})),(select concat(#{memAdr},#{memAdr1},#{memAdr2})));
 		]]>
 	</insert>
+	
+	<!--로그인창에서 입력한 id와 비밀번호로 회원정보를 조회하는 sql문-->
+	<select id="loginById" resultType="memberVO" parameterType="memberVO">
+	<![CDATA[ 
+		select * from member
+		where memId = #{memId} and memPwd = #{memPwd}
+	]]>
+	</select>
 
 </mapper>
 		

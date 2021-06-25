@@ -5,15 +5,30 @@
  <!-------------header------------------------------------------------------------------------------------------------------------------------>   
 	  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container" style=" height: 150px;">
-	      <a class="navbar-brand" href="index.html">SIMPLE</a>
+	      <a class="navbar-brand" href="${contextPath}/main.do">SIMPLE</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="${ContextPath}/WEB-INF/views/login_01.jsp" class="nav-link"  style="margin-bottom:100px;">LOGIN</a></li>
-	        	<li class="nav-item"><a href="" class="nav-link">JOIN</a></li>
-	        	<li class="nav-item"><a href="" class="nav-link">MYPAGE</a></li>
+	        	<c:choose>
+	        	<c:when test="${isLogOn == true && member != null}">
+	        	<h6>환영합니다.${member.memName}님!</h6>
+	        	<li class="nav-item active"><a href="${contextPath}/logout.do" class="nav-link"  style="margin-bottom:100px;">LOGOUT</a></li>
+	        	</c:when>
+	        	<c:otherwise>
+	        	<li class="nav-item active"><a href="${contextPath}/login_01.do" class="nav-link"  style="margin-bottom:100px;">LOGIN</a></li>
+	        	</c:otherwise>
+	        	</c:choose>
+	        	<li class="nav-item"><a href="${contextPath}/join_01.do" class="nav-link">JOIN</a></li>
+	        	<c:choose>
+	        	<c:when test="${isLogOn == true && member != null}">
+	        	<li class="nav-item"><a href="${contextPath}/mypage_01.do?action=mypage&id=${member.memId}" class="nav-link">MYPAGE</a></li>
+	        	</c:when>
+	        	<c:otherwise>
+	        	<li class="nav-item"><a href="${contextPath}/login_01.do" class="nav-link">MYPAGE</a></li>
+	        	</c:otherwise>
+	        	</c:choose>
 	        	<li class="nav-item"><a href="" class="nav-link">매장안내</a></li>
 	        	<li class="nav-item"><a href="" class="nav-link" style="margin-right:20px;">고객센터</a></li>
 
