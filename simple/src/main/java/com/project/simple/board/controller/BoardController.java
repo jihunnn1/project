@@ -14,4 +14,6 @@ public interface BoardController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView listQuestion(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView listInquiry(@RequestParam("memId") String memId,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

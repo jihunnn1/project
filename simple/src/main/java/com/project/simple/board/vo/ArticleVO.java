@@ -25,6 +25,18 @@ public class ArticleVO {
 	private String questionTitle;
 	private String questionContent;
 	
+	//inquiry 게시판
+	private String memId;
+	private int inquiryNum;
+	private String inquiryType;
+	private Date inquiryDate;
+	private String inquiryTitle;
+	private String inquiryContent;
+	private String inquiryFile;
+	private String inquiryAnswer;
+	private String inquiryReq;
+	
+	
 	//notice 게시판
 	public ArticleVO() {
 		System.out.println("ArticleVO 생성자");
@@ -113,6 +125,79 @@ public class ArticleVO {
 	
 	public void setQuestionContent(String questionContent) {
 		this.questionContent = questionContent;
+	}
+	
+	//inquiry 게시판
+	public String getmemId() {
+		return memId;
+	}
+	
+	public void setmemId(String memId) {
+		this.memId = memId;
+	}
+	
+	public int getInquiryNum() {
+		return inquiryNum;
+	}
+	
+	public void setInquiryNum(int inquiryNum) {
+		this.inquiryNum = inquiryNum;
+	}
+	
+	public String getInquiryType() {
+		return inquiryType;
+	}
+	
+	public void setInquiryNum(String inquiryType) {
+		this.inquiryType = inquiryType;
+	}
+	
+	public Date getInquiryDate() {
+		return inquiryDate;
+	}
+	
+	public void setInquiryDate(Date inquiryDate) {
+		this.inquiryDate = inquiryDate;
+	}
+	
+	public String getInquiryTitle() {
+		return inquiryTitle;
+	}
+	
+	public void setInquiryTitle(String inquiryTitle) {
+		this.inquiryTitle = inquiryTitle;
+	}
+	
+	public String getInquiryContent() {
+		return inquiryContent;
+	}
+	
+	public void setInquiryContent(String inquiryContent) {
+		this.inquiryContent = inquiryContent;
+	}
+	
+	public String getInquiryFile() {
+		return inquiryFile;
+	}
+	
+	public void setInquiryFile(String inquiryFile) {
+		this.inquiryFile = inquiryFile;
+	}
+	
+	public String getInquiryAnswer() {
+		return inquiryAnswer;
+	}
+	
+	public void setInquiryAnswer(String inquiryAnswer) {
+		this.inquiryAnswer = inquiryAnswer;
+	}
+	
+	public String getInquiryReq() {
+		return inquiryReq;
+	}
+	
+	public void setInquiryReq(String inquiryReq) {
+		this.inquiryReq = inquiryReq;
 	}
 
 

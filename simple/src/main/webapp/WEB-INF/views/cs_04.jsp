@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -222,31 +224,35 @@
 			</div>
 			<table class="table" style="height: 30px;">
 				<thead class="table-dark" align=center>
-					<tr align="center">
-						<td scope="col" width="100">번호</td>
-						<td scope="col" width="150">문의유형</td>
-						<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
-						<td scope="col" width="150">작성일</td>
-
-					</tr>
+				<tr align="center">
+					<td scope="col" width="100">번호</td>
+					<td scope="col" width="150">문의유형</td>
+					<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
+					<td scope="col" width="150">작성일</td>
+				</tr>
+				<c:choose>
+					<c:when test="${empty inquiryList}">
+						<tr height="200">
+							<td colspan="5" style="background-color:white; padding-top:100px;">
+								<p align="center">
+									<b><span style="color:black; ">로그인필요.</sapn></b>
+								</p>
+							</td>
+						</tr>	
+					</c:when>
+					<c:when test="${!empty inquiryList}">
+					<c:forEach var="inquiry" items="${inquiryList}" varStatus="inquiryNum">
 					<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">1</td>
-						<td scope="col" width="150">상품문의</td>
+						<td scope="col" width="50">${inquiryNum.count}</td>
+						<td scope="col" width="150">${inquiry.inquiryType}</td>
 						<td align="left" scope="col" width="500"><a href="#"
-							style="color: black; padding-left: 30px; margin-bottom: 0px;">배송
-								언제 되나요?</a></td>
-						<td scope="col" width="150">2021-08-12</td>
+							style="color: black; padding-left: 30px; margin-bottom: 0px;">${inquiry.inquiryTitle}</a></td>
+						<td scope="col" width="150"><fmt:formatDate value="${inquiry.inquiryDate}" /></td>
 					</tr>
-					<tr
-						style="border-bottom: 1px solid #212529;; background-color: white; color: black;">
-						<td scope="col" width="50"></td>
-						<td scope="col" width="150">상품문의</td>
-						<td align="left" scope="col" width="500"><a href="#"
-							style="color: black; padding-left: 30px; margin-bottom: 0px;">↳ㅤ[답변]
-								배송 언제 되나요?</a></td>
-						<td scope="col" width="150">2021-08-12</td>
-					</tr>
+					</c:forEach>
+					</c:when>
+					</c:choose>
 				</thead>
 			</table>
 			<button type="submit" id="buttonmy" class="btn btn-dark"

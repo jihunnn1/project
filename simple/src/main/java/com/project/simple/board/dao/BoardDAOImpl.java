@@ -16,7 +16,7 @@ import com.project.simple.board.vo.ArticleVO;
 public class BoardDAOImpl implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
-	
+	//notice게시판
 	@Override
 	public List<ArticleVO> selectAllNoticeList() throws DataAccessException {
 		List<ArticleVO> noticeList = sqlSession.selectList("mapper.board.selectAllNoticeList");
@@ -28,10 +28,18 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
 	}
 	
+	//question 게시판
 	@Override
 	public List<ArticleVO> selectAllQuestionList() throws DataAccessException {
 		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList");
 		return questionList;
+	}
+	
+	//inquiry 게시판
+	@Override
+	public List<ArticleVO> selectAllInquiryList(String memId) throws DataAccessException {
+		List<ArticleVO> inquiryList = sqlSession.selectList("mapper.board.selectAllInquiryList",memId);
+		return inquiryList;
 	}
 
 }	

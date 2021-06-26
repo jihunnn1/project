@@ -13,11 +13,24 @@
 		<result property="noticeContent" column="noticeContent"/>
 		<result property="noticeImg" column="noticeImg"/>
 	</resultMap>
-	
+	<!-- question 게시판 -->
 	<resultMap id="questionResult" type="articleVO">
 		<result property="questionNum" column="questionNum"/>
 		<result property="questionTitle" column="questionTitle"/>
 		<result property="questionContent" column="questionContent" />
+	</resultMap>
+	
+	
+	<!-- inquiry 게시판 -->
+	<resultMap id="inquiryResult" type="articleVO">
+		<result property="memId" column="memId"/>
+		<result property="inquiryNum" column="inquiryNum"/>
+		<result property="inquiryType" column="inquiryType" />
+		<result property="inquiryDate" column="inquiryDate" />
+		<result property="inquiryContent" column="inquiryContent" />
+		<result property="inquiryFile" column="inquiryFile" />
+		<result property="inquiryAnswer" column="inquiryAnswer" />
+		<result property="inquiryReq" column="inquiryReq" />
 	</resultMap>
 	
 	
@@ -44,6 +57,15 @@
 	<![CDATA[
 			
 			select * from question;
+			
+
+	]]>
+	</select>
+	
+	<select id="selectAllInquiryList" resultMap="inquiryResult">
+	<![CDATA[
+			
+			select * from inquiry where memId = #{memId};
 			
 
 	]]>

@@ -27,7 +27,7 @@ import com.project.simple.board.vo.ArticleVO;
 public class BoardServiceImpl implements BoardService{
 	@Autowired
 	BoardDAO boardDAO;
-	
+	//notice 게시판
 	public List<ArticleVO> listNotice() throws Exception{
 		List<ArticleVO> noticeList = boardDAO.selectAllNoticeList();
 		return noticeList;
@@ -39,10 +39,16 @@ public class BoardServiceImpl implements BoardService{
 		ArticleVO articleVO = boardDAO.selectNotice(noticeNum);
 		return articleVO;
 	}
-	
+	//qustion 게시판
 	public List<ArticleVO> listQuestion() throws Exception{
 		List<ArticleVO> questionList = boardDAO.selectAllQuestionList();
 		return questionList;
+	}
+	
+	//inquiry 게시판
+	public List<ArticleVO> listInquiry(String memId) throws Exception{
+		List<ArticleVO> inquiryList = boardDAO.selectAllInquiryList(memId);
+		return inquiryList;
 	}
 	
 	

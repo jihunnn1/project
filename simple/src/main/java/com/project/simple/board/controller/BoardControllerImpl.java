@@ -75,4 +75,16 @@ public class BoardControllerImpl implements BoardController{
 			return mav;
 		}
 		
+		@Override
+		@RequestMapping(value="board/listInquiry.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView listInquiry(@RequestParam("memId") String memId,HttpServletRequest request,HttpServletResponse response) throws Exception {
+			String viewName = (String)request.getAttribute("viewName");
+			System.out.println("memID:"+memId);
+			List<ArticleVO> inquiryList = boardService.listInquiry(memId);
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("inquiryList", inquiryList);
+			System.out.println(inquiryList);
+			return mav;
+		}
+		
 }		
