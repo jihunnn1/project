@@ -230,17 +230,6 @@
 					<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
 					<td scope="col" width="150">작성일</td>
 				</tr>
-				<c:choose>
-					<c:when test="${empty inquiryList}">
-						<tr height="200">
-							<td colspan="5" style="background-color:white; padding-top:100px;">
-								<p align="center">
-									<b><span style="color:black; ">로그인필요.</sapn></b>
-								</p>
-							</td>
-						</tr>	
-					</c:when>
-					<c:when test="${!empty inquiryList}">
 					<c:forEach var="inquiry" items="${inquiryList}" varStatus="inquiryNum">
 					<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
@@ -251,8 +240,6 @@
 						<td scope="col" width="150"><fmt:formatDate value="${inquiry.inquiryDate}" /></td>
 					</tr>
 					</c:forEach>
-					</c:when>
-					</c:choose>
 				</thead>
 			</table>
 			<button type="submit" id="buttonmy" class="btn btn-dark"

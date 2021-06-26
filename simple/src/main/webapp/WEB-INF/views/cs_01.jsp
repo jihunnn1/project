@@ -11,6 +11,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+    function InquiryList() {
+        if (${isLogOn != true && member == null}) {
+            alert("로그인 해주세요.");
+            location.href = '${contextPath}/login_01.do';
+        } else {
+        	location.href='${contextPath}/board/listInquiry.do?memId=${member.memId}'
+        }
+    }
+</script>
 <style>
 
 .page_wrap {
@@ -138,7 +148,7 @@
 						묻는 질문</button>
 				</div>
 				<div class="btn-group" role="group">
-					<button type="button" onclick="location.href='${contextPath}/board/listInquiry.do?memId=${member.memId}'"
+					<button type="button" onclick="InquiryList()"
 						class="btn btn-default"
 						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white;">*1:1문의</button>
 				</div>
