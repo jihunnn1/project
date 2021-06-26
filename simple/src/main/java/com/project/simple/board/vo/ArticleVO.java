@@ -20,6 +20,10 @@ public class ArticleVO {
 	private String noticeContent;
 	private String noticeImg;
 
+	//question 게시판
+	private int questionNum;
+	private String questionTitle;
+	private String questionContent;
 	
 	//notice 게시판
 	public ArticleVO() {
@@ -87,6 +91,29 @@ public class ArticleVO {
 		}
 	}
 	
+	//question 게시판
+	public int getQuestionNum() {
+		return questionNum;
+	}
+	
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+	public String getQuestionTitle() {
+		return questionTitle;
+	}
+	
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
+	}
+	
+	public String getQuestionContent() {
+		return questionContent;
+	}
+	
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
 
 
 }

@@ -12,4 +12,6 @@ public interface BoardController {
 	
 	public ModelAndView viewNotice(@RequestParam("noticeNum") int noticeNum,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView listQuestion(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -64,4 +64,15 @@ public class BoardControllerImpl implements BoardController{
 			return mav;
 		}
 		
+		@Override
+		@RequestMapping(value="board/listQuestion.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView listQuestion(HttpServletRequest request,HttpServletResponse response) throws Exception {
+			String viewName = (String)request.getAttribute("viewName");
+			List<ArticleVO> questionList = boardService.listQuestion();
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("questionList", questionList);
+			System.out.println(questionList);
+			return mav;
+		}
+		
 }		

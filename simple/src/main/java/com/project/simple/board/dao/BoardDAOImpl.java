@@ -28,5 +28,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
 	}
 	
+	@Override
+	public List<ArticleVO> selectAllQuestionList() throws DataAccessException {
+		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList");
+		return questionList;
+	}
 
 }	

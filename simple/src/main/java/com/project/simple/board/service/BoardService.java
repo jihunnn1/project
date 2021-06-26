@@ -9,6 +9,6 @@ public interface BoardService {
 	
 	public List<ArticleVO> listNotice() throws Exception;
 	public ArticleVO viewNotice(int noticeNum) throws Exception;
-
+	public List<ArticleVO> listQuestion() throws Exception;
 
 }

@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="mapper.board">
-
+	<!-- notice 게시판 -->
 	<resultMap id="noticeResult" type="articleVO">
 		<result property="noticeNum" column="noticeNum"/>
 		<result property="noticeDate" column="noticeDate"/>
@@ -12,6 +12,12 @@
 		<result property="noticeWriter" column="noticeWriter"/>
 		<result property="noticeContent" column="noticeContent"/>
 		<result property="noticeImg" column="noticeImg"/>
+	</resultMap>
+	
+	<resultMap id="questionResult" type="articleVO">
+		<result property="questionNum" column="questionNum"/>
+		<result property="questionTitle" column="questionTitle"/>
+		<result property="questionContent" column="questionContent" />
 	</resultMap>
 	
 	
@@ -29,6 +35,15 @@
 			
 			select * from notice
 			where noticeNum = #{noticeNum}
+			
+
+	]]>
+	</select>
+	
+	<select id="selectAllQuestionList" resultMap="questionResult">
+	<![CDATA[
+			
+			select * from question;
 			
 
 	]]>

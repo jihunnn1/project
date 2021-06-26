@@ -155,55 +155,31 @@
 						<td scope="col" width="500">내용</td>
 
 					</tr>
+					<c:forEach var="question" items="${questionList}" varStatus="questionNum">
 					<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black; border-bottom: 1px solid #32383e;">
 
-						<td scope="col" width="50" style="padding-top: 12px;">1</td>
+						<td scope="col" width="50" style="padding-top: 12px;">${question.questionNum }</td>
 						<td align="left" scope="col" width="500"
 							style="padding-top: 15px; padding-bottom: 0px;">
 							<div>
 								<div id="section1b" class="label">
 									<p
 										style="color: black; text-align: left; cursor: pointer; font-size: 15px; font-weight: normal;">
-										<span style="color: red">Q</span>. 휴일에 상품을 받을 수 있나요? ▼
+										<span style="color: red">Q</span>. ${question.questionTitle }
 									</p>
 								</div>
 								<div id="section1b" class="elements">
 									<hr style="margin-bottom: 20px; margin-top: 0px;">
 									<p
 										style="color: black; text-align: left; cursor: pointer; font-size: 15px;">
-										<span style="color: green;">A</span>. 토요일은 배송 가능 하오나, 공휴일 주말은
-										배송 불가합니다.
+										<span style="color: green;">A</span>. ${question.questionContent }
 									</p>
 								</div>
 							</div>
 						</td>
 					</tr>
-					<tr
-						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black; border-bottom: 1px solid #32383e;">
-
-						<td scope="col" width="50" style="padding-top: 12px;">1</td>
-						<td align="left" scope="col" width="500"
-							style="padding-top: 15px; padding-bottom: 0px;">
-							<div>
-								<div id="section1b" class="label">
-									<p
-										style="color: black; text-align: left; cursor: pointer; font-size: 15px; font-weight: normal;">
-										<span style="color: red">Q</span>. 오래전 구입한 제품이 하자로 A/S를 신청하니
-										단종된제품이라고 합니다. 어떻하나요? ▼
-									</p>
-								</div>
-								<div id="section1b" class="elements">
-									<hr style="margin-bottom: 20px; margin-top: 0px;">
-									<p
-										style="color: black; text-align: left; cursor: pointer; font-size: 15px;">
-										<span style="color: green;">A</span>. 단종된 제품이라 하더라도 A/S용
-										비축자재(약3년)가 있으므로, 서비스를 받으실 수 있습니다.
-									</p>
-								</div>
-							</div>
-						</td>
-					</tr>
+					</c:forEach>
 				</thead>
 			</table>
 			<!-- -아코디언메뉴 -->

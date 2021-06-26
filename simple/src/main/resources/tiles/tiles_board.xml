@@ -19,5 +19,9 @@
 		<put-attribute name="title" value="공지사항상세창" />
 		<put-attribute name="body" value="/WEB-INF/views/cs_02.jsp" />
 	</definition>
+		<definition name="board/listQuestion" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문목록" />
+		<put-attribute name="body" value="/WEB-INF/views/cs_03.jsp" />
+	</definition>
 	
 </tiles-definitions>	

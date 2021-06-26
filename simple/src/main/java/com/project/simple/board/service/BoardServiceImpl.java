@@ -40,6 +40,11 @@ public class BoardServiceImpl implements BoardService{
 		return articleVO;
 	}
 	
+	public List<ArticleVO> listQuestion() throws Exception{
+		List<ArticleVO> questionList = boardDAO.selectAllQuestionList();
+		return questionList;
+	}
+	
 	
 
 	

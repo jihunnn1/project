@@ -13,5 +13,6 @@ public interface BoardDAO{
 	
 	public ArticleVO selectNotice(int noticeNum) throws DataAccessException;
 	
+	public List selectAllQuestionList() throws DataAccessException;
 
 }
