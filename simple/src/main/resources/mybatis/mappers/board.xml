@@ -73,8 +73,8 @@
 	</select>
 	<insert id="insertNewInquiry" parameterType="java.util.Map">
 		<![CDATA[
-			insert into inquiry(memId,inquiryNum, inquiryType, inquiryDate, inquiryTitle, inquiryContent, inquiryFile)
-			values(#{memId},#{inquiryNum}, #{inquiryType}, #{inquiryDate}, #{inquiryTitle}, #{inquiryContent}, #{inquiryFile});
+			insert into inquiry(memId,inquiryNum, inquiryType,inquiryTitle, inquiryContent, inquiryFile)
+			values(#{memId},#{inquiryNum}, #{inquiryType}, #{inquiryTitle}, #{inquiryContent}, #{inquiryFile});
 		]]>
 		
 	</insert>
@@ -83,7 +83,7 @@
 	<![CDATA[
 			
 			select max(inquiryNum)+1 from inquiry;
-			
+	
 
 	]]>
 	</select>

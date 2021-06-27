@@ -41,7 +41,7 @@ import com.project.simple.member.vo.MemberVO;
 	
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController{
-		private static final String ARTICLE_IMAGE_REPO = "c:\\spring\\inquiry_image";
+		private static final String ARTICLE_IMAGE_REPO = "C:\\spring\\inquiry_image";
 		@Autowired
 		private BoardService boardService;
 		@Autowired
