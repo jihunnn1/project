@@ -41,5 +41,18 @@ public class BoardDAOImpl implements BoardDAO{
 		List<ArticleVO> inquiryList = sqlSession.selectList("mapper.board.selectAllInquiryList",memId);
 		return inquiryList;
 	}
+	
+	@Override
+	public int insertNewInquiry(Map inquiryMap) throws DataAccessException {
+		int inquiryNum = selectNewInquiryNum();
+		inquiryMap.put("inquiryNum", inquiryNum);
+		sqlSession.insert("mapper.board.insertNewInquiry", inquiryMap);
+		return inquiryNum;
+	}
+	
+	private int selectNewInquiryNum() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNewInquiryNum");
+		
+	}
 
 }	

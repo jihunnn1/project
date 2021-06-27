@@ -11,5 +11,6 @@ public interface BoardService {
 	public ArticleVO viewNotice(int noticeNum) throws Exception;
 	public List<ArticleVO> listQuestion() throws Exception;
 	public List<ArticleVO> listInquiry(String memId) throws Exception;
+	public int addNewInquiry(Map articleMap) throws Exception;
 
 }

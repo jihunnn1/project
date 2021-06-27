@@ -14,7 +14,7 @@
 <script>
     function InquiryList() {
         if (${isLogOn != true && member == null}) {
-            alert("로그인 해주세요.");
+            alert("로그인이 필요합니다.");
             location.href = '${contextPath}/login_01.do';
         } else {
         	location.href='${contextPath}/board/listInquiry.do?memId=${member.memId}'
@@ -142,7 +142,7 @@
 						style="font-size: 28px; font-weight: bold; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; margin-left: 28px;">*공지사항</button>
 				</div>
 				<div class="btn-group" role="group">
-					<button type="button" onclick="location.href=''"
+					<button type="button" onclick="location.href='${contextPath}/board/listQuestion.do'"
 						class="btn btn-default"
 						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white;">*자주
 						묻는 질문</button>

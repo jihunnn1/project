@@ -242,8 +242,8 @@
 					</c:forEach>
 				</thead>
 			</table>
-			<button type="submit" id="buttonmy" class="btn btn-dark"
-				style="float: left; margin-left: 1190px; margin-top: 25px; border-radius: 2px;">확인</button>
+			<a id="buttonmy" class="btn btn-dark" href="${contextPath}/board/inquiryForm.do?memId=${member.memId}"
+				style="float: left; margin-left: 1190px; margin-top: 25px; border-radius: 2px;">글쓰기</a>
 		</div>
 		<!-- 내용 끝 -->
 		<!-- 페이징 글번호 -->

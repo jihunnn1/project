@@ -52,6 +52,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	@Override
+	public int addNewInquiry(Map inquiryMap) throws Exception{
+		return boardDAO.insertNewInquiry(inquiryMap);
+	}
+	
+	
 
 	
 }	

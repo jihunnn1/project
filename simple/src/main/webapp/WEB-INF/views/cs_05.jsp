@@ -8,29 +8,41 @@
 
 <script type="text/javascript">
 <!--글쓰기 유효형 검사-->
-	function CS_write() {
-		var form = document.Checkwrite;
+	function inquiry_write() {
+		var form = document.inquiryForm;
 
-		if (form.category.value == "") {
+		if (form.inquiryType.value == "") {
 			alert("문의유형을 선택해주세요")
-			form.category.focus();
+			form.inquiryType.focus();
 			return false;
 		}
 
-		if (form.title.value == "") {
+		if (form.inquiryTitle.value == "") {
 			alert("글 제목을 입력해주세요")
-			document.form.title.focus();
+			document.form.inquiryTitle.focus();
 			return false;
 		}
 
-		if (form.content.value == "") {
+		if (form.inquiryContent.value == "") {
 			alert("글 내용을 입력해주세요")
-			document.form.content.focus();
+			document.form.inquiryContent.focus();
 			return false;
 		}
 		form.submit();
 	}
 </script>
+<script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#preview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+</script>
+
 <style>
 #buttonmy {
 	width: 80px;
@@ -108,7 +120,7 @@
 			</div>
 
 			<!-- 내용 -->
-			<form name="Checkwrite" action="" method="post">
+			<form name="inquiryForm" action="${contextPath }/board/addNewInquiry.do" method="post" enctype="multipart/form-data">
 				<table class=table style="padding-top: 50px; border-top: #212529;">
 
 					<tr style="background-color: #212529; margin-top: 20px;"
@@ -118,7 +130,7 @@
 					<tr style="border-top: 1px solid #212529;">
 						<td
 							style="padding-left: 95px; font-weight: bold; padding-right: 100px;">문의유형</td>
-						<td style="background-color: white;"><select name="category"
+						<td style="background-color: white;"><select name="inquiryType"
 							style="height: 28px;">
 								<option value="">선택</option>
 								<option value="배송문의">배송문의</option>
@@ -130,13 +142,13 @@
 						<td
 							style="padding-left: 95px; font-weight: bold; padding-top: 25px;">제목</td>
 						<td style="padding-top: 25px; background-color: white;"><input
-							type=text name="title" size=60 value=""
+							type=text name="inquiryTitle" size=60 value=""
 							style="height: 28px; border: 1px solid #aaaaaa; border-radius: 3px;"></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 95px; font-weight: bold;">내용</td>
 						<td style="padding-top: 25px; background-color: white;"><input
-							type="text" name="content" value=""
+							type="text" name="inquiryContent" value=""
 							style="width: 510px; height: 300px"
 							style="padding-top:25px; border-color:	#aaaaaa;"></td>
 					</tr>
@@ -144,12 +156,12 @@
 						<td
 							style="padding-left: 95px; font-weight: bold; padding-top: 30px;">파일첨부</td>
 						<td style="background-color: white;"><input type="file"
-							onchange="readURL(this);" style="padding-top: 25px;"></td>
+							onchange="readURL(this);" style="padding-top: 25px;" name="inquiryFile"></td>
 					</tr>
 				</table>
 				<hr style="border-color: #212529;; width: 100%;">
 				<div>
-					<button type="button" onclick="CS_write();" class="btn btn-dark "
+					<button type="button" onclick="inquiry_write();" class="btn btn-dark "
 						id="buttonmy" style="margin-left: 630px; margin-top: 30px;">등록</button>
 
 					<button type="button" onclick="location.href=''"

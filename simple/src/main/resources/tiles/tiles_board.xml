@@ -30,6 +30,9 @@
 		<put-attribute name="title" value="1:1문의목록" />
 		<put-attribute name="body" value="/WEB-INF/views/cs_04.jsp" />
 	</definition>
-	
+	<definition name="board/inquiryForm" extends="baseLayout">
+		<put-attribute name="title" value="1:1문의글쓰기창" />
+		<put-attribute name="body" value="/WEB-INF/views/cs_05.jsp" />
+	</definition>
 	
 </tiles-definitions>	
