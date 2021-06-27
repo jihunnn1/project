@@ -57,6 +57,11 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.insertNewInquiry(inquiryMap);
 	}
 	
+	@Override
+	public ArticleVO viewInquiry(int inquiryNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectInquiry(inquiryNum);
+		return articleVO;
+	}
 	
 
 	

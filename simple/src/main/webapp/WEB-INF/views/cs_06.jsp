@@ -2,9 +2,23 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#preview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+</script>
 <style>
 #buttonmy {
 	width: 80px;
@@ -80,13 +94,35 @@
 			<table class="table" style="margin-top: 20px; text-align: center;">
 				<thead class="table-dark" align=center>
 					<tr style="border-bottom: 1px solid grey; height: 30px;">
-						<td>배송 언제 되나요?</td>
-					</tr>
-					<tr
+						<td><a>${inquiry.inquiryTitle}</a></td>
+					</tr>	
+
+					
+				<c:choose>		
+				<c:when test="${not empty inquiry.inquiryFile && inquiry.inquiryFile != 'null'}">
+				<tr
 						style="border-bottom: 0.5px solid grey; height: 300px; text-align: left; background-color: white;">
-						<td style="padding-bottom: 250px; color: black;">5월 말에 주문 했는데
-							배송은 언제 되나요?</td>
-					</tr>
+				<td style="padding-bottom: 250px; color: black;"><a>${inquiry.inquiryContent}<br>
+				<input type="hidden" name="inquiryFile" value="${inquiry.inquiryFile}" />
+				<img  src="${contextPath}/download.do?inquiryNum=${inquiry.inquiryNum}&inquiryFile=${inquiry.inquiryFile}" id="preview" /><br>
+	
+				</a>
+	
+				</td>
+				</tr>	
+					
+
+			</c:when>
+			<c:otherwise>
+				<tr
+						style="border-bottom: 0.5px solid grey; height: 300px; text-align: left; background-color: white;">
+					<td style="color:black;"><input type="hidden" name="inquiryFile" value="${inquiry.inquiryFile}"/></td>
+		
+				</tr>
+			</c:otherwise>		
+			</c:choose>
+						
+		
 				</thead>
 			</table>
 			<button type="submit" class="btn btn-dark" id="buttonmy"

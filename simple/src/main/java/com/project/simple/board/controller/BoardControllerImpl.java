@@ -1,6 +1,8 @@
 package com.project.simple.board.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -61,7 +63,6 @@ public class BoardControllerImpl implements BoardController{
 							HttpServletRequest request, HttpServletResponse response) throws Exception {
 			String viewName = (String)request.getAttribute("viewName");
 			articleVO = boardService.viewNotice(noticeNum);
-			System.out.println(articleVO);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName(viewName);
 			mav.addObject("notice", articleVO);
@@ -75,7 +76,6 @@ public class BoardControllerImpl implements BoardController{
 			List<ArticleVO> questionList = boardService.listQuestion();
 			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("questionList", questionList);
-			System.out.println(questionList);
 			return mav;
 		}
 		
@@ -87,7 +87,6 @@ public class BoardControllerImpl implements BoardController{
 			List<ArticleVO> inquiryList = boardService.listInquiry(memId);
 			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("inquiryList", inquiryList);
-			System.out.println(inquiryList);
 			return mav;
 		}
 		
@@ -121,18 +120,21 @@ public class BoardControllerImpl implements BoardController{
 			MemberVO memberVO = (MemberVO)session.getAttribute("member");
 			String memId = memberVO.getmemId();
 			inquiryMap.put("inquiryNum", 0);
+			System.out.println(memId);
 			inquiryMap.put("memId", memId);
-			inquiryMap.put("inquriyFile", inquiryFile);
+			inquiryMap.put("inquiryFile", inquiryFile);
+			System.out.println(inquiryFile);
 			String message;
 			ResponseEntity resEnt=null;
 			HttpHeaders responseHeaders = new HttpHeaders();
 			responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 			try {
 				int inquiryNum = boardService.addNewInquiry(inquiryMap);
+				System.out.println(inquiryMap);
 				if(inquiryFile != null && inquiryFile.length() !=0) { 
 					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + inquiryFile);
-							File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + inquiryNum);
-							FileUtils.moveFileToDirectory(srcFile, destDir,true);
+						File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + inquiryNum);
+						FileUtils.moveFileToDirectory(srcFile, destDir,true);
 				}
 				
 				message = "<script>";
@@ -175,4 +177,43 @@ public class BoardControllerImpl implements BoardController{
 		return inquiryFile;
 		
 }
+		
+		//한개 이미지 보여주기
+		@RequestMapping(value="/board/viewInquiry.do", method=RequestMethod.GET)
+		public ModelAndView viewInquiry(@RequestParam("inquiryNum") int inquiryNum,
+							HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = (String)request.getAttribute("viewName");
+			articleVO = boardService.viewInquiry(inquiryNum);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("inquiry", articleVO);
+			System.out.println(articleVO);
+			return mav;
+		}
+		
+
+		@RequestMapping(value="/board/download.do", method=RequestMethod.GET)
+		protected void download(@RequestParam("inquiryFile") String inquiryFile,
+				@RequestParam("inquiryNum") int inquiryNum,
+				HttpServletResponse response)throws Exception {
+			OutputStream out = response.getOutputStream();
+			String downFile = ARTICLE_IMAGE_REPO + "\\" + inquiryNum + "\\" + inquiryFile;
+			File file = new File(downFile);
+			
+			response.setHeader("Cache-Control","no-cache");
+			response.addHeader("Content-disposition", "attachment; inquiryFile="+inquiryFile);
+			FileInputStream in=new FileInputStream(inquiryFile);
+			byte[] buffer=new byte[1024*8];
+			while(true){
+				int count=in.read(buffer); 
+				if(count==-1) 
+					break;
+				out.write(buffer,0,count);
+			}
+			in.close();
+			out.close();
+			return ;
+		}
+		
+
 }

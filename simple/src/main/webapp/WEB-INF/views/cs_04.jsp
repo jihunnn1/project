@@ -235,8 +235,8 @@
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
 						<td scope="col" width="50">${inquiryNum.count}</td>
 						<td scope="col" width="150">${inquiry.inquiryType}</td>
-						<td align="left" scope="col" width="500"><a href="#"
-							style="color: black; padding-left: 30px; margin-bottom: 0px;">${inquiry.inquiryTitle}</a></td>
+						<td align="left" scope="col" width="500"><a href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquiry.inquiryNum}"
+							style="color: black; padding-left: 30px; margin-bottom: 0px;" >${inquiry.inquiryTitle}</a></td>
 						<td scope="col" width="150"><fmt:formatDate value="${inquiry.inquiryDate}" /></td>
 					</tr>
 					</c:forEach>

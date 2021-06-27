@@ -54,5 +54,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("mapper.board.selectNewInquiryNum");
 		
 	}
+	
+	@Override
+	public ArticleVO selectInquiry(int inquiryNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectInquiry", inquiryNum);
+	}
 
 }	

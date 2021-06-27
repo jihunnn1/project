@@ -87,6 +87,16 @@
 
 	]]>
 	</select>
+	
+	<select id="selectInquiry" resultType="articleVO" parameterType="int"> 
+	<![CDATA[
+			
+			select * from inquiry
+			where inquiryNum = #{inquiryNum};
+			
+
+	]]>
+	</select>
 
 	
 

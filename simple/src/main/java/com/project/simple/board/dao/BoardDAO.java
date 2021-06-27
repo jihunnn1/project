@@ -18,5 +18,7 @@ public interface BoardDAO{
 	public List selectAllInquiryList(String memId) throws DataAccessException;
 	
 	public int insertNewInquiry(Map inquiryMap) throws DataAccessException;
+	
+	public ArticleVO selectInquiry(int inquiryNum) throws DataAccessException;
 
 }
