@@ -17,7 +17,7 @@ public interface BoardController {
 	
 	public ModelAndView listQuestion(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView listInquiry(@RequestParam("memId") String memId,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listInquiry( HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewInquiry(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	

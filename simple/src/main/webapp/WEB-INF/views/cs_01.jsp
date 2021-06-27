@@ -17,7 +17,7 @@
             alert("로그인이 필요합니다.");
             location.href = '${contextPath}/login_01.do';
         } else {
-        	location.href='${contextPath}/board/listInquiry.do?memId=${member.memId}'
+        	location.href='${contextPath}/board/listInquiry.do'
         }
     }
 </script>

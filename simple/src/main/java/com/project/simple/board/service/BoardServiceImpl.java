@@ -1,5 +1,6 @@
 package com.project.simple.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.project.simple.board.dao.BoardDAO;
 import com.project.simple.board.vo.ArticleVO;
@@ -46,9 +48,14 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	//inquiry 게시판
-	public List<ArticleVO> listInquiry(String memId) throws Exception{
-		List<ArticleVO> inquiryList = boardDAO.selectAllInquiryList(memId);
-		return inquiryList;
+	public Map<String ,List> listInquiry(ArticleVO articleVO) throws Exception{
+		Map<String,List> inquiryMap=new HashMap<String,List>();
+		List<ArticleVO> inquiryList=boardDAO.selectInquiryList(articleVO);
+		if(inquiryList.size()==0){ //카트에 저장된 상품이없는 경우
+			return null;
+		}
+		inquiryMap.put("inquiryList", inquiryList);
+		return inquiryMap;
 	}
 	
 	

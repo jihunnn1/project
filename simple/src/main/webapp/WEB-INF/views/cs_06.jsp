@@ -2,23 +2,14 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				$('#preview').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-</script>
+
 <style>
 #buttonmy {
 	width: 80px;

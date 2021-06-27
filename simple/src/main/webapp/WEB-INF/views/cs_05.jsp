@@ -28,6 +28,8 @@
 			document.form.inquiryContent.focus();
 			return false;
 		}
+
+
 		form.submit();
 	}
 </script>

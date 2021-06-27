@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="inquiryList"  value="${inquiryMap.inquiryList}"  />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -242,7 +243,7 @@
 					</c:forEach>
 				</thead>
 			</table>
-			<a id="buttonmy" class="btn btn-dark" href="${contextPath}/board/inquiryForm.do?memId=${member.memId}"
+			<a id="buttonmy" class="btn btn-dark" href="${contextPath}/board/inquiryForm.do"
 				style="float: left; margin-left: 1190px; margin-top: 25px; border-radius: 2px;">글쓰기</a>
 		</div>
 		<!-- 내용 끝 -->

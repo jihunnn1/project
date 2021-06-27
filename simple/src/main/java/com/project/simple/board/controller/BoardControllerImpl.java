@@ -29,8 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
 import com.project.simple.board.service.BoardService;
 import com.project.simple.board.vo.ImageVO;
 import com.project.simple.board.vo.ArticleVO;
@@ -46,6 +44,9 @@ public class BoardControllerImpl implements BoardController{
 		private BoardService boardService;
 		@Autowired
 		private ArticleVO articleVO;
+		
+		@Autowired
+		private MemberVO memberVO;
 		
 		@Override
 		@RequestMapping(value="board/listNotice.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -80,14 +81,21 @@ public class BoardControllerImpl implements BoardController{
 		}
 		
 		@Override
-		@RequestMapping(value="board/listInquiry.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public ModelAndView listInquiry(@RequestParam("memId") String memId,HttpServletRequest request,HttpServletResponse response) throws Exception {
-			String viewName = (String)request.getAttribute("viewName");
-			System.out.println("memId:"+memId);
-			List<ArticleVO> inquiryList = boardService.listInquiry(memId);
+		@RequestMapping(value="/board/listInquiry.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView listInquiry(HttpServletRequest request,HttpServletResponse response) throws Exception {
+			String viewName=(String)request.getAttribute("viewName");
 			ModelAndView mav = new ModelAndView(viewName);
-			mav.addObject("inquiryList", inquiryList);
+			HttpSession session=request.getSession();
+			MemberVO memberVO=(MemberVO)session.getAttribute("member");
+			String memId=memberVO.getmemId();
+			articleVO.setmemId(memId);
+			System.out.println(memId);
+			Map<String ,List> inquiryMap=boardService.listInquiry(articleVO);
+			session.setAttribute("inquiryMap", inquiryMap);
+			System.out.println(inquiryMap);
 			return mav;
+
+	
 		}
 		
 		@RequestMapping(value="/board/*Form.do", method=RequestMethod.GET)			
@@ -139,7 +147,7 @@ public class BoardControllerImpl implements BoardController{
 				
 				message = "<script>";
 				message+= " alert('새글을 추가했습니다.');";
-				message += "  location.href='" + multipartRequest.getContextPath() + "/board/listInquiry.do';";
+				message += "  location.href='" + multipartRequest.getContextPath() + "/board/listInquiry.do";
 				message += " </script>";
 				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);	
 				

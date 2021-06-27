@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+
 import com.project.simple.board.vo.ArticleVO;
 
 
@@ -37,8 +38,8 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//inquiry °Ô½ÃÆÇ
 	@Override
-	public List<ArticleVO> selectAllInquiryList(String memId) throws DataAccessException {
-		List<ArticleVO> inquiryList = sqlSession.selectList("mapper.board.selectAllInquiryList",memId);
+	public List<ArticleVO> selectInquiryList(ArticleVO articleVO) throws DataAccessException {
+		List<ArticleVO> inquiryList =(List)sqlSession.selectList("mapper.board.selectAllInquiryList",articleVO);
 		return inquiryList;
 	}
 	

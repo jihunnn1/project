@@ -63,7 +63,7 @@
 	]]>
 	</select>
 	
-	<select id="selectAllInquiryList" resultMap="inquiryResult">
+	<select id="selectAllInquiryList" parameterType="ArticleVO"  resultMap="inquiryResult">
 	<![CDATA[
 			
 			select * from inquiry where memId = #{memId};
