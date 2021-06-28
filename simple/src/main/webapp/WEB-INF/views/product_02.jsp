@@ -158,7 +158,8 @@
 							style="color: black; text-align: center; margin-top: 8px; padding-top: 30px;">더보기▼</a></li>
 					</ul>
 				</div>			
-
+           <!-- 최근 본 상품 끝 -->
+			<!-- 내용 -->
 			<div class="row">
 				<div class="col-md-4 ftco-animate">
 					<div class="blog-entry">
