@@ -97,6 +97,26 @@
 
 	]]>
 	</select>
+	
+		<select id="selectInquiry1" resultType="articleVO" parameterType="int"> 
+	<![CDATA[
+			
+			select * from inquiry
+			where inquiryNum = #{inquiryNum};
+			
+
+	]]>
+	</select>
+	 
+	<update id="updateArticle"  parameterType="java.util.Map">
+			update inquiry
+			set inquiryTitle = #{inquiryTitle},	 
+			inquiryContent = #{inquiryContent}
+			 <if test="inquiryFile!='' and inquiryFile!=null">
+			  , inquiryFile=#{inquiryFile}
+			</if>
+			where inquiryNum=#{inquiryNum}
+	</update>
 
 	
 

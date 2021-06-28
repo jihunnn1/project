@@ -23,4 +23,10 @@ public interface BoardController {
 	
 	public ModelAndView viewInquiry(@RequestParam("inquiryNum") int inquiryNum,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView inquiryForm(@RequestParam("inquiryNum") int inquiryNum, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
+
+	
+	
 }

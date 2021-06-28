@@ -89,10 +89,8 @@ public class BoardControllerImpl implements BoardController{
 			MemberVO memberVO=(MemberVO)session.getAttribute("member");
 			String memId=memberVO.getmemId();
 			articleVO.setmemId(memId);
-			System.out.println(memId);
 			Map<String ,List> inquiryMap=boardService.listInquiry(articleVO);
 			session.setAttribute("inquiryMap", inquiryMap);
-			System.out.println(inquiryMap);
 			return mav;
 
 	
@@ -128,17 +126,14 @@ public class BoardControllerImpl implements BoardController{
 			MemberVO memberVO = (MemberVO)session.getAttribute("member");
 			String memId = memberVO.getmemId();
 			inquiryMap.put("inquiryNum", 0);
-			System.out.println(memId);
 			inquiryMap.put("memId", memId);
 			inquiryMap.put("inquiryFile", inquiryFile);
-			System.out.println(inquiryFile);
 			String message;
 			ResponseEntity resEnt=null;
 			HttpHeaders responseHeaders = new HttpHeaders();
 			responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 			try {
 				int inquiryNum = boardService.addNewInquiry(inquiryMap);
-				System.out.println(inquiryMap);
 				if(inquiryFile != null && inquiryFile.length() !=0) { 
 					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + inquiryFile);
 						File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + inquiryNum);
@@ -170,11 +165,9 @@ public class BoardControllerImpl implements BoardController{
 			Iterator<String> fileNames = multipartRequest.getFileNames();			
 			while(fileNames.hasNext()) {
 				String fileName = fileNames.next();
-				System.out.println(fileName);
 				MultipartFile mFile = multipartRequest.getFile(fileName);
 				inquiryFile = mFile.getOriginalFilename();
 				File file = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
-				System.out.println(file);
 				if(mFile.getSize()!=0) {	
 					if(!file.exists()) {
 							file.getParentFile().mkdirs();
@@ -191,37 +184,88 @@ public class BoardControllerImpl implements BoardController{
 		public ModelAndView viewInquiry(@RequestParam("inquiryNum") int inquiryNum,
 							HttpServletRequest request, HttpServletResponse response) throws Exception {
 			String viewName = (String)request.getAttribute("viewName");
+			HttpSession session=request.getSession();
+			MemberVO memberVO=(MemberVO)session.getAttribute("member");
+			String memId=memberVO.getmemId();
+			articleVO.setmemId(memId);
 			articleVO = boardService.viewInquiry(inquiryNum);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName(viewName);
 			mav.addObject("inquiry", articleVO);
+			return mav;
+		}
+		
+		
+		@RequestMapping(value="/board/modInquiry.do", method = RequestMethod.POST)			
+		public ModelAndView inquiryForm(@RequestParam("inquiryNum") int inquiryNum, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+			System.out.println(inquiryNum);
+			String viewName =(String)multipartRequest.getAttribute("viewName");
+			articleVO = boardService.inquiryForm(inquiryNum);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("inquiryNum", articleVO);
 			System.out.println(articleVO);
 			return mav;
 		}
 		
-
-		@RequestMapping(value="/board/download.do", method=RequestMethod.GET)
-		protected void download(@RequestParam("inquiryFile") String inquiryFile,
-				@RequestParam("inquiryNum") int inquiryNum,
-				HttpServletResponse response)throws Exception {
-			OutputStream out = response.getOutputStream();
-			String downFile = ARTICLE_IMAGE_REPO + "\\" + inquiryNum + "\\" + inquiryFile;
-			File file = new File(downFile);
-			
-			response.setHeader("Cache-Control","no-cache");
-			response.addHeader("Content-disposition", "attachment; inquiryFile="+inquiryFile);
-			FileInputStream in=new FileInputStream(inquiryFile);
-			byte[] buffer=new byte[1024*8];
-			while(true){
-				int count=in.read(buffer); 
-				if(count==-1) 
-					break;
-				out.write(buffer,0,count);
+		
+		  @RequestMapping(value="/board/modArticle.do" ,method = RequestMethod.POST)
+		  @ResponseBody
+		  public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest,  
+		    HttpServletResponse response) throws Exception{
+		    multipartRequest.setCharacterEncoding("utf-8");
+			Map<String,Object> inquiryMap = new HashMap<String, Object>();
+			Enumeration enu=multipartRequest.getParameterNames();
+			while(enu.hasMoreElements()){
+				String name=(String)enu.nextElement();
+				String value=multipartRequest.getParameter(name);
+				inquiryMap.put(name,value);
+				System.out.println(name);
+				
 			}
-			in.close();
-			out.close();
-			return ;
-		}
+			
+			String inquiryFile= upload(multipartRequest);
+			inquiryMap.put("inquiryFile", inquiryFile);
+			System.out.println(inquiryFile);
+			String inquiryNum=(String)inquiryMap.get("inquiryNum");
+			inquiryMap.put("inquiryNum", inquiryNum);
+			System.out.println(inquiryNum);
+			String message;
+			ResponseEntity resEnt=null;
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		    try {
+		       boardService.modArticle(inquiryMap);
+		       if(inquiryFile!=null && inquiryFile.length()!=0) {
+		         File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+inquiryFile);
+		         File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+inquiryNum);
+		         FileUtils.moveFileToDirectory(srcFile, destDir, true);
+		         
+		         String originalFileName = (String)inquiryMap.get("originalFileName");
+		         File oldFile = new File(ARTICLE_IMAGE_REPO+"\\"+inquiryNum+"\\"+originalFileName);
+		         oldFile.delete();
+		       }	
+		       message = "<script>";
+			   message += " alert('글을 수정했습니다.');";
+			   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewInquiry.do?inquiryNum="+inquiryNum+"';";
+			   message +=" </script>";
+		       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    }catch(Exception e) {
+		      File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+inquiryFile);
+		      srcFile.delete();
+		      message = "<script>";
+			  message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+			  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+inquiryNum+"';";
+			  message +=" </script>";
+		      resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    }
+		    return resEnt;
+		  }
+		
+	
+
+
+
 		
 
 }
