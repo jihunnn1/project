@@ -86,7 +86,7 @@
 
 					<div class="container">
 						<div id="main-back">
-							<button onclick="#"
+							<button onclick="location.href='${contextPath}/main.do'"
 								style="height: 40px; width: 210px; font-size: 17px; background-color: #212529; color: white;">Simple
 								홈 바로가기</button>
 						</div>

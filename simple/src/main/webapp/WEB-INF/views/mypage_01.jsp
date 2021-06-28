@@ -14,6 +14,18 @@
 
 <!-- 조회기간 선택 자바스크립트 -->
 <script>
+		//회원탈퇴경고창
+		function drop_out(){
+				if (confirm("회원탈퇴를 진행하시겠습니까?")) {
+					location.href="${contextPath}/deletemember.do";
+				} else {
+					return false;
+				}			
+				
+				form.submit();
+		}
+
+
 	$(function() {
 		//input을 datepicker로 선언
 		$("#datepicker1, #datepicker2")
@@ -222,30 +234,7 @@
 			</div>
 		<!-- 최근 본 상품 끝 -->
 		<!-- Left Menu -->
-			<div class="col-lg-2"
-				style="float: left; margin-right: 50px; width: 230px; font-size: 17px; padding-left: 0px; padding-top: 13px;">
-				<div class="list-group list-group-flush">
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">마이
-						쇼핑</a> <a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">회원정보
-						수정</a> <a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">주문/배송조회</a>
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">취소/반품내역</a>
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">장바구니</a>
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">관심상품</a>
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">1:1문의</a>
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">A/S접수</a>
-					<a href="#"
-						class="list-group-item list-group-item-action text-center font-weight-bold">상품
-						리뷰</a>
-				</div>
-			</div>
+			<jsp:include page="/WEB-INF/views/common/mypage_sidemenu.jsp" flush="false" />
 		<!-- left Menu 끝-->
 		<!-- 마이페이지 상단 공통 ui -->
 			<div class="table_01" style="padding-top: 30px;">
@@ -256,7 +245,7 @@
 								<th
 									style="font-size: 16px; background-color: #212529; color: white;"
 									colspan="3"><a
-									style="font-size: 16px; padding-left: 10px; ">홍길동</a>
+									style="font-size: 16px; padding-left: 10px; ">${member.memName}</a>
 									<a>님 환영합니다.</a></th>
 							</tr>
 							<tr align="center"
@@ -344,7 +333,7 @@
 						</tr>
 					</table>
 				</div>
-				<button type="submit" id="btn-remove-mypage"
+				<button type="button" onclick="drop_out()" id="btn-remove-mypage"
 					style="float: right; color: black; font-size: 15px; padding-right: 5px; border: none; background-color: white; cursor: pointer;">회원탈퇴</button>
 			</div>
 		</div>

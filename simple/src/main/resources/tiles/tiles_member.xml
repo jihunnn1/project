@@ -106,7 +106,13 @@
 		<put-attribute name="body" value="/WEB-INF/views/nonorderinquiry.jsp" />
 	</definition>
 	
+	<definition name="product_01" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/product_01.jsp" />
+	</definition>
 	
+	<definition name="product_02" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/product_02.jsp" />
+	</definition>
 	
 	<definition name="storeinfomation" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/storeinfomation.jsp" />
@@ -161,6 +167,10 @@
 	<definition name="mypage_09" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/mypage_09.jsp" />
 	</definition>
+	
+	<definition name="mypage_10" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage_10.jsp" />
+	</definition>
 		
 	<definition name="mypage_13" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/mypage_13.jsp" />
@@ -170,13 +180,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage_14.jsp" />
 	</definition>
 	
+		<definition name="deletemember" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/deletemember.jsp" />
+	</definition>
+		
 	<definition name="add_product" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/views/add_product.jsp"/>
     </definition>
     
-    <definition name="lookup_product" extends="baseLayout">
-        <put-attribute name="body" value="/WEB-INF/views/lookup_product.jsp"/>
-    </definition>
+    
+	
 		
 	
 	

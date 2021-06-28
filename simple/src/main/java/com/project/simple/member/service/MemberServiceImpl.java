@@ -28,8 +28,8 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.insertMember(member);
 	}
 	@Override
-	public int removeMember(String id) throws DataAccessException{
-		return memberDAO.deleteMember(id);
+	public int removeMember(MemberVO removemember) throws DataAccessException{
+		return memberDAO.deleteMember(removemember);
 	}
 	
 	//로그인 기능 구현 추가
