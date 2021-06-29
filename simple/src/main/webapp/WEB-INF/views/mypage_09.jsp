@@ -13,7 +13,6 @@
 	align-items: center;
 	padding-top: 10px;
 }
-
 #Mypage { /*아이디 선택자*/
 	display: flex;
 	flex-direction: column;
@@ -24,25 +23,20 @@
 	padding-right: 20px;
 	font-size: 10px;
 }
-
 .my_row {
 	flex-direction: row;
 }
-
 .container1 {
 	width: 250px;
 }
-
 .container2 {
 	width: 800px;
 }
-
 #sect {
 	display: flex;
 	flex-direction: row;
 	padding-bottom: 10px;
 }
-
 .nav_MyPage {
 	width: 120px;
 	list-style-type: none;
@@ -50,11 +44,9 @@
 	padding: 0;
 	font-size: 14px;
 }
-
 #MyPage_center1 {
 	border: 1px solid rgb(140, 140, 140);
 }
-
 .nav_MyPage li a {
 	display: block;
 	color: #000000;
@@ -63,24 +55,20 @@
 	text-decoration: none;
 	font-weight: bold;
 }
-
 .nav_MyPage li a.current {
 	background-color: rgb(200, 200, 200);
 	color: block;
 }
-
 .nav_MyPage li a: hover:not(.current) {
 	background-color: #CD853F;
 	color: white;
 }
-
 #MyPage_top {
 	padding-top: 50px;
 	align-items: center;
 	width: 700px;
 	height: 100px;
 }
-
 #MyPage_top1 {
 	padding-top: 50px;
 	align-items: center;
@@ -88,7 +76,6 @@
 	width: 700px;
 	height: 100px;
 }
-
 #MyPage_top2 {
 	padding-top: 50px;
 	align-items: center;
@@ -96,64 +83,53 @@
 	width: 700px;
 	height: 100px;
 }
-
 .PASSWORD_confirm_text {
 	position: relative;
 	left: 15px;
 }
-
 #MyPage_top3 {
 	align-items: center;
 	padding-left: 300px;
 	width: 700px;
 	height: 100px;
 }
-
 .btn_PASSWORD_confirm {
 	position: relative;
 	font-size: 15px;
 	width: 80px;
 }
-
 .btn_main_back {
 	position: relative;
 	left: 14px;
 	font-size: 15px;
 	width: 80px;
 }
-
 #Mypage_nav {
 	width: 400px;
 }
-
 #Mypage-center {
 	display: flex;
 	flex-direction: row;
 }
-
 #Mypage_nav {
 	display: flex;
 	flex-direction: column;
 	width: 120px;
 }
-
 .Easy-sgin-in-wrap {
 	display: flex;
 	flex-direction: column; /*column으로 정렬 */
 	float: right;
 }
-
 .Easy-sgin-in-wrap .sign-button-list {
 	list-style: none;
 	width: 350px;
 	display: flex;
 	flex-direction: column;
 }
-
 .Easy-sgin-in-wrap .sign-button-list li {
 	padding-top: 10px;
 }
-
 .Easy-sgin-in-wrap .sign-button-list li button {
 	width: 350px;
 	height: 40px;
@@ -161,7 +137,6 @@
 	text-align: center;
 	background: rgb(255, 255, 255);
 }
-
 .Easy-sgin-in-wrap .sign-button-list li button i {
 	font-size: 10px;
 }
@@ -220,54 +195,25 @@
 					<thead class="table-dark" align=center>
 						<tr align="center"
 							style="background-color: #212529; color: white;">
-							<td scope="col" width="100">선택</td>
-							<td scope="col" width="150"></td>
-							<td scope="col" width="500" align=left>상품</td>
-							<td scope="col" width="120">금액</td>
-							<td scope="col" width="120">배송비</td>
-							<td scope="col" width="120">합계</td>
+							<td scope="col" width="300"></td>
+							<td scope="col" width="800" align="center">상품</td>
+							<td scope="col" width="300">금액</td>
+				
 						</tr>
 					</thead>
 					<tbody>
+	
 						<tr>
-							<td scope="col" align=center><br>
-							<br>
-							<input type="checkbox" style="zoom: 2.0;"></td>
-							<td scope="col"><img
-								src="${contextPath}/resources/images/sofa01.jpg" width=130
-								height=130></td>
-							<td scope="col" align=left style="padding-top: 0px;"><br>
-							<br>
-							<br>패브릭 쇼파 (2인분)</td>
-							<td scope="col" align=center style="padding-top: 0px;"><br>
-							<br>
-							<br>230,000</td>
-							<td scope="col" align=center style="padding-top: 0px;"><br>
-							<br>
-							<br>무료배송</td>
-							<td scope="col" align=center style="padding-top: 0px;"><br>
-							<br>
-							<br>230,000</td>
-						</tr>
-						<tr>
-							<td scope="col" align=center><br>
-							<br>
-							<input type="checkbox" style="zoom: 2.0;"></td>
-							<td scope="col"><img
+							
+							<td scope="col" align="center"><img
 								src="${contextPath}/resources/images/chair01.jpg" width=130
 								height=130></td>
-							<td scope="col" align=left style="padding-top: 0px;"><br>
+							<td scope="col" align="center" style="padding-top: 0px;"><br>
 							<br>
 							<br>원목의자</td>
-							<td scope="col" align=center style="padding-top: 0px;"><br>
+							<td scope="col" align="center" style="padding-top: 0px;"><br>
 							<br>
 							<br>100,000</td>
-							<td scope="col" align=center style="padding-top: 0px;"><br>
-							<br>
-							<br>2,500</td>
-							<td scope="col" align=center style="padding-top: 0px;"><br>
-							<br>
-							<br>102,500</td>
 						</tr>
 
 
