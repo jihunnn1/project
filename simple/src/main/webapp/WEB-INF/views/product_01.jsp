@@ -2,6 +2,9 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,15 +18,12 @@
 	text-align: center;
 	font-size: 0;
 }
-
 .page_nation {
 	display: inline-block;
 }
-
 .page_nation .none {
 	display: none;
 }
-
 .page_nation a {
 	display: block;
 	margin: 0 3px;
@@ -38,37 +38,31 @@
 	color: #999999;
 	text-decoration: none;
 }
-
 .page_nation .arrow {
 	border: 1px solid #ccc;
 }
-
 .page_nation .pprev {
 	background: #f8f8f8
 		url('${contextPath}/resources/images/page_pprev.png') no-repeat center
 		center;
 	margin-left: 0;
 }
-
 .page_nation .prev {
 	background: #f8f8f8 url('${contextPath}/resources/images/page_prev.png')
 		no-repeat center center;
 	margin-right: 7px;
 }
-
 .page_nation .next {
 	background: #f8f8f8 url('${contextPath}/resources/images/page_next.png')
 		no-repeat center center;
 	margin-left: 7px;
 }
-
 .page_nation .nnext {
 	background: #f8f8f8
 		url('${contextPath}/resources/images/page_nnext.png') no-repeat center
 		center;
 	margin-right: 0;
 }
-
 .page_nation a.active {
 	background-color: #42454c;
 	color: #fff;
@@ -178,12 +172,12 @@
 						<div class="text d-flex py-1">
 							<div class="desc pl-2">
 								<h3 class="heading">
-									<a href="#">${product.productName}</a>
+									<a href="${contextPath}/product/viewProduct.do?productNum=${product.productNum}">${product.productName}</a>
 								</h3>
 								<hr style="margin-top: 25px;">
 								<h3 class="heading"
 									style="padding-left: 67%; white-space: nowrap;">
-									<a href="#" style="font-size: 22px;">${product.productPrice}</a>
+									<a href="${contextPath}/product/viewProduct.do?productNum=${product.productNum}" style="font-size: 22px;"><fmt:formatNumber pattern="###,###,###" value="${product.productPrice}"/></a>
 								</h3>
 							</div>
 						</div>
