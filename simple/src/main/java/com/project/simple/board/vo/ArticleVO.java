@@ -20,6 +20,22 @@ public class ArticleVO {
 	private String noticeContent;
 	private String noticeImg;
 
+	//question 게시판
+	private int questionNum;
+	private String questionTitle;
+	private String questionContent;
+	
+	//inquiry 게시판
+	private String memId;
+	private int inquiryNum;
+	private String inquiryType;
+	private Date inquiryDate;
+	private String inquiryTitle;
+	private String inquiryContent;
+	private String inquiryFile;
+	private String inquiryAnswer;
+	private String inquiryReq;
+	
 	
 	//notice 게시판
 	public ArticleVO() {
@@ -87,6 +103,102 @@ public class ArticleVO {
 		}
 	}
 	
+	//question 게시판
+	public int getQuestionNum() {
+		return questionNum;
+	}
+	
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+	public String getQuestionTitle() {
+		return questionTitle;
+	}
+	
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
+	}
+	
+	public String getQuestionContent() {
+		return questionContent;
+	}
+	
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
+	
+	//inquiry 게시판
+	public String getmemId() {
+		return memId;
+	}
+	
+	public void setmemId(String memId) {
+		this.memId = memId;
+	}
+	
+	public int getInquiryNum() {
+		return inquiryNum;
+	}
+	
+	public void setInquiryNum(int inquiryNum) {
+		this.inquiryNum = inquiryNum;
+	}
+	
+	public String getInquiryType() {
+		return inquiryType;
+	}
+	
+	public void setInquiryNum(String inquiryType) {
+		this.inquiryType = inquiryType;
+	}
+	
+	public Date getInquiryDate() {
+		return inquiryDate;
+	}
+	
+	public void setInquiryDate(Date inquiryDate) {
+		this.inquiryDate = inquiryDate;
+	}
+	
+	public String getInquiryTitle() {
+		return inquiryTitle;
+	}
+	
+	public void setInquiryTitle(String inquiryTitle) {
+		this.inquiryTitle = inquiryTitle;
+	}
+	
+	public String getInquiryContent() {
+		return inquiryContent;
+	}
+	
+	public void setInquiryContent(String inquiryContent) {
+		this.inquiryContent = inquiryContent;
+	}
+	
+	public String getInquiryFile() {
+		return inquiryFile;
+	}
+	
+	public void setInquiryFile(String inquiryFile) {
+		this.inquiryFile = inquiryFile;
+	}
+	
+	public String getInquiryAnswer() {
+		return inquiryAnswer;
+	}
+	
+	public void setInquiryAnswer(String inquiryAnswer) {
+		this.inquiryAnswer = inquiryAnswer;
+	}
+	
+	public String getInquiryReq() {
+		return inquiryReq;
+	}
+	
+	public void setInquiryReq(String inquiryReq) {
+		this.inquiryReq = inquiryReq;
+	}
 
 
 }

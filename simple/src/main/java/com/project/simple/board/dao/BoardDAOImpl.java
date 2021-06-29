@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+
 import com.project.simple.board.vo.ArticleVO;
 
 
@@ -16,7 +17,7 @@ import com.project.simple.board.vo.ArticleVO;
 public class BoardDAOImpl implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
-	
+	//notice게시판
 	@Override
 	public List<ArticleVO> selectAllNoticeList() throws DataAccessException {
 		List<ArticleVO> noticeList = sqlSession.selectList("mapper.board.selectAllNoticeList");
@@ -28,5 +29,46 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
 	}
 	
-
+	//question 게시판
+	@Override
+	public List<ArticleVO> selectAllQuestionList() throws DataAccessException {
+		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList");
+		return questionList;
+	}
+	
+	//inquiry 게시판
+	@Override
+	public List<ArticleVO> selectInquiryList(ArticleVO articleVO) throws DataAccessException {
+		List<ArticleVO> inquiryList =(List)sqlSession.selectList("mapper.board.selectAllInquiryList",articleVO);
+		return inquiryList;
+	}
+	
+	@Override
+	public int insertNewInquiry(Map inquiryMap) throws DataAccessException {
+		int inquiryNum = selectNewInquiryNum();
+		inquiryMap.put("inquiryNum", inquiryNum);
+		sqlSession.insert("mapper.board.insertNewInquiry", inquiryMap);
+		return inquiryNum;
+	}
+	
+	private int selectNewInquiryNum() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNewInquiryNum");
+		
+	}
+	
+	@Override
+	public ArticleVO selectInquiry(int inquiryNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectInquiry", inquiryNum);
+	}
+	
+	
+	@Override
+	public ArticleVO selectInquiry1(int inquiryNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectInquiry", inquiryNum);
+	}
+	
+	@Override
+	public void updateArticle(Map inquiryMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateArticle", inquiryMap);
+	}
 }	

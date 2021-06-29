@@ -13,5 +13,16 @@ public interface BoardDAO{
 	
 	public ArticleVO selectNotice(int noticeNum) throws DataAccessException;
 	
+	public List selectAllQuestionList() throws DataAccessException;
+	
+	public List<ArticleVO> selectInquiryList(ArticleVO articleVO) throws DataAccessException;
+	
+	public int insertNewInquiry(Map inquiryMap) throws DataAccessException;
+	
+	public ArticleVO selectInquiry(int inquiryNum) throws DataAccessException;
+	
+	
+	public ArticleVO selectInquiry1(int inquiryNum) throws DataAccessException;
 
+	public void updateArticle(Map inquiryMap) throws DataAccessException ;
 }

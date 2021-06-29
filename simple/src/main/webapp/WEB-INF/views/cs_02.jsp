@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -148,15 +149,15 @@
 				<thead class="table-dark" align=center>
 					<tr align="center">
 						<td scope="col" colspan="6"
-							style="border-bottom: 1px solid white;">6월 신용카드 무이자 할부 이벤트!!</td>
+							style="border-bottom: 1px solid white;">${notice.noticeTitle}</td>
 					</tr>
 					<tr>
 						<td scope="col" width="150">작성자</td>
 						<td scope="col" width="150"
-							style="background-color: white; color: black;"><a>Simple</a></td>
+							style="background-color: white; color: black;"><a>${notice.noticeWriter }</a></td>
 						<td scope="col" width="100">작성일</td>
 						<td scope="col" width="100"
-							style="background-color: white; color: black;">2021-06-12</td>
+							style="background-color: white; color: black;"><fmt:formatDate value="${notice.noticeDate}" /></td>
 						<td scope="col" width="80">조회수</td>
 						<td scope="col" width="80"
 							style="background-color: white; color: black;">0</td>
@@ -166,7 +167,7 @@
 						style="border-bottom: 1px solid #32383e !important; background-color: white; color: black;">
 
 						<td colspan="6" align="left" scope="col" width="500" height="500"><a
-							href="#" style="color: black; padding-left: 30px;">글 내용</a></td>
+							href="#" style="color: black; padding-left: 30px;">${notice.noticeContent }</a></td>
 					</tr>
 				</thead>
 			</table>

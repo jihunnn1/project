@@ -2,9 +2,31 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+function modInquiry(url,inquiryNum){
+	 var form = document.createElement("form");
+	 form.setAttribute("method", "post");
+	 form.setAttribute("action", url);
+    var inquiryNumInput = document.createElement("input");
+    inquiryNumInput.setAttribute("type","hidden");
+    inquiryNumInput.setAttribute("name","inquiryNum");
+    inquiryNumInput.setAttribute("value", inquiryNum);
+	 
+    form.appendChild(inquiryNumInput);
+    document.body.appendChild(form);
+    form.submit();
+
+}
+
+
+</script>
 <style>
 #buttonmy {
 	width: 80px;
@@ -13,6 +35,8 @@
 	border-radius: 2px;
 	padding-top: 1.8px;
 }
+
+
 </style>
 </head>
 <body>
@@ -76,25 +100,50 @@
 
 			</div>
 
-
+		<form name="frmInquiry" method="post"  action="${contextPath}/board/modInquiry.do?inquiryNum=${inquiry.inquiryNum}"  enctype="multipart/form-data">
 			<table class="table" style="margin-top: 20px; text-align: center;">
 				<thead class="table-dark" align=center>
 					<tr style="border-bottom: 1px solid grey; height: 30px;">
-						<td>배송 언제 되나요?</td>
-					</tr>
-					<tr
+						<td><a>${inquiry.inquiryTitle}</a></td>
+						<td><a>${inquiry.inquiryNum}</a></td>
+					</tr>	
+
+					
+				<c:choose>		
+				<c:when test="${not empty inquiry.inquiryFile && inquiry.inquiryFile != 'null'}">
+				<tr
 						style="border-bottom: 0.5px solid grey; height: 300px; text-align: left; background-color: white;">
-						<td style="padding-bottom: 250px; color: black;">5월 말에 주문 했는데
-							배송은 언제 되나요?</td>
-					</tr>
+				<td style="padding-bottom: 250px; color: black;"><a>${inquiry.inquiryContent}<br>
+				<input type="hidden" name="OrignInquiryFile" value="${inquiry.inquiryFile}" />
+				<img  src="${contextPath}/download.do?inquiryNum=${inquiry.inquiryNum}&inquiryFile=${inquiry.inquiryFile}" id="preview" /><br>
+	
+				</a>
+	
+				</td>
+				</tr>	
+					
+
+			</c:when>
+			<c:otherwise>
+				<tr
+						style="border-bottom: 0.5px solid grey; height: 300px; text-align: left; background-color: white;">
+					<td style="padding-bottom: 250px; color: black;">${inquiry.inquiryContent}<br>
+		
+				</tr>
+			</c:otherwise>		
+			</c:choose>
+						
+		
 				</thead>
 			</table>
-			<button type="submit" class="btn btn-dark" id="buttonmy"
+
+			<button type="button" class="btn btn-dark" id="buttonmy"
 				style="float: left; margin-left: 590px; margin-top: 30px;">목록</button>
-			<button type="submit" class="btn btn-dark" id="buttonmy"
-				style="float: left; margin-left: 1100px; margin-top: -30px;">수정</button>
-			<button type="submit" class="btn btn-dark" id="buttonmy"
-				style="float: left; margin-left: 1190px; margin-top: -30px;">삭제</button>
+				<button type="submit" class="btn btn-dark" id="buttonmy" 
+					style="float: left; margin-left: 1100px; margin-top: -30px; " >수정</button>
+				<button type="button" class="btn btn-dark" id="buttonmy" 
+					style="float: left; margin-left: 1190px; margin-top: -30px;">삭제</button>	
+			</form>	
 		</div>
 	</section>
 	<!-- 내용 끝 -->

@@ -30,7 +30,7 @@
 	        	</c:otherwise>
 	        	</c:choose>
 	        	<li class="nav-item"><a href="" class="nav-link">매장안내</a></li>
-	        	<li class="nav-item"><a href="" class="nav-link" style="margin-right:20px;">고객센터</a></li>
+	        	<li class="nav-item"><a href="${contextPath}/board/listNotice.do" class="nav-link" style="margin-right:20px;">고객센터</a></li>
 
 	        </ul>
 
