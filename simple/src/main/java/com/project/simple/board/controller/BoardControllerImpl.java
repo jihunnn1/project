@@ -159,6 +159,7 @@ public class BoardControllerImpl implements BoardController{
 				}
 			return resEnt;
 		}
+		
 
 		private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 			String inquiryFile=null;

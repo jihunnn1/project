@@ -38,7 +38,7 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		return "main";
+		return "404";
 	}
 
 	// 멤버로그인작업 ppt226
@@ -156,6 +156,14 @@ public class MemberControllerImpl implements MemberController {
 
 	@RequestMapping(value = "/join_01.do", method = RequestMethod.GET)
 	private ModelAndView join_01(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/storeinfomation.do", method = RequestMethod.GET)
+	private ModelAndView storeinfomation(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
