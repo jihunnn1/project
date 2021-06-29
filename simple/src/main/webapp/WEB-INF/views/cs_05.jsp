@@ -33,37 +33,14 @@
 		form.submit();
 	}
 	
-	<script type="text/javascript">
-	function fileUpload(){
-		var fileInput = document.getElementsByClassName("inquiryFile");
-
-		for( var i=0; i<fileInput.length; i++ ){
-			if( fileInput[i].files.length > 0 ){
-				for( var j = 0; j < fileInput[i].files.length; j++ ){
-					console.log(fileInput[i].files[j].name); // 파일명 출력
-				}
-			}
+		function modInquiry(obj) {
+				obj.action="${contextPath}/board/modArticle.do?inquiryNum=${inquiryNum.inquiryNum}";
+				obj.submit();
+				
 		}
-
-	}
-	
-	 function modInquiry(obj){
-		 obj.action="${contextPath}/board/modArticle.do?inquiryNum="${inquiryNum}";
-		 obj.submit();
-	 }
 	 
 </script>
-<script>
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				$('#preview').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-</script>
+
 
 <style>
 #buttonmy {
@@ -143,7 +120,7 @@
 
 			<!-- 내용 -->
 			
-			<form name="inquiryForm" action="${contextPath}"  method="post" enctype="multipart/form-data">
+			<form name="inquiryForm" action="${contextPath}/board/addNewInquiry.do"  method="post" enctype="multipart/form-data">
 				<table class=table style="padding-top: 50px; border-top: #212529;">
 					<c:choose>
 						<c:when test="${!empty inquiryNum}">
@@ -218,7 +195,7 @@
 					<tr>
 						<td
 							style="padding-left: 95px; font-weight: bold; padding-top: 30px;">파일첨부</td>
-						<td style="background-color: white;">기존파일: ${inquiryNum.inquiryFile}<br><input type="file"
+						<td style="background-color: white;"><input type="file"
 							onchange="readURL(${inquiryNum.inquiryFile});" style="padding-top: 25px;" name="inquiryFile" value="${inquiryNum.inquiryFile}" 
 							></td>
 					</tr>
@@ -227,15 +204,15 @@
 				</table>
 				<hr style="border-color: #212529;; width: 100%;">
 					<c:choose>
-						<c:when test="${!empty inquiryNum}">
-					<button type="button" onclick="modInquiry(this.form)" class="btn btn-dark "
+					<c:when test="${!empty inquiryNum}">
+					<button type="button" onClick="modInquiry(this.form)" class="btn btn-dark "
 						id="buttonmy" style="margin-left: 630px; margin-top: 30px;">수정하기</button>
 	     					 <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
+
 	  					</c:when>
-	  				<c:when test="${empty inquiryNum}">	
-	  					
+	  				<c:when test="${empty inquiryNum}">		
 				<div>
-					<button type="button" onclick="inquiry_write();" class="btn btn-dark "
+					<button type="button" onclick="inquiry_write()" class="btn btn-dark "
 						id="buttonmy" style="margin-left: 630px; margin-top: 30px;">등록</button>
 
 					<button type="button" onclick="location.href=''"

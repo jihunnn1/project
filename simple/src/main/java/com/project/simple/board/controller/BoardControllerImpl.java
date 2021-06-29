@@ -106,7 +106,7 @@ public class BoardControllerImpl implements BoardController{
 		
 		//한개 이미지 글쓰기
 		@Override
-		@RequestMapping(value="board/addNewInquiry.do", method = RequestMethod.POST)
+		@RequestMapping(value="/board/addNewInquiry.do", method = RequestMethod.POST)
 		@ResponseBody
 		public ResponseEntity addNewInquiry(MultipartHttpServletRequest multipartRequest, 
 				HttpServletResponse response) throws Exception {

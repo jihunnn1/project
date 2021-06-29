@@ -26,6 +26,7 @@ function modInquiry(url,inquiryNum){
 }
 
 
+
 </script>
 <style>
 #buttonmy {
