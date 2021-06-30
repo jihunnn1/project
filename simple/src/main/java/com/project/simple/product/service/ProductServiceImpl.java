@@ -36,5 +36,15 @@ public class ProductServiceImpl implements ProductService{
 		ProductVO productVO = productDAO.selectProduct(productNum);
 		return productVO;
 	}
+	@Override
+	public List<String> keywordSearch(String keyword) throws Exception {
+		List<String> list=productDAO.selectKeywordSearch(keyword);
+		return list;
+	}
+	@Override
+	public List<ProductVO> searchProduct(String searchWord) throws Exception {
+		List productList=productDAO.selectProductBySearchWord(searchWord);
+		return productList;
+	}
 	
 }

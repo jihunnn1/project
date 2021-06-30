@@ -1,6 +1,7 @@
 package com.project.simple.product.controller;
 
 import java.util.List;
+import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.simple.product.service.ProductService;
 import com.project.simple.product.vo.ProductVO;
 
 @Controller("productController")
+
 public class ProductControllerImpl implements ProductController{
 	@Autowired
 	private ProductService productService;
@@ -71,6 +74,38 @@ public class ProductControllerImpl implements ProductController{
 		mav.setViewName(viewName);
 		mav.addObject("product", productVO);
 		System.out.println(productVO);
+		return mav;
+		
+	}
+	@RequestMapping(value="/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")//브라우저로 전송하는 json데이터의 한글 인코딩을 지정
+	public @ResponseBody String  keywordSearch(@RequestParam("keyword") String keyword,//검색할 키워드 가져옴
+			                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("utf-8");
+		//System.out.println(keyword);
+		if(keyword == null || keyword.equals(""))
+		   return null ;
+	
+		keyword = keyword.toUpperCase();
+	    List<String> keywordList =productService.keywordSearch(keyword);// 가져온 키워드가 포함된 상품 제목 조회
+	    
+	    // 최종 완성될 JSONObject 선언(전체)
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("keyword", keywordList); //조회한 데이터를 json에 저장
+		 		
+	    String jsonInfo = jsonObject.toString(); //json을 문자열로 변환한 후 브라우저로 출력
+	    //System.out.println(jsonInfo);
+	    return jsonInfo ;
+	}
+	
+	@RequestMapping(value="/searchProduct.do" ,method = RequestMethod.GET)
+	public ModelAndView searchProduct(@RequestParam("searchWord") String searchWord,
+			                       HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName=(String)request.getAttribute("viewName");
+		List<ProductVO> productList=productService.searchProduct(searchWord); // 검색창에서 가져온 단어가 포함된 상품 제목을 조회
+		
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("productList", productList);
 		return mav;
 		
 	}

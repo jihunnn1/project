@@ -12,5 +12,6 @@ public interface ProductDAO {
 	public int deleteProduct(String productNum) throws DataAccessException;
 
 	public ProductVO selectProduct(String productNum) throws DataAccessException;
-	
+	public List<String> selectKeywordSearch(String keyword) throws DataAccessException;
+	public List<ProductVO> selectProductBySearchWord(String searchWord) throws DataAccessException;
 }

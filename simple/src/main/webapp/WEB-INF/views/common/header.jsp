@@ -1,7 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" /> 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
  
+ <script type="text/javascript">
+	var loopSearch=true; //제시된 키워드를 클릭하면 keywordSearch()함수의 실행을 중지
+	function keywordSearch(){
+		if(loopSearch==false)
+			return;
+	 var value=document.frmSearch.searchWord.value;
+		$.ajax({
+			type : "get",
+			async : true, //false인 경우 동기식으로 처리한다.
+			url : "${contextPath}/keywordSearch.do",
+			data : {keyword:value},
+			success : function(data, textStatus) {
+			    var jsonInfo = JSON.parse(data);//전송된 데이터를 json으로 파싱
+				displayResult(jsonInfo);//전송된 json데이터를 표시
+			},
+			error : function(data, textStatus) {
+				alert("에러가 발생했습니다."+data);
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				
+			}
+		}); //end ajax	
+	}
+	
+	function displayResult(jsonInfo){
+		var count = jsonInfo.keyword.length; //json 데이터 개수를 구함
+		if(count > 0) {
+		    var html = '';
+		    for(var i in jsonInfo.keyword){ //json데이터를 차례대로 <a>태그를 이용해 키워드 목록을 만듬
+			   html += "<a href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a><br/>";
+		    }
+		    var listView = document.getElementById("suggestList");//<a>태그로 만든 키워드 목록을 <div>태그에 차례대로 표시
+		    listView.innerHTML = html;
+		    show('suggest');
+		}else{
+		    hide('suggest');
+		} 
+	}
+	function select(selectedKeyword) {
+		 document.frmSearch.searchWord.value=selectedKeyword;
+		 loopSearch = false;
+		 hide('suggest');
+	}
+	function show(elementId) {
+		 var element = document.getElementById(elementId);
+		 if(element) {
+		  element.style.display = 'block';
+		 }
+		}
+	function hide(elementId){
+	   var element = document.getElementById(elementId);
+	   if(element){
+		  element.style.display = 'none';
+	   }
+	}
+</script>
  <!-------------header------------------------------------------------------------------------------------------------------------------------>   
 	  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container" style=" height: 150px;">
@@ -99,19 +156,21 @@
 		</div>
 		
 		
-		 	
-    		<input type="text"  placeholder="Search for..."  style="margin-top:60px; margin-left:-300px;">
-    		<button type="submit" style="background-image:url(${contextPath}/resources/images/header-01.png); cusor:pointer;  background-size:25px; width:35px; height:35px; border:1px solid #828282; background-repeat:no-repeat; border-radius:2px; margin-top:60px; margin-left:1px; background-position:center; cursor:pointer;"></button>
-    	 	
-       	<div class="dropdown">
+		 	<form name="frmSearch" action="${contextPath}/searchProduct.do" >
+    		<input type="text" onKeyUp="keywordSearch()" name="searchWord" class="main_input" placeholder="Search for..."  style="margin-top:60px; margin-left:-300px;">
+    		<button type="submit" name="search" class="btn1" style="background-image:url(${contextPath}/resources/images/header-01.png); cusor:pointer;  background-size:25px; width:35px; height:35px; border:1px solid #828282; background-repeat:no-repeat; border-radius:2px; margin-top:60px; margin-left:1px; background-position:center; cursor:pointer;"></button>
+    	 	</form>
+    	 	<div id="suggest">
+               <div id="suggestList"></div>
+            </div>
+            
+            
+            
+            
+       	   <div class="dropdown">
        		
   			<button style="background-image:url(${contextPath}/resources/images/header-02.png); cusor:pointer;  border:none; background-size:50px 55px; width:40px; height:40px; background-repeat:no-repeat; border-radius:2px; margin-top:69px;  background-position:center; background-color: transparent !important; cursor:pointer;"></button>
-    			
  
-  		
-  			
-  
-  		
   		
   	<!-- 사이트맵 -->
   		<ul class="dropdown-menu submenu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-1200px; padding-left:1300px; margin-bottom:600px;">
