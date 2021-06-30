@@ -67,37 +67,34 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main.do");	
+		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
 
-	
-	//È¸¿øÅ»ÅðÀÛ¾÷
-	@RequestMapping(value="/removeMember.do" ,method = RequestMethod.POST)
-	public ModelAndView removeMember(@ModelAttribute("removemember")  MemberVO removemember,
-			           HttpServletRequest request, HttpServletResponse response, RedirectAttributes rAttr) throws Exception{
+	// È¸¿øÅ»ÅðÀÛ¾÷
+	@RequestMapping(value = "/removeMember.do", method = RequestMethod.POST)
+	public ModelAndView removeMember(@ModelAttribute("removemember") MemberVO removemember, HttpServletRequest request,
+			HttpServletResponse response, RedirectAttributes rAttr) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		String sessionmemPwd = member.getmemPwd();
 		String memPwd = removemember.getmemPwd();
-		
-		if(!(sessionmemPwd.equals(memPwd))) {
+
+		if (!(sessionmemPwd.equals(memPwd))) {
 			rAttr.addAttribute("result", false);
 			ModelAndView mav = new ModelAndView("redirect:/deletemember.do");
 			return mav;
-		} 
-		
+		}
+
 		int result = memberService.removeMember(removemember);
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView("redirect:/drop_out.do");
-		return mav; 
-		
-		
+		return mav;
+
 	}
-	
-	
+
 	@RequestMapping(value = "/drop_out.do", method = RequestMethod.GET)
 	private ModelAndView drop_out(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -105,7 +102,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/deletemember.do", method = RequestMethod.GET)
 	private ModelAndView deletemember(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -137,7 +134,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/mypage_01.do", method = RequestMethod.GET)
 	private ModelAndView mypage_01(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -161,7 +158,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/storeinfomation.do", method = RequestMethod.GET)
 	private ModelAndView storeinfomation(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -186,7 +183,5 @@ public class MemberControllerImpl implements MemberController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }
