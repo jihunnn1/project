@@ -1,5 +1,6 @@
 package com.project.simple.product.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -35,6 +36,18 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public ProductVO selectProduct(String productNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.product.selectProduct", productNum);
+	}
+
+	@Override
+	public List<String> selectKeywordSearch(String keyword) throws DataAccessException {
+		 List<String> list=(ArrayList)sqlSession.selectList("mapper.product.selectKeywordSearch",keyword);
+		   return list;
+	}
+
+	@Override
+	public List<ProductVO> selectProductBySearchWord(String searchWord) throws DataAccessException {
+		ArrayList list=(ArrayList)sqlSession.selectList("mapper.product.selectProductBySearchWord",searchWord);
+		 return list;
 	}
 
 

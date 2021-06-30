@@ -11,5 +11,7 @@ public interface ProductService {
 	public int addProduct(ProductVO productVO) throws DataAccessException;
 	public int removeProduct(String productNum) throws DataAccessException;
 	public ProductVO viewProduct(String productNum) throws Exception;
+	public List<String> keywordSearch(String keyword) throws Exception;
+	public List<ProductVO> searchProduct(String searchWord) throws Exception;
 
 }
