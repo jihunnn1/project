@@ -13,6 +13,7 @@
 		<result property="noticeContent" column="noticeContent"/>
 		<result property="noticeImg" column="noticeImg"/>
 	</resultMap>
+	
 	<!-- question 게시판 -->
 	<resultMap id="questionResult" type="articleVO">
 		<result property="questionNum" column="questionNum"/>

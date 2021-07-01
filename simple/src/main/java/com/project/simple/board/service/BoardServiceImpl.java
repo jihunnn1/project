@@ -35,17 +35,18 @@ public class BoardServiceImpl implements BoardService{
 		return noticeList;
 	}
 	
-	//단일 파일 보이기
 	@Override
 	public ArticleVO viewNotice(int noticeNum) throws Exception {
 		ArticleVO articleVO = boardDAO.selectNotice(noticeNum);
 		return articleVO;
 	}
+	
 	//qustion 게시판
 	public List<ArticleVO> listQuestion() throws Exception{
 		List<ArticleVO> questionList = boardDAO.selectAllQuestionList();
 		return questionList;
 	}
+	
 	
 	//inquiry 게시판
 	public Map<String ,List> listInquiry(ArticleVO articleVO) throws Exception{
@@ -71,7 +72,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 
-	
 	@Override
 	public ArticleVO inquiryForm(int inquiryNum) throws Exception {
 		ArticleVO articleVO = boardDAO.selectInquiry1(inquiryNum);
