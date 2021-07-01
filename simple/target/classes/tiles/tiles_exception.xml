@@ -15,4 +15,9 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/exception/404.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="500" extends="empty">
+		<put-attribute name="content"
+			value="/WEB-INF/views/exception/500.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

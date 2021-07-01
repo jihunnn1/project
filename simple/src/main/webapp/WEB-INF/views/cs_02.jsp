@@ -124,27 +124,9 @@
 				</ul>
 			</div>
 			<!-- 최근 본 상품 끝 -->
+			<jsp:include page="/WEB-INF/views/common/csMenu.jsp" flush="false" />
 			<!-- 내용 -->
-			<div class="btn-group btn-group-justified" role="group"
-				aria-label="..." style="margin-bottom: 30px; margin-top: 10px;">
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default"
-						style="font-size: 28px; font-weight: bold; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; margin-left: 28px;">*공지사항</button>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default"
-						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white;">*자주
-						묻는 질문</button>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default"
-						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white;">*1:1문의</button>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default"
-						style="font-size: 25px; border: none; color: #5a5a5a; background-color: white;">*A/S센터</button>
-				</div>
-			</div>
+
 			<table class="table">
 				<thead class="table-dark" align=center>
 					<tr align="center">
@@ -172,7 +154,7 @@
 				</thead>
 			</table>
 
-			<button type="button" onclick="location.href=''" id="buttonmy"
+			<button type="button" onclick="location.href='${contextPath}/board/listNotice.do'" id="buttonmy"
 				class="btn btn-dark"
 				style="float: left; margin-left: 600px; margin-top: 30px; border-radius: 2px;">목록</button>
 		</div>
