@@ -270,57 +270,54 @@ h3 {
 	function phone_check() {
 		window.open("phone_check.jsp", "phonewin", "width=400, height=350");
 	}
-
-
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-    //주문자 우편번호
-    function sample6_execDaumPostcode() {
-        new daum.Postcode(
-                {
-                    oncomplete : function(data) {
-                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
- 
-                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                        var fullAddr = ''; // 최종 주소 변수
-                        var extraAddr = ''; // 조합형 주소 변수
- 
-                        // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                            fullAddr = data.roadAddress;
- 
-                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                            fullAddr = data.jibunAddress;
-                        }
- 
-                        // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                        if (data.userSelectedType === 'R') {
-                            //법정동명이 있을 경우 추가한다.
-                            if (data.bname !== '') {
-                                extraAddr += data.bname;
-                            }
-                            // 건물명이 있을 경우 추가한다.
-                            if (data.buildingName !== '') {
-                                extraAddr += (extraAddr !== '' ? ', '
-                                        + data.buildingName : data.buildingName);
-                            }
-                            // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                            fullAddr += (extraAddr !== '' ? ' (' + extraAddr
-                                    + ')' : '');
-                        }
- 
-                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                        document.getElementById('sample6_address').value = fullAddr;
- 
-                        // 커서를 상세주소 필드로 이동한다.
-                        document.getElementById('sample6_address2').focus();
-                    }
-                }).open();
-    }
+	//주문자 우편번호
+	function sample6_execDaumPostcode() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var fullAddr = ''; // 최종 주소 변수
+						var extraAddr = ''; // 조합형 주소 변수
+
+						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							fullAddr = data.roadAddress;
+
+						} else { // 사용자가 지번 주소를 선택했을 경우(J)
+							fullAddr = data.jibunAddress;
+						}
+
+						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+						if (data.userSelectedType === 'R') {
+							//법정동명이 있을 경우 추가한다.
+							if (data.bname !== '') {
+								extraAddr += data.bname;
+							}
+							// 건물명이 있을 경우 추가한다.
+							if (data.buildingName !== '') {
+								extraAddr += (extraAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+									+ ')' : '');
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+						document.getElementById('sample6_address').value = fullAddr;
+
+						// 커서를 상세주소 필드로 이동한다.
+						document.getElementById('sample6_address2').focus();
+					}
+				}).open();
+	}
 </script>
 </head>
 <title>주문결제창</title>
@@ -362,22 +359,25 @@ h3 {
 				</ul>
 			</div>
 
-			<form name="CheckJoin" action="${contextPath}/addMembers.do" method="post">
+			<form name="CheckJoin" action="${contextPath}/addMembers.do"
+				method="post">
 				<section class="ftco-section testimony-section" id="sect"
 					style="padding-top: 50px; padding-left: 170px;">
 
 					<div class="container" style="width: 900px;">
 						<section class="Easy-sgin-in-wrap">
 							<div id="MainBox">
-								<table style="wdith:500px; height:330px;">
+								<table style="wdith: 500px; height: 330px;">
 									<tr>
-										<td class="user_name" >
-											<div align="right" style="width:80px;">
-												<a style="color: red; padding-right: 5px; write-space:nowrap;">*</a>이름
+										<td class="user_name">
+											<div align="right" style="width: 80px;">
+												<a
+													style="color: red; padding-right: 5px; write-space: nowrap;">*</a>이름
 											</div>
 										</td>
 										<td colspan="3" class="user_name" style="padding-left: 10px;">
-											<input type="text" name="memName" size="20" value="" style="margin-bottom: 10px;">
+											<input type="text" name="memName" size="20" value=""
+											style="margin-bottom: 10px;">
 										</td>
 									</tr>
 									<tr>
@@ -387,10 +387,10 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="user_id" style="padding-left: 10px;">
-											<input type="text" name="memId" size="30" value="" style="margin-bottom: 10px;">
-											<input type="button" name="check_id_overlap" value="중복확인"
-											onclick="id_check()"> <input type="hidden"
-											name="idDuplication" value="idUncheck">
+											<input type="text" name="memId" size="30" value=""
+											style="margin-bottom: 10px;"> <input type="button"
+											name="check_id_overlap" value="중복확인" onclick="id_check()">
+											<input type="hidden" name="idDuplication" value="idUncheck">
 										</td>
 									</tr>
 									<tr>
@@ -420,9 +420,9 @@ h3 {
 											</div>
 										</td>
 										<td colspan="3" class="email" style="padding-left: 10px;">
-											<input type="text" name="memEmail" value="" size="13" style="margin-bottom: 10px;">
-											@ <select name="memEmail1"  id="selcet1"
-											style="height: 34px;">
+											<input type="text" name="memEmail" value="" size="13"
+											style="margin-bottom: 10px;"> @ <select
+											name="memEmail1" id="selcet1" style="height: 34px;">
 												<option value="naver.com">naver.com</option>
 												<option value="gmail.com">gmail.com</option>
 												<option value="nate.com">nate.com</option>
@@ -433,13 +433,13 @@ h3 {
 									</tr>
 									<tr>
 										<td class="phone">
-											<div align="right"style=" margin-bottom: 10px;">
+											<div align="right" style="margin-bottom: 10px;">
 												<a style="color: red; padding-right: 5px;">*</a>핸드폰
 											</div>
 										</td>
 										<td colspan="3" class="phone" style="padding-left: 10px;">
-											<select name="memPhoneNum"  id="selcet1"
-											style="height: 34px;margin-bottom: 10px;">
+											<select name="memPhoneNum" id="selcet1"
+											style="height: 34px; margin-bottom: 10px;">
 												<option value="">선택</option>
 												<option value="010">010</option>
 												<option value="011">011</option>
@@ -448,20 +448,22 @@ h3 {
 												<option value="019">019</option>
 												<option value="010">010</option>
 										</select>- <input type="text" name="memPhoneNum1" value="" size="3">-
-											<input type="text" name="memPhoneNum2" value="" size="3"> <input
-											type="button" name="phone_certification"
+											<input type="text" name="memPhoneNum2" value="" size="3">
+											<input type="button" name="phone_certification"
 											onclick="phone_check()" value="핸드폰인증">
 										</td>
 									</tr>
 									<tr>
 										<td class="addr1">
-											<div align="right"style="margin-bottom: 10px;">
+											<div align="right" style="margin-bottom: 10px;">
 												<a style="color: red; padding-right: 5px;">*</a>주소
 											</div>
 										</td>
 										<td colspan="3" class="addr" style="padding-left: 10px;">
-											<input type="text" name="memAdr" id="sample6_postcode" readonly size="10" style="margin-bottom: 10px;"> 
-											<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+											<input type="text" name="memAdr" id="sample6_postcode"
+											readonly size="10" style="margin-bottom: 10px;"> <input
+											type="button" onclick="sample6_execDaumPostcode()"
+											value="우편번호 찾기">
 										</td>
 									</tr>
 									<tr>
@@ -469,20 +471,23 @@ h3 {
 											<div align="right"></div>
 										</td>
 										<td colspan="3" class="addr1" style="padding-left: 10px;">
-											<input type="text" style="margin-bottom: 10px;" name="memAdr1" id="sample6_address" size="30" value=""><input type="text" name="memAdr2" id="sample6_address2" size="30" value="">
+											<input type="text" style="margin-bottom: 10px;"
+											name="memAdr1" id="sample6_address" size="30" value=""><input
+											type="text" name="memAdr2" id="sample6_address2" size="30"
+											value="">
 										</td>
-											
-		
-								    </tr>
+
+
+									</tr>
 								</table>
-								
+
 							</div>
 						</section>
 
 					</div>
 					<div class="container">
 						<div id="RightBox">
-							<table style="width:450px; height:330px;">
+							<table style="width: 450px; height: 330px;">
 								<tr>
 									<td style="padding-left: 15px;"><input type="checkbox"
 										name="full_agree" id="full_agree" onclick="checkAllCheckbox()"
@@ -562,15 +567,17 @@ h3 {
 				</section>
 				<div style="text-align: center; padding-bottom: 70px">
 					<input type="button" name="modify" value="회원가입 "
-						style="padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" onclick="Check_Join()"> <input
-						type="reset" name="reset" value="취    소" style="width: 75px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;"
+						style="padding-left: 10px; background-color: #212529; color: white; border-radius: 2px;"
+						onclick="Check_Join()"> <input type="reset" name="reset"
+						value="취    소"
+						style="width: 75px; background-color: #212529; color: white; border-radius: 2px; margin-left: 20px;"
 						onclick="location.href='/Main'">
 				</div>
 			</form>
 		</div>
 	</section>
 
-	
+
 
 
 
