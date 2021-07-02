@@ -125,7 +125,7 @@
 					<h2 class="mb-4" style="font-size: 35px; margin-top: 15px;">고객센터</h2>
 				</div>
 			</div>
-			<!-- 타이틀 끝 --><!--  -->
+			<!-- 타이틀 끝 -->
 			<!-- 최근 본 상품 -->
 			<div id="recentlyProduct"
 				style="position: absolute; width: 120px; height: 310px; margin-left: 1370px; border: 1px solid #d2d2d2; margin-top: -100px;">
