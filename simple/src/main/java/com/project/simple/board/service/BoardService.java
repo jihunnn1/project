@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.simple.board.vo.ArticleVO;
+import com.project.simple.page.Criteria;
 
 public interface BoardService {
 	
-	public List<ArticleVO> listNotice() throws Exception;
+	public List<ArticleVO> listNotice(Criteria cri) throws Exception;
+	public List<ArticleVO> listNoticeAll() throws Exception;
 	public ArticleVO viewNotice(int noticeNum) throws Exception;
 	public List<ArticleVO> listQuestion() throws Exception;
 	public Map<String ,List> listInquiry(ArticleVO articleVO) throws Exception;

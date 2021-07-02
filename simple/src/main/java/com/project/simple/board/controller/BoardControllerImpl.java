@@ -33,6 +33,8 @@ import com.project.simple.board.service.BoardService;
 import com.project.simple.board.vo.ImageVO;
 import com.project.simple.board.vo.ArticleVO;
 import com.project.simple.member.vo.MemberVO;
+import com.project.simple.page.PageMaker;
+import com.project.simple.page.Criteria;
 
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController {
@@ -48,14 +50,20 @@ public class BoardControllerImpl implements BoardController {
 	// 공지사항 리스트
 	@Override
 	@RequestMapping(value = "board/listNotice.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listNotice(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ArticleVO> noticeList = boardService.listNotice();
+		List<ArticleVO> noticeList = boardService.listNotice(cri);
+		List<ArticleVO> noticeListAll = boardService.listNoticeAll();
 		ModelAndView mav = new ModelAndView(viewName);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(noticeListAll.size());
 		mav.addObject("noticeList", noticeList);
+		mav.addObject("pageMaker", pageMaker);
+		
 		return mav;
 	}
-
+	
 	// 공지사항 상세보기
 	@RequestMapping(value = "/board/viewNotice.do", method = RequestMethod.GET)
 	public ModelAndView viewNotice(@RequestParam("noticeNum") int noticeNum, HttpServletRequest request,

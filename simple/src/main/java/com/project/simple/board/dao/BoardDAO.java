@@ -6,12 +6,14 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.project.simple.board.vo.ArticleVO;
+import com.project.simple.page.Criteria;
 
 
 public interface BoardDAO{
-	public List selectAllNoticeList() throws DataAccessException;
+	public List selectAllNoticeList(Criteria cri) throws DataAccessException;
 	
 	public ArticleVO selectNotice(int noticeNum) throws DataAccessException;
+	public List<ArticleVO> selectNoticeListAll() throws DataAccessException;
 	
 	public List selectAllQuestionList() throws DataAccessException;
 	
