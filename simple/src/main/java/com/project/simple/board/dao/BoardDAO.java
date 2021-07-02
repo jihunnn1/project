@@ -25,4 +25,6 @@ public interface BoardDAO{
 	public ArticleVO selectInquiry1(int inquiryNum) throws DataAccessException;
 
 	public void updateInquiry(Map inquiryMap) throws DataAccessException ;
+	
+	public void deleteInquiry(int inquiryNum) throws DataAccessException;
 }

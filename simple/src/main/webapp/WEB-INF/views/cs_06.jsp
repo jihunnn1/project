@@ -10,24 +10,18 @@
 <html lang="en">
 <head>
 <script>
-function modInquiry(url,inquiryNum){
-	 var form = document.createElement("form");
-	 form.setAttribute("method", "post");
-	 form.setAttribute("action", url);
-    var inquiryNumInput = document.createElement("input");
-    inquiryNumInput.setAttribute("type","hidden");
-    inquiryNumInput.setAttribute("name","inquiryNum");
-    inquiryNumInput.setAttribute("value", inquiryNum);
-	 
-    form.appendChild(inquiryNumInput);
-    document.body.appendChild(form);
-    form.submit();
 
+function removeInquiry(obj) {
+	if (confirm("삭제하시겠습니까??")) {
+	obj.action="${contextPath}/board/removeInquiry.do?inquiryNum=${inquiry.inquiryNum}";
+	} else {
+		return false;
+	}
+	obj.submit();
 }
 
 
-
-</script>
+</script>		
 <style>
 #buttonmy {
 	width: 80px;
@@ -119,11 +113,11 @@ function modInquiry(url,inquiryNum){
 			</table>
 
 			<button type="button" class="btn btn-dark" id="buttonmy"
-				style="float: left; margin-left: 590px; margin-top: 30px;">목록</button>
+				style="float: left; margin-left: 590px; margin-top: 30px;" onclick="location.href='${contextPath}/board/listInquiry.do'">목록</button>
 				<button type="submit" class="btn btn-dark" id="buttonmy" 
 					style="float: left; margin-left: 1100px; margin-top: -30px; " >수정</button>
 				<button type="button" class="btn btn-dark" id="buttonmy" 
-					style="float: left; margin-left: 1190px; margin-top: -30px;">삭제</button>	
+					style="float: left; margin-left: 1190px; margin-top: -30px;" onclick="removeInquiry(this.form)">삭제</button>	
 			</form>	
 		</div>
 	</section>

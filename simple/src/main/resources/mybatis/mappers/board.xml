@@ -118,6 +118,13 @@
 			</if>
 			where inquiryNum=#{inquiryNum}
 	</update>
+		 
+	<update id="deleteInquiry"  parameterType="java.util.Map">
+	
+			delete from inquiry where inquiryNum=#{inquiryNum};
+			
+	</update>
+	
 
 	
 

@@ -71,4 +71,9 @@ public class BoardDAOImpl implements BoardDAO{
 	public void updateInquiry(Map inquiryMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateInquiry", inquiryMap);
 	}
+	
+	@Override
+	public void deleteInquiry(int inquiryNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteInquiry", inquiryNum);
+	}
 }	

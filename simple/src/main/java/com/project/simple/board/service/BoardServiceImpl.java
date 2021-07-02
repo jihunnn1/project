@@ -82,6 +82,11 @@ public class BoardServiceImpl implements BoardService{
 	public void modInquiry(Map inquiryMap) throws Exception {
 		boardDAO.updateInquiry(inquiryMap);
 	}
+	
+	@Override
+	public void removeInquiry(int inquiryNum) throws Exception {
+		boardDAO.deleteInquiry(inquiryNum);
+	}	
 
 	
 }	

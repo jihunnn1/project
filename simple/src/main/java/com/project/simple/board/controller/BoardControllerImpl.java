@@ -268,5 +268,36 @@ public class BoardControllerImpl implements BoardController {
 	}
 	
 	//1:1문의 삭제하기
+	@Override
+	@RequestMapping(value="/board/removeInquiry.do", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity removeInquiry(@RequestParam("inquiryNum") int inquiryNum,
+				HttpServletRequest request, HttpServletResponse response) throws Exception {
+					response.setContentType("text/html; charset-utf-8");
+					String message;
+					ResponseEntity resEnt = null;
+					HttpHeaders responseHeaders = new HttpHeaders();
+					responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+					try {
+						boardService.removeInquiry(inquiryNum);
+						File destDir = new File(ARTICLE_IMAGE_REPO+"\\" + inquiryNum);
+						FileUtils.deleteDirectory(destDir);
+						
+						message = "<script>";
+						message +=" location.href='"+request.getContextPath() + "/board/listInquiry.do';";
+						message +=" </script>";
+						resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+							
+					} catch(Exception e) {
+						message = "<script>";
+						message += " alert('오류가 발생했습니다. 다시 수정해주세요);";
+						message += " location.href='"+request.getContextPath() + "/board/viewInquiry.do?inquiryNum="+inquiryNum+"';";
+						message += " </script>";
+						resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+						e.printStackTrace();
+					}
+					return resEnt;
+					
+				}	
 
 }
