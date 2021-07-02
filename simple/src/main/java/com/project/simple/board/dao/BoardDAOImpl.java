@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.project.simple.board.vo.ArticleVO;
+import com.project.simple.page.Criteria;
 
 
 @Repository("boardDAO")
@@ -19,9 +20,15 @@ public class BoardDAOImpl implements BoardDAO{
 	private SqlSession sqlSession;
 	//notice°Ô½ÃÆÇ
 	@Override
-	public List<ArticleVO> selectAllNoticeList() throws DataAccessException {
-		List<ArticleVO> noticeList = sqlSession.selectList("mapper.board.selectAllNoticeList");
+	public List<ArticleVO> selectAllNoticeList(Criteria cri) throws DataAccessException {
+		List<ArticleVO> noticeList = sqlSession.selectList("mapper.board.selectAllNoticeList", cri);
 		return noticeList;
+	}
+	
+	@Override
+	public List<ArticleVO> selectNoticeListAll() throws DataAccessException {
+		List<ArticleVO> noticeListAll = sqlSession.selectList("mapper.board.selectNoticeListAll");
+		return noticeListAll;
 	}
 	
 	@Override

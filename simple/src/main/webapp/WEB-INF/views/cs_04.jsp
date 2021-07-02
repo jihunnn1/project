@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="inquiryList" value="${inquiryMap.inquiryList}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +19,10 @@
 <script>
 	$(function() {
 		//input을 datepicker로 선언
-		$(".datepicker1, .datepicker2")
+		$("#datepicker1, #datepicker2")
 				.datepicker(
 						{
-							dateFormat : 'dd' //달력 날짜 형태
+							dateFormat : 'yy-mm-dd' //달력 날짜 형태
 							,
 							showOtherMonths : true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 							,
@@ -58,12 +61,10 @@
 		//초기값을 오늘 날짜로 설정해줘야 합니다.
 		$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
 	});
-	
 </script>
 
 
 <style>
-
 .page_wrap {
 	text-align: center;
 	font-size: 0;
@@ -156,7 +157,7 @@
 				</div>
 			</div>
 			<!-- 타이틀 끝 -->
-			
+
 			<!-- 최근 본 상품 -->
 			<div id="recentlyProduct"
 				style="position: absolute; width: 120px; height: 310px; margin-left: 1370px; border: 1px solid #d2d2d2; margin-top: -100px;">
@@ -185,45 +186,48 @@
 			<jsp:include page="/WEB-INF/views/common/csMenu.jsp" flush="false" />
 			<!-- 내용 -->
 
-									<div style="display: inline !important;">
-										<p style="float: left; width: 80px; margin-top: 10px; ">구매기간</p>
+			<div style="display: inline !important;">
+				<p style="float: left; width: 80px; margin-top: 10px;">작성기간</p>
 
-										<input type="text" class="datepicker1"
-											style="width: 120px; margin-right: 50px; margin-top: 10px; height: 30px; flaot: left; border: 1px solid #bebebe; border-radius: 2px; display: inline !important;">
+				<input type="text" id="datepicker1"
+					style="width: 120px; margin-right: 50px; margin-top: 10px; height: 30px; flaot: left; border: 1px solid #bebebe; border-radius: 2px; display: inline !important;">
 
-										<span class="glyphicon glyphicon-calendar" aria-hidden="true"
-											style="margin-left: -35px;"> </span> ~ <input type="text"
-											class="datepicker2"
-											style="width: 120px; margin-right: 50px; height: 30px; flaot: left; border: 1px solid #bebebe; border-radius: 2px; display: inline !important;">
+				<span class="glyphicon glyphicon-calendar" aria-hidden="true"
+					style="margin-left: -35px;"> </span> ~ <input type="text"
+					id="datepicker2"
+					style="width: 120px; margin-right: 50px; height: 30px; flaot: left; border: 1px solid #bebebe; border-radius: 2px; display: inline !important;">
 
-										<span class="glyphicon glyphicon-calendar" aria-hidden="true"
-											style="margin-left: -35px;"> </span>
+				<span class="glyphicon glyphicon-calendar" aria-hidden="true"
+					style="margin-left: -35px;"> </span>
 
-										<button type="submit" class="btn btn-default"
-											style="background-color: #dcdcdc; fmargin-left: 380px; margin-top: 0px; width: 80px; height: 28px; display: inline !important; background-color: #212529; 
-											color: white; border-radius: 2px; height: 30px; margin-right: 500px; padding-top:3px;">조회</button>
-									</div>
+				<button type="submit" class="btn btn-default"
+					style="background-color: #dcdcdc; fmargin-left: 380px; margin-top: 0px; width: 80px; height: 28px; display: inline !important; background-color: #212529; color: white; border-radius: 2px; height: 30px; margin-right: 500px; padding-top: 3px;">조회</button>
+			</div>
 			<table class="table" style="height: 30px;">
 				<thead class="table-dark" align=center>
-				<tr align="center">
-					<td scope="col" width="100">번호</td>
-					<td scope="col" width="150">문의유형</td>
-					<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
-					<td scope="col" width="150">작성일</td>
-				</tr>
-					<c:forEach var="inquiry" items="${inquiryList}" varStatus="inquiryNum">
-					<tr
-						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-						<td scope="col" width="50">${inquiryNum.count}</td>
-						<td scope="col" width="150">${inquiry.inquiryType}</td>
-						<td align="left" scope="col" width="500"><a href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquiry.inquiryNum}"
-							style="color: black; padding-left: 30px; margin-bottom: 0px;" >${inquiry.inquiryTitle}</a></td>
-						<td scope="col" width="150"><fmt:formatDate value="${inquiry.inquiryDate}" /></td>
+					<tr align="center">
+						<td scope="col" width="100">번호</td>
+						<td scope="col" width="150">문의유형</td>
+						<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
+						<td scope="col" width="150">작성일</td>
 					</tr>
+					<c:forEach var="inquiry" items="${inquiryList}"
+						varStatus="inquiryNum">
+						<tr
+							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
+							<td scope="col" width="50">${inquiryNum.count}</td>
+							<td scope="col" width="150">${inquiry.inquiryType}</td>
+							<td align="left" scope="col" width="500"><a
+								href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquiry.inquiryNum}"
+								style="color: black; padding-left: 30px; margin-bottom: 0px;">${inquiry.inquiryTitle}</a></td>
+							<td scope="col" width="150"><fmt:formatDate
+									value="${inquiry.inquiryDate}" /></td>
+						</tr>
 					</c:forEach>
 				</thead>
 			</table>
-			<a id="buttonmy" class="btn btn-dark" href="${contextPath}/board/inquiryForm.do"
+			<a id="buttonmy" class="btn btn-dark"
+				href="${contextPath}/board/inquiryForm.do"
 				style="float: left; margin-left: 1190px; margin-top: 25px; border-radius: 2px;">글쓰기</a>
 		</div>
 		<!-- 내용 끝 -->
@@ -238,6 +242,9 @@
 			</div>
 		</div>
 	</section>
-	<br><br><br><br>
-	</body>
+	<br>
+	<br>
+	<br>
+	<br>
+</body>
 </html>

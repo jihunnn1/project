@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import com.project.simple.page.Criteria;
 
 public interface BoardController {
 	
-	public ModelAndView listNotice(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listNotice(Criteria cri,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView viewNotice(@RequestParam("noticeNum") int noticeNum,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;

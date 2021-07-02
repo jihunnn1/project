@@ -39,7 +39,16 @@
 	<select id="selectAllNoticeList" resultMap="noticeResult">
 	<![CDATA[
 			
-			select noticeNum, noticeDate, noticeTitle, noticeWriter from notice;
+			select noticeNum, noticeDate, noticeTitle, noticeWriter from notice order by noticeNum desc
+			limit #{pageStart}, #{perPageNum};
+			
+
+	]]>
+	</select>
+		<select id="selectNoticeListAll" resultMap="noticeResult">
+	<![CDATA[
+			
+			select noticeNum, noticeDate, noticeTitle, noticeWriter from notice order by noticeNum desc;
 			
 
 	]]>
@@ -124,6 +133,9 @@
 			delete from inquiry where inquiryNum=#{inquiryNum};
 			
 	</update>
+	
+
+
 	
 
 	

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.simple.board.dao.BoardDAO;
 import com.project.simple.board.vo.ArticleVO;
+import com.project.simple.page.Criteria;
 
 
 @Service("boardService")
@@ -29,10 +30,18 @@ import com.project.simple.board.vo.ArticleVO;
 public class BoardServiceImpl implements BoardService{
 	@Autowired
 	BoardDAO boardDAO;
+	
+
+	
 	//notice °Ô½ÃÆÇ
-	public List<ArticleVO> listNotice() throws Exception{
-		List<ArticleVO> noticeList = boardDAO.selectAllNoticeList();
+	public List<ArticleVO> listNotice(Criteria cri) throws Exception{
+		List<ArticleVO> noticeList = boardDAO.selectAllNoticeList(cri);
 		return noticeList;
+	}
+	
+	public List<ArticleVO> listNoticeAll() throws Exception{
+		List<ArticleVO> noticeListAll = boardDAO.selectNoticeListAll();
+		return noticeListAll;
 	}
 	
 	@Override
