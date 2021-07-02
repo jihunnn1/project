@@ -178,9 +178,10 @@
 </style>
 </head>
 <title>주문결제창</title>
-<body><!-- 마이페이지 상단메뉴 -->
+<body>
+	<!-- 마이페이지 상단메뉴 -->
 	<section class="ftco-section"
-		style="padding-top: 50px; margin-bottom: 50px; padding-bottom: 0px; height:700px;">
+		style="padding-top: 50px; margin-bottom: 50px; padding-bottom: 0px; height: 700px;">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3"
 				style="background-color: #f5f5f5; border: 1px solid #e7e7e7; margin-top: 50px;">
@@ -189,8 +190,8 @@
 					<h2 class="mb-4" style="font-size: 35px; margin-top: 15px;">마이페이지</h2>
 				</div>
 			</div>
-	<!-- 마이페이지 상단메뉴 끝 -->
-		<!-- 최근 본 상품 -->
+			<!-- 마이페이지 상단메뉴 끝 -->
+			<!-- 최근 본 상품 -->
 			<div id="recentlyProduct"
 				style="position: absolute; width: 120px; height: 310px; margin-left: 1370px; border: 1px solid #d2d2d2; margin-top: -100px;">
 				<ul
@@ -214,37 +215,40 @@
 						style="color: black; text-align: center; margin-top: 8px; padding-top: 30px;">더보기▼</a></li>
 				</ul>
 			</div>
-		<!-- 최근 본 상품 끝 -->
+			<!-- 최근 본 상품 끝 -->
 
 
-		<!-- Left Menu -->
-			<jsp:include page="/WEB-INF/views/common/mypage_sidemenu.jsp" flush="false" />
-		<!-- left Menu 끝-->
+			<!-- Left Menu -->
+			<jsp:include page="/WEB-INF/views/common/mypage_sidemenu.jsp"
+				flush="false" />
+			<!-- left Menu 끝-->
+			<form action="${contextPath}/modMember.do" method="post">
+				<div class="container02"
+					style="padding-left: 300px; padding-top: 30px;">
+					<div id="MyPage_top">
+						<h4
+							style="text-align: center; padding-left: 60px; font-size: 18px;">회원정보를
+							수정하시려면 비밀번호를 입력해주세요</h4>
+					</div>
+					<div id="MyPage_top1" style="padding-top: 20px; margin-left: 30px;">
+						<img src="${contextPath}/resources/images/smile.png" width="60">
+					</div>
+					<div id="MyPage_top2" style="padding-top: 10px; height: 50px;">
+						<p>
+							PASSWORD<input type="password" name="memPwd"
+								class="PASSWORD_confirm_text" size="22"
+								placeholder="비밀번호를 입력하세요">
+						</p>
 
-			<div class="container02"
-				style="padding-left: 300px; padding-top: 30px;">
-				<div id="MyPage_top">
-					<h4
-						style="text-align: center; padding-left: 60px; font-size: 18px;">회원정보를
-						수정하시려면 비밀번호를 입력해주세요</h4>
-				</div>
-				<div id="MyPage_top1" style="padding-top: 20px; margin-left: 30px;">
-					<img src="${contextPath}/resources/images/smile.png" width="60">
-				</div>
-				<div id="MyPage_top2" style="padding-top: 10px; height: 50px;">
-					<p>
-						PASSWORD<input type="text" name="PASSWORD_confirm_text"
-							class="PASSWORD_confirm_text" size="22" placeholder="비밀번호를 입력하세요">
-					</p>
-
-					<div id="MyPage_top3" style="padding-left: 99px;">
-						<button type="submit" id="buttonmy" class="btn_PASSWORD_confirm" 
-							style="width: 90px;">확인</button>
-						<button onClick="location.href='/main'" id="buttonmy" class="btn_main_back"
-							style="width: 90px; margin-left: 0px;">취소</button>
+						<div id="MyPage_top3" style="padding-left: 99px;">
+							<button type="submit" id="buttonmy" class="btn_PASSWORD_confirm"
+								style="width: 90px;">확인</button>
+							<button onClick="location.href='${contextPath}/main.do'" id="buttonmy"
+								class="btn_main_back" style="width: 90px; margin-left: 0px;">취소</button>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</section>
 	<br>
@@ -256,5 +260,5 @@
 	<br>
 	<br>
 	<br>
-  </body>
+</body>
 </html>

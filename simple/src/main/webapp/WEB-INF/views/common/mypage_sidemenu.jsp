@@ -12,7 +12,7 @@
 		<div class="list-group list-group-flush">
 			<a href="#"
 				class="list-group-item list-group-item-action text-center font-weight-bold">마이
-				쇼핑</a> <a href="${contextPath}/mypage_10.do"
+				쇼핑</a> <a href="${contextPath}/mypage_02.do"
 				class="list-group-item list-group-item-action text-center font-weight-bold">회원정보
 				수정</a> <a href="#"
 				class="list-group-item list-group-item-action text-center font-weight-bold">주문/배송조회</a>

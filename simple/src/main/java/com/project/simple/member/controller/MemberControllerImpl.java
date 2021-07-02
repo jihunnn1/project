@@ -38,7 +38,7 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		return "mypage_04";
+		return "mypage_02";
 	}
 
 	// 멤버로그인작업 ppt226
@@ -95,6 +95,34 @@ public class MemberControllerImpl implements MemberController {
 
 	}
 
+	// 회원수정 비밀번호확인
+	@RequestMapping(value = "/modMember.do", method = RequestMethod.POST)
+	public ModelAndView modmember(@ModelAttribute("confirmPwd") MemberVO confirmPwd, HttpServletRequest request,
+			HttpServletResponse response, RedirectAttributes rAttr) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String sessionmemPwd = member.getmemPwd();
+		String memPwd = confirmPwd.getmemPwd();
+
+		if (!(sessionmemPwd.equals(memPwd))) {
+			rAttr.addAttribute("result", false);
+			ModelAndView mav = new ModelAndView("redirect:/mypage_02.do");
+			return mav;
+		}
+
+		ModelAndView mav = new ModelAndView("redirect:/mypage_03.do");
+		return mav;
+	}
+
+	@RequestMapping(value = "/mypage_03.do", method = RequestMethod.GET)
+	private ModelAndView mypage_03(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+
 	@RequestMapping(value = "/drop_out.do", method = RequestMethod.GET)
 	private ModelAndView drop_out(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -127,7 +155,7 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/mypage_10.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage_02.do", method = RequestMethod.GET)
 	private ModelAndView mypage_10(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
