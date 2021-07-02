@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<resultMap id="memResult" type="memberVO">
+		<result property="memId" column="memId" />
+		<result property="memName" column="memName" />
+		<result property="memPwd" column="memPwd" />
+		<result property="memEmail" column="memEmail" />
+		<result property="memPhoneNum" column="memPhoneNum" />
+		<result property="memAdr" column="memAdr" />
+	</resultMap>
+
+
+	<!-- 회원리스트 조회 -->
+	<select id="selectAllMemberList" resultMap="memResult">
+	<![CDATA[
+		select * from t_member order by joinDate desc
+	]]>
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="memberVO">
+		<![CDATA[ 
+
+			insert into simple.member(memId, memName, memPwd, memEmail, memPhoneNum, memAdr) 
+			values(#{memId},#{memName},#{memPwd},(select concat(#{memEmail},#{memEmail1})),(select concat(#{memPhoneNum},#{memPhoneNum1},#{memPhoneNum2})),(select concat(#{memAdr},#{memAdr1},#{memAdr2})));
+		]]>
+	</insert>
+
+	<!--로그인창에서 입력한 id와 비밀번호로 회원정보를 조회하는 sql문 -->
+	<select id="loginById" resultType="memberVO"
+		parameterType="memberVO">
+	<![CDATA[ 
+		select * from member
+		where memId = #{memId} and memPwd = #{memPwd}
+	]]>
+	</select>
+	
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="MemberVO">
+	<![CDATA[
+	   delete from  member
+	   where
+	   memId=#{memId} and memPwd=#{memPwd}
+	]]>
+	</delete>
+
+</mapper>
+		
+		
