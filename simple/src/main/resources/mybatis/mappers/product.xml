@@ -20,7 +20,13 @@
 	<!-- 상품 조회 -->
 	<select id="selectAllProductList" resultMap="proResult">
 	<![CDATA[
-		select productNum,productName,productPrice,category from product order by category;
+		select * from product order by category;
+	]]>
+	</select>
+   <!-- 상품 조회 -->
+	<select id="admin_selectAllProductList" resultMap="proResult">
+	<![CDATA[
+		select * from product order by category;
 	]]>
 	</select>
 	
@@ -32,9 +38,9 @@
 		]]>
 	</insert>
 	<!-- 상품삭제 -->
-	<delete id="deleteProduct" parameterType="productVO">
+	<delete id="deleteProduct" parameterType="string">
 		<![CDATA[ 
-			delete from simple.product(productNum, productName, productPrice, category, subcategory, productImage,productManufacturer,productOrigin) 
+			delete from simple.product 
 			where productNum = #{productNum};
 		]]>
 	</delete>

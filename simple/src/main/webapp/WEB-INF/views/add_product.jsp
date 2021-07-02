@@ -185,25 +185,49 @@
 		   form.productOrigin.focus();
 		   return false;
 	   }
+	   if (confirm("상품을 등록하시겠습니까?")){ //확인
+	    	
+	    } else { //취소
+	     	return false;
+	    }
+
 	   form.submit();
+	   alert("상품 등록이 완료되었습니다.");
    }
 
 </script>
 </head>
 <title>주문결제창</title>
 <body>
+<img src="${contextPath}/resources/images/product-01.jpg" width=100%
+		height=350px>
+
 
 	<section class="ftco-section testimony-section"
 		style="padding-top: 50px;">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3"
-				style="background-color: #f5f5f5; border: 1px solid #e7e7e7; margin-top: 50px;">
+				style="background-color: #f5f5f5; border: 1px solid #e7e7e7; margin-top: 20px;">
 				<div class="col-md-20 heading-section ftco-animate"
 					style="height: 60px;">
-					<h2 class="mb-4" style="font-size: 35px; margin-top: 15px;">상품관리</h2>
+					<h2 class="mb-4" style="font-size: 35px; margin-top: 15px;">상품 관리</h2>
 				</div>
 			</div>
+
+				<div class="btn-group btn-group-justified" role="group"
+				aria-label="..." style="margin-bottom: 30px; margin-top: 10px;">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" onclick="location.href='${contextPath}/product/admin_listProduct.do'"
+						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; margin-left: 10px;">상품조회</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" onclick="location.href='${contextPath}/product/add_product.do'"
+						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; font-weight: bold;">*상품등록</button>
+				</div>
 			
+			</div>
+			
+			<hr style="margin-top: -10px;">
 
 			<section class="ftco-section testimony-section"
 				style="padding-top: 40px;">
@@ -211,7 +235,7 @@
 					<section class="Easy-sgin-in-wrap4">
 						<div id="LeftBox">
 							<h3 id="login_text">상품등록</h3>
-							<form name="newProduct" action="${contextPath}/addProduct.do" method="post">
+							<form name="newProduct" action="${contextPath}/product/addProduct.do" method="post">
 								<div style="padding-left: 107px;"> 
                                      <label>상품번호</label>
                                           <input type="text" name="productNum" value="">
@@ -257,7 +281,7 @@
 									style="background-color: #212529; color: white;">
 									<i class="sgin-up"></i><span>등록</span>
 								</button></li>
-							<li><button onclick="location.href='/Main'"
+							<li><button  onclick="location.href='${contextPath}/product/admin_listProduct.do'"
 									style="background-color: #212529; color: white;">
 									<i class="btn-Non Order Inquiry"></i><span>취소</span>
 								</button></li>
