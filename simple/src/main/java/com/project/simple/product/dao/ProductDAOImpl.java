@@ -20,6 +20,11 @@ public class ProductDAOImpl implements ProductDAO{
 		List<ProductVO> productList = sqlSession.selectList("mapper.product.selectAllProductList");
 		return productList;
 	}
+	@Override
+	public List<ProductVO> admin_selectAllProductList() throws DataAccessException{
+		List<ProductVO> productList = sqlSession.selectList("mapper.product.admin_selectAllProductList");
+		return productList;
+	}
 	
 	@Override
 	public int insertProduct(ProductVO productVO)throws DataAccessException{
@@ -27,11 +32,7 @@ public class ProductDAOImpl implements ProductDAO{
 		return result;
 	}
 	
-	@Override
-	public int deleteProduct(String productNum) throws DataAccessException{
-		int result=sqlSession.delete("mapper.product.deleteProduct", productNum);
-		return result;
-	}
+	
 
 	@Override
 	public ProductVO selectProduct(String productNum) throws DataAccessException {
@@ -49,6 +50,12 @@ public class ProductDAOImpl implements ProductDAO{
 		ArrayList list=(ArrayList)sqlSession.selectList("mapper.product.selectProductBySearchWord",searchWord);
 		 return list;
 	}
+	@Override
+	public void deleteProduct(String productNum) throws DataAccessException{
+		sqlSession.delete("mapper.product.deleteProduct", productNum);
+	}
+
+	
 
 
 }

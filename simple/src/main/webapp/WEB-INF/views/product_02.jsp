@@ -146,6 +146,7 @@ function change () {
 		} else { //취소
 			return;
 		}
+		form.submit();
 	}
 </script>
 </head>
@@ -154,6 +155,7 @@ function change () {
 	
 	<section class="ftco-section" style="padding-top: 20px; ">
 		<div class="container">
+		<form method="post" id="addCartForm" action="${contextPath}/product/viewProduct.do?productNum=${product.productNum}">
 			<div class="row justify-content-center mb-5 pb-3"
 				style="background-color: #f5f5f5; border: 1px solid #e7e7e7;">
 				<div class="col-md-20 heading-section ftco-animate"
@@ -271,15 +273,17 @@ function change () {
 						</h3>
 					</div>
 				</form>
-				<form method="post" id="addCartForm" action="${contextPath}/product/viewProduct.do?productNum=${product.productNum}">
+				    <button type="submit" class="btn btn-default"
+						style="background-color: #dcdcdc; float: left; margin-left: 630px; margin-top: 20px; width: 50px; height: 50px; border-radius: 2px;"></button>
 					<button type="submit" class="btn btn-default"
-						style="background-color: #dcdcdc; float: left; margin-left: 630px; margin-top: 20px; width: 330px; height: 50px; border-radius: 2px;">바로구매</button>
+						style="background-color: #dcdcdc; float: left; margin-left: 700px; margin-top: 20px; width: 280px; height: 50px; border-radius: 2px;">바로구매</button>
 					<button type="submit" class="btn btn-default" onclick="addCartBtn()"
-						style="background-color: #dcdcdc; float: left; margin-left: 965px; margin-top: -50px; width: 330px; height: 50px; border-radius: 2px;">장바구니</button>
-                </form>
+						style="background-color: #dcdcdc; float: left; margin-left: 1000px; margin-top: -50px; width: 280px; height: 50px; border-radius: 2px;">장바구니</button>
+               
+                
 				</div>
 
-
+              </form>
 
 			</div>
 

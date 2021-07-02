@@ -183,12 +183,7 @@
 		<definition name="deletemember" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/deletemember.jsp" />
 	</definition>
-		
-	<definition name="add_product" extends="baseLayout">
-        <put-attribute name="body" value="/WEB-INF/views/add_product.jsp"/>
-    </definition>
- 
-    
+	
     
 	
 	

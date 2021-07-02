@@ -88,7 +88,7 @@
 	        	</c:choose>
 	        	<li class="nav-item"><a href="${contextPath}/storeinfomation.do" class="nav-link">매장안내</a></li>
 	        	<li class="nav-item"><a href="${contextPath}/board/listNotice.do" class="nav-link" style="margin-right:20px;">고객센터</a></li>
-
+                <li class="nav-item"><a href="${contextPath}/product/admin_listProduct.do" class="nav-link" style="margin-right:20px;">관리자</a></li>
 	        </ul>
 
 	     <div class="dropdown">

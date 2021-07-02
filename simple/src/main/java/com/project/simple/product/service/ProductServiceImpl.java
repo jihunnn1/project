@@ -1,6 +1,7 @@
 package com.project.simple.product.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,12 +25,17 @@ public class ProductServiceImpl implements ProductService{
 		return productList;
 	}
 	@Override
+	public List<ProductVO> admin_listProduct() throws Exception {
+		List<ProductVO>  productList = productDAO.admin_selectAllProductList();
+		return productList;
+	}
+	@Override
 	public int addProduct(ProductVO product) throws DataAccessException {
 		return productDAO.insertProduct(product);
 	}
 	@Override
-	public int removeProduct(String productNum) throws DataAccessException{
-		return productDAO.deleteProduct(productNum);
+	public void removeProduct(String productNum) throws DataAccessException{
+		productDAO.deleteProduct(productNum);
 	}
 	@Override
 	public ProductVO viewProduct(String productNum) throws Exception {
@@ -45,6 +51,16 @@ public class ProductServiceImpl implements ProductService{
 	public List<ProductVO> searchProduct(String searchWord) throws Exception {
 		List productList=productDAO.selectProductBySearchWord(searchWord);
 		return productList;
+	}
+	@Override
+	public ProductVO admin_detailproduct(String productNum) throws Exception {
+		ProductVO productVO = productDAO.selectProduct(productNum);
+		return productVO;
+	}
+	@Override
+	public void modProduct(Map<String, Object> productMap) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
