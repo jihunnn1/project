@@ -13,9 +13,10 @@ public interface BoardDAO{
 	public List selectAllNoticeList(Criteria cri) throws DataAccessException;
 	
 	public ArticleVO selectNotice(int noticeNum) throws DataAccessException;
-	public List<ArticleVO> selectNoticeListAll() throws DataAccessException;
+	public int selectNoticeCount() throws DataAccessException;
 	
-	public List selectAllQuestionList() throws DataAccessException;
+	public List selectAllQuestionList(Criteria cri) throws DataAccessException;
+	public int selectQuestionCount() throws DataAccessException;
 	
 	public List<ArticleVO> selectInquiryList(ArticleVO articleVO) throws DataAccessException;
 	

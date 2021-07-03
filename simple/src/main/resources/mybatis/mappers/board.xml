@@ -45,10 +45,10 @@
 
 	]]>
 	</select>
-		<select id="selectNoticeListAll" resultMap="noticeResult">
+	<select id="selectNoticeCount" resultType="int" parameterType="int">
 	<![CDATA[
 			
-			select noticeNum, noticeDate, noticeTitle, noticeWriter from notice order by noticeNum desc;
+			select count(*) as noticeCount from notice;
 			
 
 	]]>
@@ -72,6 +72,15 @@
 
 	]]>
 	</select>
+	
+	<select id="selectQuestionCount" resultType="int" parameterType="int">
+	<![CDATA[
+			
+			select count(*) as questionCount from question;
+			
+
+	]]>
+	</select>	
 	
 	<select id="selectAllInquiryList" parameterType="ArticleVO"  resultMap="inquiryResult">
 	<![CDATA[

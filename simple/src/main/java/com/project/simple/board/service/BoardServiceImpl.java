@@ -39,9 +39,9 @@ public class BoardServiceImpl implements BoardService{
 		return noticeList;
 	}
 	
-	public List<ArticleVO> listNoticeAll() throws Exception{
-		List<ArticleVO> noticeListAll = boardDAO.selectNoticeListAll();
-		return noticeListAll;
+	public int noticeCount() throws Exception{
+		int noticeCount = boardDAO.selectNoticeCount();
+		return noticeCount;
 	}
 	
 	@Override
@@ -51,10 +51,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	//qustion 게시판
-	public List<ArticleVO> listQuestion() throws Exception{
-		List<ArticleVO> questionList = boardDAO.selectAllQuestionList();
+	public List<ArticleVO> listQuestion(Criteria cri) throws Exception{
+		List<ArticleVO> questionList = boardDAO.selectAllQuestionList(cri);
 		return questionList;
 	}
+	
+	public int questionCount() throws Exception{
+		int questionCount = boardDAO.selectQuestionCount();
+		return questionCount;
+	}	
 	
 	
 	//inquiry 게시판

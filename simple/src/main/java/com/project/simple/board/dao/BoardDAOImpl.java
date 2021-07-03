@@ -26,9 +26,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
-	public List<ArticleVO> selectNoticeListAll() throws DataAccessException {
-		List<ArticleVO> noticeListAll = sqlSession.selectList("mapper.board.selectNoticeListAll");
-		return noticeListAll;
+	public int selectNoticeCount() throws DataAccessException {
+		int noticeCount = sqlSession.selectOne("mapper.board.selectNoticeCount");
+		System.out.println(noticeCount);
+		return noticeCount;
 	}
 	
 	@Override
@@ -38,9 +39,15 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//question 게시판
 	@Override
-	public List<ArticleVO> selectAllQuestionList() throws DataAccessException {
+	public List<ArticleVO> selectAllQuestionList(Criteria cri) throws DataAccessException {
 		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList");
 		return questionList;
+	}
+
+	@Override
+	public int selectQuestionCount() throws DataAccessException {
+		int questionCount = sqlSession.selectOne("mapper.board.selectQuestionCount");
+		return questionCount;
 	}
 	
 	//inquiry 게시판

@@ -146,7 +146,7 @@
 						</tr>	
 					</c:when>
 					<c:when test="${!empty noticeList}">
-					<c:forEach var="notice" items="${noticeList}" varStatus="noticeNum">
+					<c:forEach var="notice" items="${noticeList}" >
 						<tr
 						style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
 						<td scope="col" width="50">${notice.noticeNum}</td>

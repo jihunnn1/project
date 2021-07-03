@@ -53,11 +53,12 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView listNotice(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		List<ArticleVO> noticeList = boardService.listNotice(cri);
-		List<ArticleVO> noticeListAll = boardService.listNoticeAll();
+		int noticeCount = boardService.noticeCount();
+		System.out.println(noticeCount);
 		ModelAndView mav = new ModelAndView(viewName);
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
-	    pageMaker.setTotalCount(noticeListAll.size());
+	    pageMaker.setTotalCount(noticeCount);
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("pageMaker", pageMaker);
 		
@@ -79,11 +80,16 @@ public class BoardControllerImpl implements BoardController {
 	// 자주묻는 질문 리스트
 	@Override
 	@RequestMapping(value = "board/listQuestion.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listQuestion(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listQuestion(Criteria cri,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ArticleVO> questionList = boardService.listQuestion();
+		List<ArticleVO> questionList = boardService.listQuestion(cri);
+		int questionCount = boardService.questionCount();
 		ModelAndView mav = new ModelAndView(viewName);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(questionCount);
 		mav.addObject("questionList", questionList);
+		mav.addObject("pageMaker", pageMaker);
 		return mav;
 	}
 
