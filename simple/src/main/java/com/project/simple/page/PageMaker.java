@@ -27,16 +27,21 @@ public class PageMaker {
     private void calcData() {
         
         endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
- 
+        
+        //시작 페이지 번호=(끝페이지 번호 - 화면에 보여질 페이지 번호의 갯수)
         startPage = (endPage - displayPageNum) + 1;
         if(startPage <= 0) startPage = 1;
         
+        //마지막 페이지 번호 = 총게시글 수/한페이지당 보여줄 게시글수
         int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
         if (endPage > tempEndPage) {
             endPage = tempEndPage;
         }
- 
+        
+        //이전 버튼 생성 여부 = 시작페이지번호 ==1?false : true
         prev = startPage == 1 ? false : true;
+        
+        //다음 버튼 생성 여부 = 끝페이지번호 * 한페이지당 보여줄 게시글의 갯수
         next = endPage * cri.getPerPageNum() < totalCount ? true : false;
         
     }

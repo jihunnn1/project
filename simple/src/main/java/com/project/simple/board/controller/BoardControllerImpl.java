@@ -96,15 +96,28 @@ public class BoardControllerImpl implements BoardController {
 	// 1:1문의 리스트
 	@Override
 	@RequestMapping(value = "/board/listInquiry.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listInquiry(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listInquiry(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String memId = memberVO.getmemId();
 		articleVO.setmemId(memId);
-		Map<String, List> inquiryMap = boardService.listInquiry(articleVO);
+		Map<String, Object> inquiryMap = new HashMap<String,Object>();
+		int pageStart = cri.getPageStart();
+		int perPageNum = cri.getPerPageNum();
+		inquiryMap.put("memId", memId);
+		inquiryMap.put("pageStart", pageStart);		
+		inquiryMap.put("perPageNum", perPageNum);
+		inquiryMap = boardService.listInquiry(inquiryMap);
+		int inquiryCount = boardService.inquiryCount(memId);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(inquiryCount);
+	    System.out.println(inquiryCount);
+	    
 		session.setAttribute("inquiryMap", inquiryMap);
+		session.setAttribute("pageMaker", pageMaker);
 		return mav;
 
 	}
@@ -142,6 +155,7 @@ public class BoardControllerImpl implements BoardController {
 		inquiryMap.put("inquiryNum", 0);
 		inquiryMap.put("memId", memId);
 		inquiryMap.put("inquiryFile", inquiryFile);
+		System.out.println(memId);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();

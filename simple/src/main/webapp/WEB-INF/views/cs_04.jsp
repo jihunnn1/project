@@ -215,7 +215,7 @@
 						varStatus="inquiryNum">
 						<tr
 							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-							<td scope="col" width="50">${inquiryNum.count}</td>
+							<td scope="col" width="50">${inquiry.inquiryNum}</td>
 							<td scope="col" width="150">${inquiry.inquiryType}</td>
 							<td align="left" scope="col" width="500"><a
 								href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquiry.inquiryNum}"
@@ -232,15 +232,28 @@
 		</div>
 		<!-- 내용 끝 -->
 		<!-- 페이징 글번호 -->
-		<div class="page_wrap" style="margin-left: 80px; margin-top: 60px;">
-			<div class="page_nation">
-				<a class="arrow pprev" href="#"></a> <a class="arrow prev" href="#"></a>
-				<a href="#" class="active">1</a> <a href="#">2</a> <a href="#">3</a>
-				<a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
-				<a href="#">8</a> <a href="#">9</a> <a href="#">10</a> <a
-					class="arrow next" href="#"></a> <a class="arrow nnext" href="#"></a>
-			</div>
-		</div>
+				<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
+	<div class="page_nation" >
+			
+    <c:if test="${pageMaker.prev}">
+
+        <a class="arrow prev" href='<c:url value="/board/listInquirydo?page=${pageMaker.startPage-1 }"/>'><i class="fa fa-chevron-left"></i></a>
+  
+    </c:if>
+    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+   
+        <a href='<c:url value="/board/listInquiry.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+    
+    </c:forEach>
+    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+ 
+        <a class="arrow next" href='<c:url value="/board/listNotice.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
+ 
+    </c:if>
+ 
+    </div>
+    </div>
+
 	</section>
 	<br>
 	<br>

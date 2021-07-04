@@ -63,16 +63,19 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	//inquiry 게시판
-	public Map<String ,List> listInquiry(ArticleVO articleVO) throws Exception{
-		Map<String,List> inquiryMap=new HashMap<String,List>();
-		List<ArticleVO> inquiryList=boardDAO.selectInquiryList(articleVO);
-		if(inquiryList.size()==0){ //카트에 저장된 상품이없는 경우
+	public Map<String ,Object> listInquiry(Map<String ,Object> inquiryMap) throws Exception{
+		List<ArticleVO> inquiryList=boardDAO.selectInquiryList(inquiryMap);
+		if(inquiryList.size()==0){ 
 			return null;
 		}
 		inquiryMap.put("inquiryList", inquiryList);
 		return inquiryMap;
 	}
 	
+	public int inquiryCount(String memId) throws Exception{
+		int inquiryCount = boardDAO.selectInquiryCount(memId);
+		return inquiryCount;
+	}	
 	
 	@Override
 	public int addNewInquiry(Map inquiryMap) throws Exception{
@@ -100,7 +103,9 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void removeInquiry(int inquiryNum) throws Exception {
 		boardDAO.deleteInquiry(inquiryNum);
-	}	
+	}
+
+
 
 	
 }	

@@ -64,10 +64,11 @@
 	]]>
 	</select>
 	
-	<select id="selectAllQuestionList" resultMap="questionResult">
+	<select id="selectAllQuestionList"  resultMap="questionResult">
 	<![CDATA[
 			
-			select * from question;
+			select * from question order by questionNum desc
+			limit #{pageStart}, #{perPageNum};
 			
 
 	]]>
@@ -82,14 +83,24 @@
 	]]>
 	</select>	
 	
-	<select id="selectAllInquiryList" parameterType="ArticleVO"  resultMap="inquiryResult">
+	<select id="selectAllInquiryList"   parameterType="java.util.HashMap"  resultMap="inquiryResult">
 	<![CDATA[
 			
-			select * from inquiry where memId = #{memId};
+			select * from inquiry where memId=#{memId} order by inquiryNum desc
+			limit #{pageStart}, #{perPageNum};
 			
 
 	]]>
 	</select>
+		<select id="selectInquiryCount" resultType="int" >
+	<![CDATA[
+			
+			select count(*) as inquiryCount from inquiry where memId=#{memId};
+			
+
+	]]>
+	</select>	
+	
 	<insert id="insertNewInquiry" parameterType="java.util.Map">
 		<![CDATA[
 			insert into inquiry(memId,inquiryNum, inquiryType,inquiryTitle, inquiryContent, inquiryFile)

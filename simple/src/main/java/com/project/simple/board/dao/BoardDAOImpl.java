@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.project.simple.board.vo.ArticleVO;
+import com.project.simple.member.vo.MemberVO;
 import com.project.simple.page.Criteria;
 
 
@@ -40,7 +41,7 @@ public class BoardDAOImpl implements BoardDAO{
 	//question 게시판
 	@Override
 	public List<ArticleVO> selectAllQuestionList(Criteria cri) throws DataAccessException {
-		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList");
+		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList", cri);
 		return questionList;
 	}
 
@@ -52,9 +53,16 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//inquiry 게시판
 	@Override
-	public List<ArticleVO> selectInquiryList(ArticleVO articleVO) throws DataAccessException {
-		List<ArticleVO> inquiryList =(List)sqlSession.selectList("mapper.board.selectAllInquiryList",articleVO);
+	public List<ArticleVO> selectInquiryList(Map<String ,Object> inquiryMap) throws DataAccessException {
+		List<ArticleVO> inquiryList =sqlSession.selectList("mapper.board.selectAllInquiryList",inquiryMap);		
+		System.out.println(inquiryList);
 		return inquiryList;
+	}
+	
+	@Override
+	public int selectInquiryCount(String memId) throws DataAccessException {
+		int selectInquiryCount = sqlSession.selectOne("mapper.board.selectInquiryCount",memId);
+		return selectInquiryCount;
 	}
 	
 	@Override
