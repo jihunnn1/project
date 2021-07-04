@@ -211,11 +211,12 @@
 						<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
 						<td scope="col" width="150">작성일</td>
 					</tr>
+					<c:set var="num" value="${pageMaker.totalCount - ((inquiryMap.pageNum-1) * 10) }"/>
 					<c:forEach var="inquiry" items="${inquiryList}"
 						varStatus="inquiryNum">
 						<tr
 							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
-							<td scope="col" width="50">${inquiry.inquiryNum}</td>
+							<td scope="col" width="50">${num}</td>
 							<td scope="col" width="150">${inquiry.inquiryType}</td>
 							<td align="left" scope="col" width="500"><a
 								href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquiry.inquiryNum}"
@@ -223,6 +224,8 @@
 							<td scope="col" width="150"><fmt:formatDate
 									value="${inquiry.inquiryDate}" /></td>
 						</tr>
+						  <c:set var="num" value="${num-1}"></c:set>
+
 					</c:forEach>
 				</thead>
 			</table>

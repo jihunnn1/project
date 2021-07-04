@@ -113,6 +113,9 @@ public class BoardControllerImpl implements BoardController {
 		int inquiryCount = boardService.inquiryCount(memId);
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
+	    int pageNum = pageMaker.getCri().getPage();
+		inquiryMap.put("pageNum", pageNum);
+		System.out.println(pageNum);
 	    pageMaker.setTotalCount(inquiryCount);
 	    System.out.println(inquiryCount);
 	    
