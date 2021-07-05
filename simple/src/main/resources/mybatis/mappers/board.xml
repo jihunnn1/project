@@ -35,7 +35,7 @@
 		<result property="inquiryReq" column="inquiryReq" />
 	</resultMap>
 	
-	
+	<!-- 공지사항 -->
 	<select id="selectAllNoticeList" resultMap="noticeResult">
 	<![CDATA[
 			
@@ -64,6 +64,7 @@
 	]]>
 	</select>
 	
+	<!-- 자주 묻는 질문 -->
 	<select id="selectAllQuestionList"  resultMap="questionResult">
 	<![CDATA[
 			
@@ -83,6 +84,7 @@
 	]]>
 	</select>	
 	
+	<!-- 1:1문의 -->
 	<select id="selectAllInquiryList"   parameterType="java.util.HashMap"  resultMap="inquiryResult">
 	<![CDATA[
 			
@@ -154,7 +156,7 @@
 			
 	</update>
 	
-
+	
 
 	
 

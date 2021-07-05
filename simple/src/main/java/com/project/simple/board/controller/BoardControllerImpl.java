@@ -125,7 +125,7 @@ public class BoardControllerImpl implements BoardController {
 
 	}
 
-	// 1:1문의 글쓰기, A/S 글쓰기
+	// 1:1문의 글쓰기 폼, A/S 글쓰기 폼
 	@RequestMapping(value = "/board/*Form.do", method = RequestMethod.GET)
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -134,7 +134,7 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// 1:1문의 수정하기
+	// 1:1문의 글쓰기
 	@Override
 	@RequestMapping(value = "/board/addNewInquiry.do", method = RequestMethod.POST)
 	@ResponseBody

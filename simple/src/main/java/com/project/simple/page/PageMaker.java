@@ -25,7 +25,7 @@ public class PageMaker {
     }
     
     private void calcData() {
-        
+        //끝페이지 번호  = (현재 페이지 번호/화면에 보여질 페이지 번호의 갯수) * 화면에 보여질 페이지 번호의 갯수 
         endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
         
         //시작 페이지 번호=(끝페이지 번호 - 화면에 보여질 페이지 번호의 갯수)
@@ -45,7 +45,7 @@ public class PageMaker {
         next = endPage * cri.getPerPageNum() < totalCount ? true : false;
         
     }
-    
+    //특정 페이지의 게시글 시작번호, 게시글 시작 행 번호
     public int getStartPage() {
         return startPage;
     }
