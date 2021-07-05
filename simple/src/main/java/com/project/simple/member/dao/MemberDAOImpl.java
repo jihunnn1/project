@@ -38,4 +38,9 @@ public class MemberDAOImpl implements MemberDAO{
 		MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);
 		return vo;
 	}
+	
+	public int updateMember(MemberVO modmember) throws DataAccessException{
+		int result = sqlSession.update("mapper.member.updateMember", modmember);
+		return result;
+	}
 }

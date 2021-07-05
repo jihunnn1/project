@@ -27,7 +27,7 @@
 		<![CDATA[ 
 
 			insert into simple.member(memId, memName, memPwd, memEmail, memPhoneNum, memAdr) 
-			values(#{memId},#{memName},#{memPwd},(select concat_ws('@',#{memEmail},#{memEmail1})),(select concat_ws('-',#{memPhoneNum},#{memPhoneNum1},#{memPhoneNum2})),(select concat(#{memAdr},',',#{memAdr1},#{memAdr2})));
+			values(#{memId},#{memName},#{memPwd},(select concat_ws('@',#{memEmail},#{memEmail1})),(select concat_ws('-',#{memPhoneNum},#{memPhoneNum1},#{memPhoneNum2})),(select concat_ws(','#{memAdr},#{memAdr1},#{memAdr2})));
 		]]>
 	</insert>
 
@@ -39,8 +39,16 @@
 		where memId = #{memId} and memPwd = #{memPwd}
 	]]>
 	</select>
-	
-	
+
+	<!-- 회원정보수정 -->
+	<update id="updateMember" parameterType="MemberVO" >
+	<![CDATA[ 
+		update simple.member
+		set memPwd = #{memPwd}, memEmail=(select concat_ws('@',#{memEmail},#{memEmail1})), memPhoneNum=(select concat_ws('-',#{memPhoneNum},#{memPhoneNum1},#{memPhoneNum2})), memAdr=(select concat_ws(','#{memAdr},#{memAdr1},#{memAdr2})) where memId=#{memId} 
+	]]>
+	</update>
+
+
 	<!-- 회원탈퇴 -->
 	<delete id="deleteMember" parameterType="MemberVO">
 	<![CDATA[

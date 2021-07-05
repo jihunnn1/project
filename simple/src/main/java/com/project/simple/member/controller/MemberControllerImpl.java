@@ -38,7 +38,7 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
-		return "mypage_02";
+		return "main";
 	}
 
 	// 멤버로그인작업 ppt226
@@ -70,7 +70,20 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-
+	
+	
+	//회원가입작업
+	@Override
+	@RequestMapping(value = "/addMembers.do", method = RequestMethod.POST)
+	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = memberService.addMember(member);
+		ModelAndView mav = new ModelAndView("redirect:/join_02.do");
+		return mav;
+	}
+	
 	// 회원탈퇴작업
 	@RequestMapping(value = "/removeMember.do", method = RequestMethod.POST)
 	public ModelAndView removeMember(@ModelAttribute("removemember") MemberVO removemember, HttpServletRequest request,
@@ -94,10 +107,37 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 
 	}
+	
+
+	// 회원정보수정  
+	@RequestMapping(value = "/modMember.do", method = RequestMethod.POST)
+	public ModelAndView modMember(@ModelAttribute("modmember") MemberVO modmember, HttpServletRequest request,
+			HttpServletResponse response, RedirectAttributes rAttr) throws Exception {
+		HttpSession session = request.getSession();
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = memberService.modMember(modmember);
+		session.removeAttribute("member");
+		session.removeAttribute("isLogOn");
+		
+		if (memberVO != null) {
+			session.setAttribute("member", memberVO);
+			session.setAttribute("isLogOn", true);
+			mav.setViewName("redirect:/main.do");
+		} else {
+			rAttr.addAttribute("result", "loginFailed");
+			mav.setViewName("redirect:/login_01.do");
+		}
+		return mav;
+		
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		return mav;
+	}
+	
 
 	// 회원수정 비밀번호확인
-	@RequestMapping(value = "/modMember.do", method = RequestMethod.POST)
-	public ModelAndView modmember(@ModelAttribute("confirmPwd") MemberVO confirmPwd, HttpServletRequest request,
+	@RequestMapping(value = "/mypage_03.do", method = RequestMethod.POST)
+	public ModelAndView mypage_03(@ModelAttribute("confirmPwd") MemberVO confirmPwd, HttpServletRequest request,
 			HttpServletResponse response, RedirectAttributes rAttr) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
@@ -195,16 +235,7 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-	@Override
-	@RequestMapping(value = "/addMembers.do", method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		int result = 0;
-		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/join_02.do");
-		return mav;
-	}
+	
 
 	@Override
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {

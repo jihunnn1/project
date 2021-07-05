@@ -222,7 +222,7 @@
 			<jsp:include page="/WEB-INF/views/common/mypage_sidemenu.jsp"
 				flush="false" />
 			<!-- left Menu 끝-->
-			<form action="${contextPath}/modMember.do" method="post">
+			<form action="${contextPath}/mypage_03.do" method="post">
 				<div class="container02"
 					style="padding-left: 300px; padding-top: 30px;">
 					<div id="MyPage_top">

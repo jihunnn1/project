@@ -17,5 +17,7 @@ public interface MemberController{
 	MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView removeMember(@ModelAttribute("removemember")
 	MemberVO removemember, HttpServletRequest request, HttpServletResponse response,RedirectAttributes rAttr) throws Exception;
+	public ModelAndView modMember(@ModelAttribute("modmember")
+	MemberVO modmember,HttpServletRequest request, HttpServletResponse response,RedirectAttributes rAttr) throws Exception;
 	
 }
