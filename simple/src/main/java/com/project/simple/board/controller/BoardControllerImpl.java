@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,7 +94,35 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 	
+	@Override
+	@RequestMapping(value = "/board/questionSearch.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView questionSearch(@RequestParam("search") String search , Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		Map<String, Object> questionSearchMap = new HashMap<String,Object>();
+		System.out.println(cri);
+		int pageStart = cri.getPageStart();
+		int perPageNum = cri.getPerPageNum();
+		questionSearchMap.put("pageStart", pageStart);
+		questionSearchMap.put("perPageNum", perPageNum);
+		questionSearchMap.put("search", search);
+		System.out.println(questionSearchMap);
+		questionSearchMap = boardService.questionSearch(questionSearchMap);
+		System.out.println(questionSearchMap);
+		int questionSearchCount = boardService.questionSearchCount(search);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    int pageNum = pageMaker.getCri().getPage();
+	    questionSearchMap.put("pageNum", pageNum);
+	    pageMaker.setTotalCount(questionSearchCount);
+	    System.out.println(questionSearchCount);
+	    
+	    mav.addObject("questionList", questionSearchMap);
+	    mav.addObject("pageMaker", pageMaker);
+	    System.out.println(mav);
+		return mav;
 
+	}
 
 	// 1:1문의 리스트
 	@Override
@@ -119,7 +148,6 @@ public class BoardControllerImpl implements BoardController {
 		inquiryMap.put("pageNum", pageNum);
 		System.out.println(pageNum);
 	    pageMaker.setTotalCount(inquiryCount);
-	    System.out.println(inquiryCount);
 	    
 		session.setAttribute("inquiryMap", inquiryMap);
 		session.setAttribute("pageMaker", pageMaker);
@@ -331,6 +359,8 @@ public class BoardControllerImpl implements BoardController {
 					}
 					return resEnt;
 					
-				}	
+				}
+
+
 
 }

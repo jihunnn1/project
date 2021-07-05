@@ -59,7 +59,19 @@ public class BoardServiceImpl implements BoardService{
 	public int questionCount() throws Exception{
 		int questionCount = boardDAO.selectQuestionCount();
 		return questionCount;
-	}	
+	}
+	
+	public Map<String ,Object> questionSearch(Map<String ,Object> questionSearchMap) throws Exception{
+		List<ArticleVO> questionSearchList=boardDAO.questionSearchList(questionSearchMap);
+
+		questionSearchMap.put("questionSearchList", questionSearchList);
+		return questionSearchMap;
+	}
+	
+	public int questionSearchCount(String search) throws Exception{
+		int questionSearchCount = boardDAO.questionSeachCount(search);
+		return questionSearchCount;
+	}
 	
 	
 	//inquiry °Ô½ÃÆÇ

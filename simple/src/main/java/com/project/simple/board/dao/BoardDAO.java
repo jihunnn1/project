@@ -19,6 +19,8 @@ public interface BoardDAO{
 	
 	public List selectAllQuestionList(Criteria cri) throws DataAccessException;
 	public int selectQuestionCount() throws DataAccessException;
+	public List<ArticleVO> questionSearchList(Map<String ,Object> questionSearchMap) throws DataAccessException;
+	public int questionSeachCount(String search) throws DataAccessException;
 	
 	public List<ArticleVO> selectInquiryList(Map<String ,Object> inquiryMap) throws DataAccessException;
 	public int selectInquiryCount(String memId) throws DataAccessException;

@@ -82,7 +82,27 @@
 			
 
 	]]>
-	</select>	
+	</select>
+	
+	<select id="questionSearchList"  resultMap="questionResult">
+	<![CDATA[
+			
+			select * from question where questionTitle like CONCAT('%', #{search}, '%')  order by questionNum desc
+			;
+			
+
+	]]>
+	</select>
+	
+	<select id="questionSearchCount" resultType="int" parameterType="int">
+	<![CDATA[
+			
+			select count(*) as questionCount from question where questionTitle like CONCAT('%', #{search}, '%');
+			
+
+	]]>
+	</select>
+		
 	
 	<!-- 1:1문의 -->
 	<select id="selectAllInquiryList"   parameterType="java.util.HashMap"  resultMap="inquiryResult">

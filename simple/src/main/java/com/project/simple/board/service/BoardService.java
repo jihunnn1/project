@@ -14,6 +14,8 @@ public interface BoardService {
 	public ArticleVO viewNotice(int noticeNum) throws Exception;
 	public List<ArticleVO> listQuestion(Criteria cri) throws Exception;
 	public int questionCount() throws Exception;
+	public Map<String ,Object> questionSearch(Map<String ,Object> questionSearchMap) throws Exception;
+	public int questionSearchCount(String search) throws Exception;
 	public Map<String ,Object> listInquiry(Map<String ,Object> inquiryMap) throws Exception;
 	public int inquiryCount(String  memId) throws Exception;
 	public int addNewInquiry(Map articleMap) throws Exception;
