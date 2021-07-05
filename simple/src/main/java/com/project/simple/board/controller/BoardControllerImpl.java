@@ -92,6 +92,8 @@ public class BoardControllerImpl implements BoardController {
 		mav.addObject("pageMaker", pageMaker);
 		return mav;
 	}
+	
+
 
 	// 1:1문의 리스트
 	@Override
