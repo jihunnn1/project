@@ -150,7 +150,7 @@
 						<td scope="col" width="500">내용</td>
 
 					</tr>
-					<c:set var="num" value="${pageMaker.totalCount - ((question.pageNum-1) * 10) }"/>
+					<c:set var="num" value="${pageMaker.totalCount - ((pageNum-1) * 10) }"/>
 					<c:forEach var="question" items="${questionList}"
 						varStatus="questionNum">
 						<tr

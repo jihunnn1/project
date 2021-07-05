@@ -89,8 +89,10 @@ public class BoardControllerImpl implements BoardController {
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(questionCount);
+	    int pageNum = pageMaker.getCri().getPage();
 		mav.addObject("questionList", questionList);
 		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("pageNum", pageNum);
 		return mav;
 	}
 	
@@ -119,6 +121,7 @@ public class BoardControllerImpl implements BoardController {
 	    
 	    mav.addObject("questionList", questionSearchMap);
 	    mav.addObject("pageMaker", pageMaker);
+		mav.addObject("pageNum", pageNum);
 	    System.out.println(mav);
 		return mav;
 
