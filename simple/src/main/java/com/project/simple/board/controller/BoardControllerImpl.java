@@ -53,11 +53,12 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView listNotice(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		List<ArticleVO> noticeList = boardService.listNotice(cri);
-		List<ArticleVO> noticeListAll = boardService.listNoticeAll();
+		int noticeCount = boardService.noticeCount();
+		System.out.println(noticeCount);
 		ModelAndView mav = new ModelAndView(viewName);
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
-	    pageMaker.setTotalCount(noticeListAll.size());
+	    pageMaker.setTotalCount(noticeCount);
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("pageMaker", pageMaker);
 		
@@ -79,31 +80,54 @@ public class BoardControllerImpl implements BoardController {
 	// 자주묻는 질문 리스트
 	@Override
 	@RequestMapping(value = "board/listQuestion.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listQuestion(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listQuestion(Criteria cri,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ArticleVO> questionList = boardService.listQuestion();
+		List<ArticleVO> questionList = boardService.listQuestion(cri);
+		int questionCount = boardService.questionCount();
 		ModelAndView mav = new ModelAndView(viewName);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(questionCount);
 		mav.addObject("questionList", questionList);
+		mav.addObject("pageMaker", pageMaker);
 		return mav;
 	}
+	
+
 
 	// 1:1문의 리스트
 	@Override
 	@RequestMapping(value = "/board/listInquiry.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listInquiry(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listInquiry(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String memId = memberVO.getmemId();
 		articleVO.setmemId(memId);
-		Map<String, List> inquiryMap = boardService.listInquiry(articleVO);
+		Map<String, Object> inquiryMap = new HashMap<String,Object>();
+		int pageStart = cri.getPageStart();
+		int perPageNum = cri.getPerPageNum();
+		inquiryMap.put("memId", memId);
+		inquiryMap.put("pageStart", pageStart);		
+		inquiryMap.put("perPageNum", perPageNum);
+		inquiryMap = boardService.listInquiry(inquiryMap);
+		int inquiryCount = boardService.inquiryCount(memId);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    int pageNum = pageMaker.getCri().getPage();
+		inquiryMap.put("pageNum", pageNum);
+		System.out.println(pageNum);
+	    pageMaker.setTotalCount(inquiryCount);
+	    System.out.println(inquiryCount);
+	    
 		session.setAttribute("inquiryMap", inquiryMap);
+		session.setAttribute("pageMaker", pageMaker);
 		return mav;
 
 	}
 
-	// 1:1문의 글쓰기, A/S 글쓰기
+	// 1:1문의 글쓰기 폼, A/S 글쓰기 폼
 	@RequestMapping(value = "/board/*Form.do", method = RequestMethod.GET)
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -112,7 +136,7 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// 1:1문의 수정하기
+	// 1:1문의 글쓰기
 	@Override
 	@RequestMapping(value = "/board/addNewInquiry.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -136,6 +160,7 @@ public class BoardControllerImpl implements BoardController {
 		inquiryMap.put("inquiryNum", 0);
 		inquiryMap.put("memId", memId);
 		inquiryMap.put("inquiryFile", inquiryFile);
+		System.out.println(memId);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();

@@ -2,10 +2,10 @@ package com.project.simple.page;
 
 public class Criteria {
     
-    private int page;
-    private int perPageNum;
-    
+    private int page;//현재 페이지
+    private int perPageNum;  //perPageNum 한페이지당 보여줄 게시글의 갯수   
     public int getPageStart() {
+
         return (this.page-1)*perPageNum;
     }
     
@@ -24,9 +24,11 @@ public class Criteria {
             this.page = page;
         }
     }
+    
     public int getPerPageNum() {
         return perPageNum;
     }
+    
     public void setPerPageNum(int pageCount) {
         int cnt = this.perPageNum;
         if(pageCount != cnt) {

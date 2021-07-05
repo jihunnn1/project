@@ -16,18 +16,22 @@ public interface BoardController {
 	public ModelAndView viewNotice(@RequestParam("noticeNum") int noticeNum,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView listQuestion(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listQuestion(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView listInquiry( HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	
+	public ModelAndView listInquiry(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewInquiry(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView viewInquiry(@RequestParam("inquiryNum") int inquiryNum,
+	public ModelAndView viewInquiry(@RequestParam("totalNum") int totalNum,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView inquiryForm(@RequestParam("inquiryNum") int inquiryNum, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 
 	public ResponseEntity removeInquiry(@RequestParam("inquiryNum") int inquiryNum, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
 	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.project.simple.board.vo.ArticleVO;
+import com.project.simple.member.vo.MemberVO;
 import com.project.simple.page.Criteria;
 
 
@@ -26,9 +27,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
-	public List<ArticleVO> selectNoticeListAll() throws DataAccessException {
-		List<ArticleVO> noticeListAll = sqlSession.selectList("mapper.board.selectNoticeListAll");
-		return noticeListAll;
+	public int selectNoticeCount() throws DataAccessException {
+		int noticeCount = sqlSession.selectOne("mapper.board.selectNoticeCount");
+		System.out.println(noticeCount);
+		return noticeCount;
 	}
 	
 	@Override
@@ -38,16 +40,29 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//question 게시판
 	@Override
-	public List<ArticleVO> selectAllQuestionList() throws DataAccessException {
-		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList");
+	public List<ArticleVO> selectAllQuestionList(Criteria cri) throws DataAccessException {
+		List<ArticleVO> questionList = sqlSession.selectList("mapper.board.selectAllQuestionList", cri);
 		return questionList;
+	}
+
+	@Override
+	public int selectQuestionCount() throws DataAccessException {
+		int questionCount = sqlSession.selectOne("mapper.board.selectQuestionCount");
+		return questionCount;
 	}
 	
 	//inquiry 게시판
 	@Override
-	public List<ArticleVO> selectInquiryList(ArticleVO articleVO) throws DataAccessException {
-		List<ArticleVO> inquiryList =(List)sqlSession.selectList("mapper.board.selectAllInquiryList",articleVO);
+	public List<ArticleVO> selectInquiryList(Map<String ,Object> inquiryMap) throws DataAccessException {
+		List<ArticleVO> inquiryList =sqlSession.selectList("mapper.board.selectAllInquiryList",inquiryMap);		
+		System.out.println(inquiryList);
 		return inquiryList;
+	}
+	
+	@Override
+	public int selectInquiryCount(String memId) throws DataAccessException {
+		int selectInquiryCount = sqlSession.selectOne("mapper.board.selectInquiryCount",memId);
+		return selectInquiryCount;
 	}
 	
 	@Override
