@@ -401,7 +401,7 @@
 	String FullmemEmail = member.getmemEmail();
 	String FullmemAdr = member.getmemAdr();
 
-	String a1 = ",";
+	String a1 = "-";
 	String e1 = "@";
 	String p1 = "-";
 

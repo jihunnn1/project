@@ -118,19 +118,8 @@ public class MemberControllerImpl implements MemberController {
 		int result = 0;
 		result = memberService.modMember(modmember);
 		session.removeAttribute("member");
-		session.removeAttribute("isLogOn");
-		
-		if (memberVO != null) {
-			session.setAttribute("member", memberVO);
-			session.setAttribute("isLogOn", true);
-			mav.setViewName("redirect:/main.do");
-		} else {
-			rAttr.addAttribute("result", "loginFailed");
-			mav.setViewName("redirect:/login_01.do");
-		}
-		return mav;
-		
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		session.removeAttribute("isLogOn");				
+		ModelAndView mav = new ModelAndView("redirect:/mypage_10.do");
 		return mav;
 	}
 	
@@ -196,7 +185,7 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@RequestMapping(value = "/mypage_02.do", method = RequestMethod.GET)
-	private ModelAndView mypage_10(HttpServletRequest request, HttpServletResponse response) {
+	private ModelAndView mypage_02(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
@@ -205,6 +194,14 @@ public class MemberControllerImpl implements MemberController {
 
 	@RequestMapping(value = "/mypage_01.do", method = RequestMethod.GET)
 	private ModelAndView mypage_01(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage_10.do", method = RequestMethod.GET)
+	private ModelAndView mypage_10(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
