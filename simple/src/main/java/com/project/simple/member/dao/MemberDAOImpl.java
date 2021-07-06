@@ -28,6 +28,12 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
+	public int insertMember_naver(MemberVO memberVO)throws DataAccessException{
+		int result=sqlSession.insert("mapper.member.insertMember_naver", memberVO);
+		return result;
+	}
+	
+	@Override
 	public int deleteMember(MemberVO removemember) throws DataAccessException{
 		int result=sqlSession.delete("mapper.member.deleteMember", removemember);
 		return result;

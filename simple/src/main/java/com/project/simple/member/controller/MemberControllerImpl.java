@@ -84,6 +84,20 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	
+	//네아로 추가정보작업
+	@Override
+	@RequestMapping(value = "/addMembers_naver.do", method = RequestMethod.POST)
+	public ModelAndView addMember_naver(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		int result = 0;
+		result = memberService.addMember_naver(member);
+		ModelAndView mav = new ModelAndView("redirect:/join_02.do");
+		return mav;
+	}
+	
+	
 	// 회원탈퇴작업
 	@RequestMapping(value = "/removeMember.do", method = RequestMethod.POST)
 	public ModelAndView removeMember(@ModelAttribute("removemember") MemberVO removemember, HttpServletRequest request,
@@ -176,13 +190,6 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/login_01.do", method = RequestMethod.GET)
-	private ModelAndView login_01(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
 
 	@RequestMapping(value = "/mypage_02.do", method = RequestMethod.GET)
 	private ModelAndView mypage_02(HttpServletRequest request, HttpServletResponse response) {
@@ -207,6 +214,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
 
 	@RequestMapping(value = "/join_02.do", method = RequestMethod.GET)
 	private ModelAndView join_02(HttpServletRequest request, HttpServletResponse response) {

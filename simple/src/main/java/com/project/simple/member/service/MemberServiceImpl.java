@@ -27,6 +27,12 @@ public class MemberServiceImpl implements MemberService{
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
 	}
+	
+	@Override
+	public int addMember_naver(MemberVO member) throws DataAccessException {
+		return memberDAO.insertMember_naver(member);
+	}
+	
 	@Override
 	public int removeMember(MemberVO removemember) throws DataAccessException{
 		return memberDAO.deleteMember(removemember);
