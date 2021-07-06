@@ -2,6 +2,9 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:if test="${questionSearchMap !=null}">
+<c:set var="questionList" value="${questionSearchMap.questionSearchList}" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -119,7 +119,7 @@ public class BoardControllerImpl implements BoardController {
 	    pageMaker.setTotalCount(questionSearchCount);
 	    System.out.println(questionSearchCount);
 	    
-	    mav.addObject("questionList", questionSearchMap);
+	    mav.addObject("questionSearchMap", questionSearchMap);
 	    mav.addObject("pageMaker", pageMaker);
 		mav.addObject("pageNum", pageNum);
 	    System.out.println(mav);
