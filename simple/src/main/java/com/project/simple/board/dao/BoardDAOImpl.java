@@ -78,6 +78,20 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
+	public List<ArticleVO> inquirySearchList(Map<String ,Object> inquirySearchMap) throws DataAccessException {
+		System.out.println(inquirySearchMap);
+		List<ArticleVO> inquirySearchList =sqlSession.selectList("mapper.board.inquirySearchList",inquirySearchMap);		
+		return inquirySearchList;
+	}
+	
+	@Override
+	public int inquirySeachCount(Map<String, Object> search) throws DataAccessException {
+		int inquirySearchCount = sqlSession.selectOne("mapper.board.inquirySearchCount",search);
+		System.out.println(inquirySearchCount);
+		return inquirySearchCount;
+	}
+	
+	@Override
 	public int insertNewInquiry(Map inquiryMap) throws DataAccessException {
 		int inquiryNum = selectNewInquiryNum();
 		inquiryMap.put("inquiryNum", inquiryNum);

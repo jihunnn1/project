@@ -102,27 +102,22 @@ public class BoardControllerImpl implements BoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		Map<String, Object> questionSearchMap = new HashMap<String,Object>();
-		System.out.println(cri);
 		int pageStart = cri.getPageStart();
 		int perPageNum = cri.getPerPageNum();
 		questionSearchMap.put("pageStart", pageStart);
 		questionSearchMap.put("perPageNum", perPageNum);
 		questionSearchMap.put("search", search);
-		System.out.println(questionSearchMap);
 		questionSearchMap = boardService.questionSearch(questionSearchMap);
-		System.out.println(questionSearchMap);
 		int questionSearchCount = boardService.questionSearchCount(search);
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
 	    int pageNum = pageMaker.getCri().getPage();
 	    questionSearchMap.put("pageNum", pageNum);
 	    pageMaker.setTotalCount(questionSearchCount);
-	    System.out.println(questionSearchCount);
 	    
 	    mav.addObject("questionSearchMap", questionSearchMap);
 	    mav.addObject("pageMaker", pageMaker);
 		mav.addObject("pageNum", pageNum);
-	    System.out.println(mav);
 		return mav;
 
 	}
@@ -154,6 +149,44 @@ public class BoardControllerImpl implements BoardController {
 	    
 		session.setAttribute("inquiryMap", inquiryMap);
 		session.setAttribute("pageMaker", pageMaker);
+		return mav;
+
+	}
+	
+	@Override
+	@RequestMapping(value = "/board/inquirySearch.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView inquirySearch(@RequestParam("search1") String search1 , @RequestParam("search2") String search2, Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(search1);
+		System.out.println(search2);
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String memId = memberVO.getmemId();
+		articleVO.setmemId(memId);
+		
+		Map<String, Object> inquirySearchMap = new HashMap<String,Object>();
+		int pageStart = cri.getPageStart();
+		int perPageNum = cri.getPerPageNum();
+		inquirySearchMap.put("pageStart", pageStart);
+		inquirySearchMap.put("perPageNum", perPageNum);
+		inquirySearchMap.put("search1", search1);
+		inquirySearchMap.put("search2", search2);
+		inquirySearchMap.put("memId", memId);
+		inquirySearchMap = boardService.inquirySearch(inquirySearchMap);
+	    System.out.println(inquirySearchMap);
+		int inquirySearchCount = boardService.inquirySearchCount(inquirySearchMap);
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    int pageNum = pageMaker.getCri().getPage();
+	    inquirySearchMap.put("pageNum", pageNum);
+	    pageMaker.setTotalCount(inquirySearchCount);
+	    System.out.println(inquirySearchMap);
+	    
+	    session.setAttribute("inquirySearchMap", inquirySearchMap);
+	    session.setAttribute("pageMaker", pageMaker);
+	    session.setAttribute("pageNum", pageNum);
 		return mav;
 
 	}

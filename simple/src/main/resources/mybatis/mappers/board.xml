@@ -114,7 +114,7 @@
 
 	]]>
 	</select>
-		<select id="selectInquiryCount" resultType="int" >
+	<select id="selectInquiryCount" resultType="int" >
 	<![CDATA[
 			
 			select count(*) as inquiryCount from inquiry where memId=#{memId};
@@ -122,6 +122,26 @@
 
 	]]>
 	</select>	
+	
+		<select id="inquirySearchList"  resultMap="inquiryResult">
+	<![CDATA[
+			
+			select * from inquiry where inquiryDate between #{search1} and #{search2} and memId=#{memId} order by inquiryNum desc
+			limit #{pageStart}, #{perPageNum};
+			;
+			
+
+	]]>
+	</select>
+	
+	<select id="inquirySearchCount" resultType="int" parameterType="java.util.Map">
+	<![CDATA[
+			
+			select count(*) from inquiry where inquiryDate between #{search1} and #{search2} and memId=#{memId};
+			
+
+	]]>
+	</select>
 	
 	<insert id="insertNewInquiry" parameterType="java.util.Map">
 		<![CDATA[

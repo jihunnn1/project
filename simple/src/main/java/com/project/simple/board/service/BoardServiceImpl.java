@@ -89,6 +89,21 @@ public class BoardServiceImpl implements BoardService{
 		return inquiryCount;
 	}	
 	
+	public Map<String ,Object> inquirySearch(Map<String ,Object> inquirySearchMap) throws Exception{
+
+		List<ArticleVO> inquirySearchList=boardDAO.inquirySearchList(inquirySearchMap);
+
+		inquirySearchMap.put("inquirySearchList", inquirySearchList);
+		System.out.println(inquirySearchMap);
+		return inquirySearchMap;
+	}
+
+	public int inquirySearchCount(Map<String, Object> search) throws Exception{
+		System.out.println(search);
+		int inquirySearchCount = boardDAO.inquirySeachCount(search);
+		return inquirySearchCount;
+	}
+	
 	@Override
 	public int addNewInquiry(Map inquiryMap) throws Exception{
 		return boardDAO.insertNewInquiry(inquiryMap);
@@ -116,6 +131,11 @@ public class BoardServiceImpl implements BoardService{
 	public void removeInquiry(int inquiryNum) throws Exception {
 		boardDAO.deleteInquiry(inquiryNum);
 	}
+
+
+
+
+
 
 
 
