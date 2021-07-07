@@ -3,6 +3,7 @@ package com.project.simple.board.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,9 +19,10 @@ public interface BoardController {
 	
 	public ModelAndView listQuestion(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-
+	public ModelAndView questionSearch(@RequestParam("search") String search , Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView listInquiry(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView inquirySearch(@RequestParam("search1") String search1 , @RequestParam("search2") String search2, Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewInquiry(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	

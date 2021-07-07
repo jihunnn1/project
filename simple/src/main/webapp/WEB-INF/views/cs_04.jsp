@@ -3,12 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:choose>
+<c:when test="${!empty inquiryMap.inquiryList}">
 <c:set var="inquiryList" value="${inquiryMap.inquiryList}" />
-
+</c:when>
+<c:when test="${!empty inquirySearchMap.inquirySearchList}">
+<c:set var="inquirySearch" value="${inquirySearchMap.inquirySearchList}" />
+</c:when>
+</c:choose>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <!-- 날짜위젯 -->
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -185,15 +190,15 @@
 			<!-- 최근 본 상품 끝 -->
 			<jsp:include page="/WEB-INF/views/common/csMenu.jsp" flush="false" />
 			<!-- 내용 -->
-
+			<form name="inquirySearch" action="${contextPath}/board/inquirySearch.do" method="post"  >
 			<div style="display: inline !important;">
 				<p style="float: left; width: 80px; margin-top: 10px;">작성기간</p>
 
-				<input type="text" id="datepicker1"
+				<input type="text" id="datepicker1" name="search1"
 					style="width: 120px; margin-right: 50px; margin-top: 10px; height: 30px; flaot: left; border: 1px solid #bebebe; border-radius: 2px; display: inline !important;">
 
 				<span class="glyphicon glyphicon-calendar" aria-hidden="true"
-					style="margin-left: -35px;"> </span> ~ <input type="text"
+					style="margin-left: -35px;"> </span> ~ <input type="text" name="search2"
 					id="datepicker2"
 					style="width: 120px; margin-right: 50px; height: 30px; flaot: left; border: 1px solid #bebebe; border-radius: 2px; display: inline !important;">
 
@@ -203,6 +208,7 @@
 				<button type="submit" class="btn btn-default"
 					style="background-color: #dcdcdc; fmargin-left: 380px; margin-top: 0px; width: 80px; height: 28px; display: inline !important; background-color: #212529; color: white; border-radius: 2px; height: 30px; margin-right: 500px; padding-top: 3px;">조회</button>
 			</div>
+			</form>
 			<table class="table" style="height: 30px;">
 				<thead class="table-dark" align=center>
 					<tr align="center">
@@ -211,8 +217,10 @@
 						<td scope="col" width="500"><p style="margin-bottom: 0px;">제목</p></td>
 						<td scope="col" width="150">작성일</td>
 					</tr>
+					<c:choose>
+					<c:when test="${!empty inquiryMap.inquiryList}">
 					<c:set var="num" value="${pageMaker.totalCount - ((inquiryMap.pageNum-1) * 10) }"/>
-					<c:forEach var="inquiry" items="${inquiryList}"
+										<c:forEach var="inquiry" items="${inquiryList}"
 						varStatus="inquiryNum">
 						<tr
 							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
@@ -227,6 +235,27 @@
 						  <c:set var="num" value="${num-1}"></c:set>
 
 					</c:forEach>
+					</c:when>
+					<c:when test="${!empty inquirySearchMap.inquirySearchList}">
+					<c:set var="num" value="${pageMaker.totalCount - ((pageNum-1) * 10) }"/>
+					<c:forEach var="inquirySearch" items="${inquirySearchList}"
+						varStatus="inquiryNum">
+						<tr
+							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
+							<td scope="col" width="50">${num}</td>
+							<td scope="col" width="150">${inquirySearch.inquiryType}</td>
+							<td align="left" scope="col" width="500"><a
+								href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquirySearch.inquiryNum}"
+								style="color: black; padding-left: 30px; margin-bottom: 0px;">${inquirySearch.inquiryTitle}</a></td>
+							<td scope="col" width="150"><fmt:formatDate
+									value="${inquirySearch.inquiryDate}" /></td>
+						</tr>
+						  <c:set var="num" value="${num-1}"></c:set>
+
+					</c:forEach>
+					</c:when>
+					</c:choose>
+
 				</thead>
 			</table>
 			<a id="buttonmy" class="btn btn-dark"
@@ -235,7 +264,9 @@
 		</div>
 		<!-- 내용 끝 -->
 		<!-- 페이징 글번호 -->
-				<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
+		<c:choose>
+		<c:when test="${!empty inquiryMap.inquiryList}">
+	<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
 	<div class="page_nation" >
 			
     <c:if test="${pageMaker.prev}">
@@ -250,13 +281,15 @@
     </c:forEach>
     <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
  
-        <a class="arrow next" href='<c:url value="/board/listNotice.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
+        <a class="arrow next" href='<c:url value="/board/listInquiry.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
  
     </c:if>
  
     </div>
     </div>
+    </c:when>
 
+	</c:choose>
 	</section>
 	<br>
 	<br>

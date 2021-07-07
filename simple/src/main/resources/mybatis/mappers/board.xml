@@ -82,7 +82,27 @@
 			
 
 	]]>
-	</select>	
+	</select>
+	
+	<select id="questionSearchList"  resultMap="questionResult">
+	<![CDATA[
+			
+			select * from question where questionTitle like CONCAT('%', #{search}, '%')  order by questionNum desc
+			;
+			
+
+	]]>
+	</select>
+	
+	<select id="questionSearchCount" resultType="int" parameterType="int">
+	<![CDATA[
+			
+			select count(*) as questionCount from question where questionTitle like CONCAT('%', #{search}, '%');
+			
+
+	]]>
+	</select>
+		
 	
 	<!-- 1:1문의 -->
 	<select id="selectAllInquiryList"   parameterType="java.util.HashMap"  resultMap="inquiryResult">
@@ -94,7 +114,7 @@
 
 	]]>
 	</select>
-		<select id="selectInquiryCount" resultType="int" >
+	<select id="selectInquiryCount" resultType="int" >
 	<![CDATA[
 			
 			select count(*) as inquiryCount from inquiry where memId=#{memId};
@@ -102,6 +122,26 @@
 
 	]]>
 	</select>	
+	
+		<select id="inquirySearchList"  resultMap="inquiryResult">
+	<![CDATA[
+			
+			select * from inquiry where memId=#{memId} and inquiryDate between #{search1} and DATE_ADD(#{search2}, interval 1 day) order by inquiryNum desc
+			limit #{pageStart}, #{perPageNum};
+			;
+			
+
+	]]>
+	</select>
+	
+	<select id="inquirySearchCount" resultType="int" parameterType="java.util.Map">
+	<![CDATA[
+			
+			select count(*) from inquiry where memId=#{memId} and inquiryDate between #{search1} and  DATE_ADD(#{search2}, interval 1 day);
+			
+
+	]]>
+	</select>
 	
 	<insert id="insertNewInquiry" parameterType="java.util.Map">
 		<![CDATA[
