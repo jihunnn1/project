@@ -19,12 +19,18 @@ public class ProductVO {
 	private String productManufacturer;   //상품 제조사
 	private String productOrigin;         //상품 원산지
 	private Date productDate;             //상품 등록날짜
+	private String productContentImage;    //상품 상세이미지
+	
+	private int productOptionNum;      //상품 옵션 번호
+	private String option1;            //상품 옵션1
+	private String option2;           //상품 옵션2
 	
 	public ProductVO() {
 
 	}
 	public ProductVO(String productNum, String productName, String productPrice,String category, String subcategory,
-			String productImage,String productManufacturer,String productOrigin) {
+			String productImage,String productManufacturer,String productOrigin,String productContentImage
+			, int productOptionNum, String option1, String option2) {
 		this.productNum = productNum;
 		this.productName = productName;
 		this.productPrice = productPrice;
@@ -33,6 +39,10 @@ public class ProductVO {
 		this.productImage = productImage;
 		this.productManufacturer = productManufacturer;
 		this.productOrigin = productOrigin;
+		this.productContentImage = productContentImage;
+		this.productOptionNum = productOptionNum;
+		this.option1 = option1;
+		this.option2 = option2;
 	
 	}
 	public String getproductNum() {
@@ -104,6 +114,33 @@ public class ProductVO {
 	}
 	public void setproductDate(Date productDate) {
 		this.productDate = productDate;
+	}
+	public String getproductContentImage() {
+		return productContentImage;
+	}
+	public void setproductContentImage(String productContentImage) {
+		this.productContentImage = productContentImage;
+	}
+	
+	public int getproductOptionNum() {
+		return productOptionNum;
+	}
+	public void setproductOptionNum(int productOptionNum) {
+		this.productOptionNum = productOptionNum;
+	}
+	
+	public String getoption2() {
+		return option2;
+	}
+	public void setoption2(String option2) {
+		this.option2 = option2;
+	}
+	
+	public String getoption1() {
+		return option1;
+	}
+	public void setoption1(String option1) {
+		this.option1 = option1;
 	}
 
 

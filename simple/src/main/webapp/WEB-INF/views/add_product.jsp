@@ -160,6 +160,7 @@
 		   form.productPrice.focus();
 		   return false;
 	   }
+	 
 	   if(form.category.value==""){
 		   alert("상품카테고리를 입력하지 않았습니다.")
 		   form.category.focus();
@@ -185,6 +186,7 @@
 		   form.productOrigin.focus();
 		   return false;
 	   }
+	  
 	   if (confirm("상품을 등록하시겠습니까?")){ //확인
 	    	
 	    } else { //취소
@@ -192,12 +194,53 @@
 	    }
 
 	   form.submit();
-	   alert("상품 등록이 완료되었습니다.");
    }
+ 
+</script>
+<script type="text/javascript">
+$('document').ready(function() {
+	 var area0 = ["카테고리 선택","침대","소파","화장대/옷장/수납","식탁/의자","테이블/책상/책장"];
+	  var area1 = ["싱글","킹","이층침대","패밀리","퀸"];
+	   var area2 = ["코너형","1인/웜체어","패브릭","리클라이너","4/6인 일자형"];
+	   var area3 = ["거실장","장식장","화장대/콘솔","옷장","서랍장"];
+	   var area4 = ["2인 이상","4인 이상","8인 이상", "식탁의자","테이블의자"];
+	   var area5 = ["소파 테이블","좌식 테이블","원목 테이블", "다용도 테이블","책상/책장"];
+	   // 카테고리 선택 박스 초기화
+	 //하위카테고리 선택 박스 초기화
+
+	   $("select[name^=category]").each(function() {
+	    $selcategory = $(this);
+	    $.each(eval(area0), function() {
+	     $selcategory.append("<option value='"+this+"'>"+this+"</option>");
+	    });
+	    $selcategory.next().append("<option value=''>하위 카테고리 선택</option>");
+	   });
+
+
+
+	   // 카테고리 선택시 하위카테고리 설정
+
+	   $("select[name^=category]").change(function() {
+	    var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 Array
+	    var $subcategory = $(this).next(); // 선택영역 객체
+	    $("option",$subcategory).remove(); // 하위카테고리 초기화
+
+	    if(area == "area0")
+	     $subcategory.append("<option value=''>하위 카테고리 선택</option>");
+	    else {
+	     $.each(eval(area), function() {
+	      $subcategory.append("<option value='"+this+"'>"+this+"</option>");
+	     });
+	    }
+	   });
+
+
+	   });
 
 </script>
+
 </head>
-<title>주문결제창</title>
+<title>관리자상품</title>
 <body>
 <img src="${contextPath}/resources/images/product-01.jpg" width=100%
 		height=350px>
@@ -233,40 +276,50 @@
 				style="padding-top: 40px;">
 				<div class="container">
 					<section class="Easy-sgin-in-wrap4">
-						<div id="LeftBox">
+						<div id="LeftBox" style="height:580px">
 							<h3 id="login_text">상품등록</h3>
-							<form name="newProduct" action="${contextPath}/product/addProduct.do" method="post">
+							<form name="newProduct" action="${contextPath}/product/addProduct.do?productNum=${product.productNum}" method="post" enctype="multipart/form-data">
 								<div style="padding-left: 107px;"> 
-                                     <label>상품번호</label>
+                                     <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품번호</label>
                                           <input type="text" name="productNum" value="">
                                </div>
                                <div style="padding-left: 107px;"> 
-                                     <label>상품이름</label>
+                                     <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품이름</label>
                                          <input type="text" name="productName" value="">
                                </div>
                                <div style="padding-left: 107px;"> 
-                                    <label>상품가격</label>
+                                    <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품가격</label>
                                          <input type="text" name="productPrice" value="">
                                </div>
-                               <div style="padding-left: 107px;"> 
-                                    <label>카테고리</label>
-                                        <input type="text" name="category" value="">
-                               </div>
-                               <div style="padding-left: 75px;"> 
-                                   <label>하위카테고리</label>
-                                        <input type="text" name="subcategory" value="">
-                               </div>
-                               <div style="padding-left: 90px;"> 
-                                   <label>상품이미지</label>
+                               <div style="padding-left: 80px;"> 
+                                       <div style="padding-left: 107px;"> 
+                                       <select style="width:190px; height:35px;" name="category" id="category"></select>                   
+                                       <select style="width:190px; height:35px;" name="subcategory" id="subcategory"></select> 
+                                       </div>                     
+                               </div>     
+                               <div style="padding-left: 90px; padding-top: 6px;"> 
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품이미지</label>
                                         <input type="file" name="productImage" size=40 value="">
                                </div>
                                <div style="padding-left: 90px;"> 
-                                   <label>상품제조사</label>
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품제조사</label>
                                         <input type="text" name="productManufacturer" value="">
                                </div>
                                <div style="padding-left: 90px;"> 
-                                   <label>상품원산지</label>
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품원산지</label>
                                         <input type="text" name="productOrigin" value="">
+                               </div>
+                               <div style="padding-left: 58px;"> 
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품상세이미지</label>
+                                        <input type="text" name="productContentImage" value="">
+                               </div>
+                               <div style="padding-left: 109px;"> 
+                                   <label>상품옵션2</label>
+                                        <input type="text" name="option1" value="">
+                               </div>
+                               <div style="padding-left: 109px;"> 
+                                   <label>상품옵션2</label>
+                                        <input type="text" name="option2" value="">
                                </div>
 							</form>
 							
@@ -296,12 +349,6 @@
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 

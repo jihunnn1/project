@@ -113,18 +113,17 @@
    
 </style>
 <script type="text/javascript">
-    function ModifyBtn(){
-	    if (confirm("상품을 수정하시겠습니까?")){ //확인
-	    	
-	    } else { //취소
-	     	return;
-	    }
-    }
+function modProduct(obj) {
+	obj.action="${contextPath}/product/modNewProduct.do?productNum=${productNum.productNum}";
+	obj.submit();
+	
+}
 
     function removeProduct(obj){
     	var form = document.RemoveProduct;
 
 	    if (confirm("상품을 삭제하시겠습니까?")){ //확인
+	    	obj.action="${contextPath}/product/removeProduct.do?productNum=${product.productNum}";
 	    	
 	    } else { //취소
 	     	return false;
@@ -135,7 +134,7 @@
 
 </head>
 <body>
-    <form name="RemoveProduct" action="${contextPath}/product/removeProduct.do?productNum=${product.productNum}"  method="post">
+    <form name="RemoveProduct" action="${contextPath}/product/modProduct.do?productNum=${product.productNum}"  method="post"enctype="multipart/form-data">
 	<section class="ftco-section" style="padding-top: 20px; ">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3"
@@ -153,9 +152,13 @@
 	
 				<div class="col-md-4 ftco-animate">
 					<div class="blog-entry">
-						<a><img src="${contextPath}/resources/images/image_1.jpg"
-							style="width: 600px; padding-top: 10px; padding-top: 10px; margin-left: -15px; float: left;">
+						<c:choose>	
+					<c:when test="${not empty product.productImage && product.productImage != 'null'}">
+					<input type="hidden" name="OrignProductFile" value="${product.productImage}"class="block-20" />	
+						<a><img style="width: 600px; height:410px; padding-top: 10px; padding-top: 10px; margin-left: -15px; float: left;" src="${contextPath}/download_product.do?productNum=${product.productNum}&productImage=${product.productImage}" id="preview" /><br>
 						</a>
+						</c:when>
+			       </c:choose>
 						<h3 class="heading">
 							<a
 								style="position: absolute; white-space: nowrap; margin-top: 5px; margin-left: 50px; float: left;">판매가ㅤㅤ
@@ -215,7 +218,7 @@
 			    	</div>
 			    </div>
                 <div style="float: right;">
-                         <input type="button" name="modify" value="수    정" style="width: 75px; height: 40px; padding-left: 10px; background-color: #212529; color: white; border-radius:2px;" onclick="ModifyBtn()"> 
+                         <input type="submit" name="modify" value="수    정" style="width: 75px; height: 40px; padding-left: 10px; background-color: #212529; color: white; border-radius:2px;"> 
 						 <input type="button" onclick="removeProduct(this.form)"value="삭    제" style="width: 75px; height: 40px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;">
 						<input type="button" name="backlistproduct" value="뒤로가기" style="width: 75px; height: 40px; background-color: #212529; color: white; border-radius:2px; margin-left:20px;" onclick="location.href='${contextPath}/product/admin_listProduct.do'">
 				</div>

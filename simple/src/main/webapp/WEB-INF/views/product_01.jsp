@@ -165,10 +165,12 @@
 			      <c:forEach var="product" items="${productList}" varStatus="productNum">
 				<div class="col-md-4 ftco-animate">
 					<div class="blog-entry">
-					
-						<a href="${contextPath}/product/viewProduct.do?productNum=${product.productNum}" class="block-20"
-							style="background-image: url('${contextPath}/resources/images/image_1.jpg');">
-						</a>
+					<c:choose>		
+				<c:when test="${not empty product.productImage && product.productImage != 'null'}">
+					<input type="hidden" name="OrignProductFile" value="${product.productImage}"class="block-20" />
+				   <img  class="block-20" style="width: 346px;"src="${contextPath}/download_product.do?productNum=${product.productNum}&productImage=${product.productImage}" id="preview" /><br>
+						</c:when>
+			</c:choose>
 						<div class="text d-flex py-1">
 							<div class="desc pl-2">
 								<h3 class="heading">
