@@ -214,33 +214,66 @@
 		</div>
 		<!-- 내용 끝 -->
 		<!-- 페이징 글번호 -->
+		<c:choose>
+		<c:when test="${questionSearchMap ==null}">
 		<div class="page_wrap" style="margin-left: 80px; margin-top: 60px;">
 			<div class="page_nation">
 
 				<c:if test="${pageMaker.prev}">
 
 					<a class="arrow prev"
-						href='<c:url value="/board/listNotice.do?page=${pageMaker.startPage-1 }"/>'><i
+						href='<c:url value="/board/listQuestion?page=${pageMaker.startPage-1 }"/>'><i
 						class="fa fa-chevron-left"></i></a>
 
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }"
 					end="${pageMaker.endPage }" var="pageNum">
 
-					<a href='<c:url value="/board/listNotice.do?page=${pageNum }"/>'><i
+					<a href='<c:url value="/board/listQuestion.do?page=${pageNum }"/>'><i
 						class="fa">${pageNum }</i></a>
 
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
 
 					<a class="arrow next"
-						href='<c:url value="/board/listNotice.do?page=${pageMaker.endPage+1 }"/>'><i
+						href='<c:url value="/board/listQuestion?page=${pageMaker.endPage+1 }"/>'><i
 						class="fa fa-chevron-right"></i></a>
 
 				</c:if>
 
 			</div>
 		</div>
+		</c:when>
+		<c:when test="${questionSearchMap !=null}">
+		<div class="page_wrap" style="margin-left: 80px; margin-top: 60px;">
+			<div class="page_nation">
+
+				<c:if test="${pageMaker.prev}">
+
+					<a class="arrow prev"
+						href='<c:url value="/board/questionSearch.do?page=${pageMaker.startPage-1 }"/>'><i
+						class="fa fa-chevron-left"></i></a>
+
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage }"
+					end="${pageMaker.endPage }" var="pageNum">
+
+					<a href='<c:url value="/board/questionSearch.do?page=${pageNum }"/>'><i
+						class="fa">${pageNum }</i></a>
+
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+
+					<a class="arrow next"
+						href='<c:url value="/board/questionSearch.do?page=${pageMaker.endPage+1 }"/>'><i
+						class="fa fa-chevron-right"></i></a>
+
+				</c:if>
+
+			</div>
+		</div>
+		</c:when>
+		</c:choose>
 	</section>
 </body>
 </html>

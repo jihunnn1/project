@@ -8,7 +8,7 @@
 <c:set var="inquiryList" value="${inquiryMap.inquiryList}" />
 </c:when>
 <c:when test="${!empty inquirySearchMap.inquirySearchList}">
-<c:set var="inquiryList" value="${inquirySearchMap.inquirySearchList}" />
+<c:set var="inquirySearch" value="${inquirySearchMap.inquirySearchList}" />
 </c:when>
 </c:choose>
 <!DOCTYPE html>
@@ -220,12 +220,7 @@
 					<c:choose>
 					<c:when test="${!empty inquiryMap.inquiryList}">
 					<c:set var="num" value="${pageMaker.totalCount - ((inquiryMap.pageNum-1) * 10) }"/>
-					</c:when>
-					<c:when test="${!empty inquirySearchMap.inquirySearchList}">
-					<c:set var="num" value="${pageMaker.totalCount - ((questionSearchMap.pageNum-1) * 10) }"/>
-					</c:when>
-					</c:choose>
-					<c:forEach var="inquiry" items="${inquiryList}"
+										<c:forEach var="inquiry" items="${inquiryList}"
 						varStatus="inquiryNum">
 						<tr
 							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
@@ -240,6 +235,27 @@
 						  <c:set var="num" value="${num-1}"></c:set>
 
 					</c:forEach>
+					</c:when>
+					<c:when test="${!empty inquirySearchMap.inquirySearchList}">
+					<c:set var="num" value="${pageMaker.totalCount - ((pageNum-1) * 10) }"/>
+					<c:forEach var="inquirySearch" items="${inquirySearchList}"
+						varStatus="inquiryNum">
+						<tr
+							style="border-bottom: 1px solid #c6c8ca; background-color: white; color: black;">
+							<td scope="col" width="50">${num}</td>
+							<td scope="col" width="150">${inquirySearch.inquiryType}</td>
+							<td align="left" scope="col" width="500"><a
+								href="${contextPath}/board/viewInquiry.do?inquiryNum=${inquirySearch.inquiryNum}"
+								style="color: black; padding-left: 30px; margin-bottom: 0px;">${inquirySearch.inquiryTitle}</a></td>
+							<td scope="col" width="150"><fmt:formatDate
+									value="${inquirySearch.inquiryDate}" /></td>
+						</tr>
+						  <c:set var="num" value="${num-1}"></c:set>
+
+					</c:forEach>
+					</c:when>
+					</c:choose>
+
 				</thead>
 			</table>
 			<a id="buttonmy" class="btn btn-dark"
@@ -248,7 +264,9 @@
 		</div>
 		<!-- 내용 끝 -->
 		<!-- 페이징 글번호 -->
-				<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
+		<c:choose>
+		<c:when test="${!empty inquiryMap.inquiryList}">
+	<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
 	<div class="page_nation" >
 			
     <c:if test="${pageMaker.prev}">
@@ -269,7 +287,31 @@
  
     </div>
     </div>
+    </c:when>
+    <c:when test="${!empty inquirySearchMap.inquirySearchList}">
+	<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
+	<div class="page_nation" >
+			
+    <c:if test="${pageMaker.prev}">
 
+        <a class="arrow prev" href='<c:url value="/board/inquirySearch.do?page=${pageMaker.startPage-1 }"/>'><i class="fa fa-chevron-left"></i></a>
+  
+    </c:if>
+    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+   
+        <a href='<c:url value="/board/inquirySearch.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+    
+    </c:forEach>
+    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+ 
+        <a class="arrow next" href='<c:url value="/board/inquirySearch.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
+ 
+    </c:if>
+ 
+    </div>
+    </div>
+    </c:when>
+	</c:choose>
 	</section>
 	<br>
 	<br>

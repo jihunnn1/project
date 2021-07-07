@@ -72,6 +72,8 @@ public class ProductControllerImpl implements ProductController{
 		return mav;
 	}
 	
+
+	
 	@Override //관리자 상품목록 조회
 	@RequestMapping(value="product/admin_listProduct.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView admin_listProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {

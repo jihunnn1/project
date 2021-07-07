@@ -58,6 +58,18 @@
 		  element.style.display = 'none';
 	   }
 	}
+	
+</script>
+<script>
+	$(document).on('click', '#btnSearch', function(object) {
+
+		object.preventDefault();
+		var url = "${contextPath}/product/listProduct.do";
+		url = url + "?productType=" + $('#productType').val();
+		location.href = url;
+		console.log(url);
+
+	});
 </script>
  <!-------------header------------------------------------------------------------------------------------------------------------------------>   
 	  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -92,7 +104,7 @@
 	        </ul>
 
 	     <div class="dropdown">
-  			<button  type="button" id="dropdownMenu1"  onclick = "location.href = '${contextPath}/product/listProduct.do'" data-toggle="dropdown" aria-expanded="true" class="category" style="margin-left:-1030px; margin-bottom:0px; cursor:pointer;">
+  			<button  type="button" id="dropdownMenu1"  onclick = "location.href = '${contextPath}/product/listProduct.do?productType='bed''" data-toggle="dropdown" aria-expanded="true" class="category" style="margin-left:-1030px; margin-bottom:0px; cursor:pointer;">
     			침대
   			</button>
   			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-1085px; text-align:center;">
@@ -104,8 +116,8 @@
  			</ul>
 		</div>
 		
-		<div class="dropdown">
-  			<button  type="button" id="dropdownMenu1"  onclick = "location.href = ''" data-toggle="dropdown" aria-expanded="true" class="category" style="margin-left:-926px; cursor:pointer; font-size:19px;">
+		<div class="dropdown" >
+  			<button  type="button" id="dropdownMenu1 btnSearch"   data-toggle="dropdown" aria-expanded="true" class="category" style="margin-left:-926px; cursor:pointer; font-size:19px;">
     			소파
   			</button>
   			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-980px; text-align:center;">
