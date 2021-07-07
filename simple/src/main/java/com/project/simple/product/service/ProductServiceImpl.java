@@ -21,8 +21,8 @@ public class ProductServiceImpl implements ProductService{
 	ProductDAO productDAO;
 	
 	@Override
-	public List<ProductVO> listProduct() throws Exception{
-		List<ProductVO>  productList = productDAO.selectAllProductList();
+	public List<ProductVO> listProduct(String sort) throws Exception{
+		List<ProductVO>  productList = productDAO.selectAllProductList(sort);
 		return productList;
 	}
 	@Override

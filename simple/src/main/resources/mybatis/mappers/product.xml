@@ -21,17 +21,21 @@
 
 
 	<!-- 상품 조회 -->
-	<select id="selectAllProductList" resultMap="proResult">
+	<select id="selectAllProductList" resultMap="proResult" parameterType="String">
 	<![CDATA[
-		select * from product order by category;
+		select * from product where category = #{sort};
 	]]>
 	</select>
-   <!-- 상품 조회 -->
+	
+	
+   <!-- 관리자 상품 조회 -->
 	<select id="admin_selectAllProductList" resultMap="proResult">
 	<![CDATA[
 		select * from product order by category;
 	]]>
 	</select>
+	
+	
 	
 	<!-- 상품추가 -->
 	<insert id="insertProduct"  parameterType="java.util.Map">
