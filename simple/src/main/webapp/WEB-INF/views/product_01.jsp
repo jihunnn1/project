@@ -118,7 +118,7 @@
 			<div class="btn-group btn-group-justified" role="group"
 				aria-label="..." style="margin-bottom: 30px; margin-top: 10px;">
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default"
+					<button type="button" class="btn btn-default" onclick = "location.href = '${contextPath}/product/listProduct_detail.do?sort=침대&subsort=싱글'"
 						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; margin-left: 10px;">*싱글</button>
 				</div>
 				<div class="btn-group" role="group">

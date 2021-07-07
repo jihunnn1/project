@@ -140,6 +140,18 @@ public class ProductControllerImpl implements ProductController{
 		System.out.println(sort);
 		String viewName = (String)request.getAttribute("viewName");
 		List<ProductVO> productList = productService.listProduct(sort);
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("productList", productList);
+		return mav;
+	}
+	
+	//技何惑前格废 炼雀
+	@RequestMapping(value="product/listProduct_detail.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView listProduct_detail(@RequestParam("sort") String sort, @RequestParam("subsort")String subsort, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(sort);
+		System.out.println(subsort);
+		String viewName = (String)request.getAttribute("viewName");
+		List<ProductVO> productList = productService.listProduct(sort);
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("productList", productList);
