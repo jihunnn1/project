@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.simple.product.vo.ProductVO;
+import com.project.simple.board.vo.ArticleVO;
 import com.project.simple.product.dao.ProductDAO;
 
 
@@ -20,8 +21,8 @@ public class ProductServiceImpl implements ProductService{
 	ProductDAO productDAO;
 	
 	@Override
-	public List<ProductVO> listProduct() throws Exception{
-		List<ProductVO>  productList = productDAO.selectAllProductList();
+	public List<ProductVO> listProduct(String sort) throws Exception{
+		List<ProductVO>  productList = productDAO.selectAllProductList(sort);
 		return productList;
 	}
 	@Override
@@ -30,8 +31,8 @@ public class ProductServiceImpl implements ProductService{
 		return productList;
 	}
 	@Override
-	public int addProduct(ProductVO product) throws DataAccessException {
-		return productDAO.insertProduct(product);
+	public int addProduct(Map productMap) throws DataAccessException {
+		return productDAO.insertProduct(productMap);
 	}
 	@Override
 	public void removeProduct(String productNum) throws DataAccessException{
@@ -58,8 +59,16 @@ public class ProductServiceImpl implements ProductService{
 		return productVO;
 	}
 	@Override
-	public void modProduct(Map<String, Object> productMap) {
-		// TODO Auto-generated method stub
+	public void modProduct(Map productMap) throws Exception  {
+		
+		productDAO.updateProduct(productMap);
+
+		
+	}
+	@Override
+	public ProductVO productForm(String productNum) throws Exception {
+		ProductVO productVO = productDAO.selectProduct(productNum);
+		return productVO;
 		
 	}
 	

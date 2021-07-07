@@ -2,6 +2,7 @@ package com.project.simple.product.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,10 @@ public class ProductDAOImpl implements ProductDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ProductVO> selectAllProductList() throws DataAccessException{
-		List<ProductVO> productList = sqlSession.selectList("mapper.product.selectAllProductList");
+	public List<ProductVO> selectAllProductList(String sort) throws DataAccessException{
+		System.out.println(sort);
+		List<ProductVO> productList = sqlSession.selectList("mapper.product.selectAllProductList", sort);
+		System.out.println(productList);
 		return productList;
 	}
 	@Override
@@ -27,8 +30,8 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 	
 	@Override
-	public int insertProduct(ProductVO productVO)throws DataAccessException{
-		int result=sqlSession.insert("mapper.product.insertProduct", productVO);
+	public int insertProduct(Map productMap)throws DataAccessException{
+		int result=sqlSession.insert("mapper.product.insertProduct", productMap);
 		return result;
 	}
 	
@@ -53,6 +56,11 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public void deleteProduct(String productNum) throws DataAccessException{
 		sqlSession.delete("mapper.product.deleteProduct", productNum);
+	}
+	@Override
+	public void updateProduct(Map productMap) throws DataAccessException {
+		sqlSession.update("mapper.product.updateProduct", productMap);
+		
 	}
 
 	

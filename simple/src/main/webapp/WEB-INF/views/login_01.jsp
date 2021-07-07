@@ -377,9 +377,10 @@
 								style="background-color: #212529; color: white; margin-left: -2px;">
 
 							</span>
+							</form>
 							<section class="Easy-sgin-in-wrap3">
 								<ul class="sign-button-list3">
-									<li><button onclick="location.href='#'"
+									<li><button onclick="location.href='${url}'"
 											style="background-color: #212529; color: white;">
 											<img
 												src="${contextPath}/resources/images/login/logo-naver.jpg"
@@ -395,7 +396,7 @@
 										</button></li>
 								</ul>
 							</section>
-						</form>
+						
 					</div>
 				</section>
 

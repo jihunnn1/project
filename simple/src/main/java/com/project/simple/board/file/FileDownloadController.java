@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FileDownloadController {
-	private static final String ARTICLE_IMAGE_REPO = "C:\\spring\\inquiry_image";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\spring\\product_image";
 	@RequestMapping("/download.do")
 	protected void download(@RequestParam("inquiryFile") String inquiryFile,
 							@RequestParam("inquiryNum") String inquiryNum,
@@ -26,6 +26,28 @@ public class FileDownloadController {
 
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-disposition", "attachment; fileName=" + inquiryFile);
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024 * 8];
+		while (true) {
+			int count = in.read(buffer); 
+			if (count == -1) 
+				break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
+	}
+	
+	@RequestMapping("/download_product.do")
+	protected void download_product(@RequestParam("productImage") String productImage,
+							@RequestParam("productNum") String productNum,
+			                 HttpServletResponse response)throws Exception {
+		OutputStream out = response.getOutputStream();
+		String downFile = ARTICLE_IMAGE_REPO + "\\" +productNum+"\\"+ productImage;
+		File file = new File(downFile);
+		System.out.println(productNum);
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachment; fileName=" + productImage);
 		FileInputStream in = new FileInputStream(file);
 		byte[] buffer = new byte[1024 * 8];
 		while (true) {

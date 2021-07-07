@@ -27,6 +27,12 @@ public class MemberServiceImpl implements MemberService{
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
 	}
+	
+	@Override
+	public int addMember_naver(MemberVO member) throws DataAccessException {
+		return memberDAO.insertMember_naver(member);
+	}
+	
 	@Override
 	public int removeMember(MemberVO removemember) throws DataAccessException{
 		return memberDAO.deleteMember(removemember);
@@ -36,5 +42,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		return memberDAO.loginById(memberVO);
+	}
+	
+	//네아로 로그인 기능 구현 추가
+		@Override
+		public MemberVO login_naver(MemberVO memberVO) throws Exception{
+			return memberDAO.loginBynaver(memberVO);
+		}
+	
+	@Override
+	public int modMember(MemberVO modmember) throws DataAccessException {
+		return memberDAO.updateMember(modmember);
 	}
 }

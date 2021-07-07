@@ -28,6 +28,12 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
+	public int insertMember_naver(MemberVO memberVO)throws DataAccessException{
+		int result=sqlSession.insert("mapper.member.insertMember_naver", memberVO);
+		return result;
+	}
+	
+	@Override
 	public int deleteMember(MemberVO removemember) throws DataAccessException{
 		int result=sqlSession.delete("mapper.member.deleteMember", removemember);
 		
@@ -38,5 +44,16 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
 		MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);
 		return vo;
+	}
+	
+	//네이버로로그인 기능 구현 추가
+		public MemberVO loginBynaver(MemberVO memberVO) throws DataAccessException{
+			MemberVO vo = sqlSession.selectOne("mapper.member.loginBynaver", memberVO);
+			return vo;
+		}
+	
+	public int updateMember(MemberVO modmember) throws DataAccessException{
+		int result = sqlSession.update("mapper.member.updateMember", modmember);
+		return result;
 	}
 }

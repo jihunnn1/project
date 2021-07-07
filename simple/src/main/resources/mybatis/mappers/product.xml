@@ -14,31 +14,59 @@
         <result property="productImage" column="productImage" />
         <result property="productManufacturer" column="productManufacturer" />
         <result property="productOrigin" column="productOrigin" />
+        <result property="productContentImage" column="productContentImage" />
+        <result property="option1" column="option1" />
+        <result property="option2" column="option2" />
 	</resultMap>
 
 
 	<!-- 상품 조회 -->
-	<select id="selectAllProductList" resultMap="proResult">
+	<select id="selectAllProductList" resultMap="proResult" parameterType="String">
 	<![CDATA[
-		select * from product order by category;
+		select * from product where category = #{sort};
 	]]>
 	</select>
-   <!-- 상품 조회 -->
+	
+	
+   <!-- 관리자 상품 조회 -->
 	<select id="admin_selectAllProductList" resultMap="proResult">
 	<![CDATA[
 		select * from product order by category;
 	]]>
 	</select>
 	
+	
+	
 	<!-- 상품추가 -->
-	<insert id="insertProduct" parameterType="productVO">
+	<insert id="insertProduct"  parameterType="java.util.Map">
 		<![CDATA[ 
 			insert into simple.product(productNum, productName, productPrice, category, subcategory, productImage,productManufacturer,productOrigin) 
-			values(#{productNum},#{productName},#{productPrice},#{category},#{subcategory},#{productImage},#{productManufacturer},#{productOrigin});
+			values(#{productNum},#{productName},#{productPrice},#{category},#{subcategory},#{productImage},#{productManufacturer},#{productOrigin})
+		
 		]]>
 	</insert>
+	<!-- 상품수정 -->
+			<!-- into simple.productoption(productNum, option1, option2) 
+			values(#{productNum},#{option1},#{option2})
+		
+		
+			into simple.productdetail(productNum, productContentImage) 
+			values(#{productNum},#{productContentImage}); -->
+	<update id="updateProduct"  parameterType="java.util.Map">
+			update product
+			set productName = #{productName},	 
+			productPrice = #{productPrice},
+			category = #{category},	 
+			subcategory = #{subcategory},
+			productManufacturer = #{productManufacturer},
+			productOrigin =#{productOrigin}
+			 <if test="productImage!='' and productImage!=null">
+			  , productImage=#{productImage}
+			</if>
+			where productNum=#{productNum}
+	</update>
 	<!-- 상품삭제 -->
-	<delete id="deleteProduct" parameterType="string">
+	<delete id="deleteProduct" parameterType="java.util.Map">
 		<![CDATA[ 
 			delete from simple.product 
 			where productNum = #{productNum};

@@ -281,36 +281,14 @@
     </c:forEach>
     <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
  
-        <a class="arrow next" href='<c:url value="/board/listNotice.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
+        <a class="arrow next" href='<c:url value="/board/listInquiry.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
  
     </c:if>
  
     </div>
     </div>
     </c:when>
-    <c:when test="${!empty inquirySearchMap.inquirySearchList}">
-	<div class="page_wrap" style="margin-left: 80px; margin-top: 60px; width:1300px;" >
-	<div class="page_nation" >
-			
-    <c:if test="${pageMaker.prev}">
 
-        <a class="arrow prev" href='<c:url value="/board/inquirySearch.do?page=${pageMaker.startPage-1 }"/>'><i class="fa fa-chevron-left"></i></a>
-  
-    </c:if>
-    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
-   
-        <a href='<c:url value="/board/inquirySearch.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
-    
-    </c:forEach>
-    <c:if test="${pageMaker.next && pageMaker.endPage >0 }">
- 
-        <a class="arrow next" href='<c:url value="/board/inquirySearch.do?page=${pageMaker.endPage+1 }"/>'><i class="fa fa-chevron-right"></i></a>
- 
-    </c:if>
- 
-    </div>
-    </div>
-    </c:when>
 	</c:choose>
 	</section>
 	<br>
