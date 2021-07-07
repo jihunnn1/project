@@ -136,9 +136,11 @@ public class ProductControllerImpl implements ProductController{
 
 	@Override //상품목록 조회
 	@RequestMapping(value="product/listProduct.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listProduct(@RequestParam("sort") String sort, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(sort);
 		String viewName = (String)request.getAttribute("viewName");
-		List<ProductVO> productList = productService.listProduct();
+		List<ProductVO> productList = productService.listProduct(sort);
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("productList", productList);
 		return mav;

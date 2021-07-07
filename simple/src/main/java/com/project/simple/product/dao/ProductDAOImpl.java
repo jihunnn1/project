@@ -17,8 +17,10 @@ public class ProductDAOImpl implements ProductDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ProductVO> selectAllProductList() throws DataAccessException{
-		List<ProductVO> productList = sqlSession.selectList("mapper.product.selectAllProductList");
+	public List<ProductVO> selectAllProductList(String sort) throws DataAccessException{
+		System.out.println(sort);
+		List<ProductVO> productList = sqlSession.selectList("mapper.product.selectAllProductList", sort);
+		System.out.println(productList);
 		return productList;
 	}
 	@Override
