@@ -65,7 +65,47 @@
 	border: 1px solid #42454c;
 }
 </style>
+<script type="text/javascript">
+$('document').ready(function() {
+	 var area0 = ["카테고리 선택","침대","소파","화장대/옷장/수납","식탁/의자","테이블/책상/책장"];
+	  var area1 = ["싱글","킹","이층침대","패밀리","퀸"];
+	   var area2 = ["코너형","1인/웜체어","패브릭","리클라이너","4/6인 일자형"];
+	   var area3 = ["거실장","장식장","화장대/콘솔","옷장","서랍장"];
+	   var area4 = ["2인 이상","4인 이상","8인 이상", "식탁의자","테이블의자"];
+	   var area5 = ["소파 테이블","좌식 테이블","원목 테이블", "다용도 테이블","책상/책장"];
+	   // 카테고리 선택 박스 초기화
+	 //하위카테고리 선택 박스 초기화
 
+	   $("select[name^=category]").each(function() {
+	    $selcategory = $(this);
+	    $.each(eval(area0), function() {
+	     $selcategory.append("<option value='"+this+"'>"+this+"</option>");
+	    });
+	    $selcategory.next().append("<option value=''>하위 카테고리 선택</option>");
+	   });
+
+
+
+	   // 카테고리 선택시 하위카테고리 설정
+
+	   $("select[name^=category]").change(function() {
+	    var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 Array
+	    var $subcategory = $(this).next(); // 선택영역 객체
+	    $("option",$subcategory).remove(); // 하위카테고리 초기화
+
+	    if(area == "area0")
+	     $subcategory.append("<option value=''>하위 카테고리 선택</option>");
+	    else {
+	     $.each(eval(area), function() {
+	      $subcategory.append("<option value='"+this+"'>"+this+"</option>");
+	     });
+	    }
+	   });
+
+
+	   });
+
+</script>
 </head>
 <body>
 
@@ -93,7 +133,7 @@
 				</div>
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-default" onclick="location.href='${contextPath}/product/add_product.do'"
-						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white;">상품등록</button>
+						style="font-size: 25px; border: none; color: #5a5a5a; padding-Zright: 210px; background-color: white;">상품등록</button>
 				</div>
 			
 			</div>
@@ -101,8 +141,11 @@
 		
 			<hr style="margin-top: -10px;">
 
-
-
+              <select style="width:190px; height:35px;" name="category" id="category"></select>                   
+              <select style="width:190px; height:35px;" name="subcategory" id="subcategory"></select>
+              <button class="btn btn-primary" name="btnSearch" id="btnSearch">조회</button> 
+	
+           <hr style="margin-top: 15px;">
 
               
 			<div class="row">
@@ -114,10 +157,12 @@
 			      <c:forEach var="product" items="${admin_productList}" varStatus="productNum">
 				<div class="col-md-4 ftco-animate">
 					<div class="blog-entry">
-					
-						<a href="${contextPath}/product/admin_detailproduct.do?productNum=${product.productNum}" class="block-20"
-							style="background-image: url('${contextPath}/resources/images/image_1.jpg');">
-						</a>
+					<c:choose>		
+				<c:when test="${not empty product.productImage && product.productImage != 'null'}">
+					<input type="hidden" name="OrignProductFile" value="${product.productImage}"class="block-20" />
+				   <img  class="block-20" style=" width: 346px;"src="${contextPath}/download_product.do?productNum=${product.productNum}&productImage=${product.productImage}" id="preview" /><br>
+						</c:when>
+			</c:choose>
 						<div class="text d-flex py-1">
 							<div class="desc pl-2">
 								<h3 class="heading">
@@ -132,6 +177,7 @@
 				</c:forEach>
 				</c:when>
 				</c:choose>
+			
 				
 			
 			</div>

@@ -2,6 +2,7 @@ package com.project.simple.product.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 	
 	@Override
-	public int insertProduct(ProductVO productVO)throws DataAccessException{
-		int result=sqlSession.insert("mapper.product.insertProduct", productVO);
+	public int insertProduct(Map productMap)throws DataAccessException{
+		int result=sqlSession.insert("mapper.product.insertProduct", productMap);
 		return result;
 	}
 	
@@ -53,6 +54,11 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public void deleteProduct(String productNum) throws DataAccessException{
 		sqlSession.delete("mapper.product.deleteProduct", productNum);
+	}
+	@Override
+	public void updateProduct(Map productMap) throws DataAccessException {
+		sqlSession.update("mapper.product.updateProduct", productMap);
+		
 	}
 
 	

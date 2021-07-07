@@ -141,14 +141,8 @@
 </style>
 <script type="text/javascript">
    //상품등록
-   function new_Product(){
-	   var form = document.newProduct;
-	   
-	   if(form.productNum.value==""){
-		   alert("상품번호을 입력하지 않았습니다.")
-		   form.productNum.focus();
-		   return false;
-	   }
+   function Product_update(){
+	   var form = document.ProductUpdate;
 	   
 	   if(form.productName.value==""){
 		   alert("상품이름을 입력하지 않았습니다.")
@@ -160,6 +154,7 @@
 		   form.productPrice.focus();
 		   return false;
 	   }
+	 
 	   if(form.category.value==""){
 		   alert("상품카테고리를 입력하지 않았습니다.")
 		   form.category.focus();
@@ -170,11 +165,7 @@
 		   form.subcategory.focus();
 		   return false;
 	   }
-	   if(form.productImage.value==""){
-		   alert("상품이미지를 입력하지 않았습니다.")
-		   form.productImage.focus();
-		   return false;
-	   }
+
 	   if(form.productManufacturer.value==""){
 		   alert("상품제조사를 입력하지 않았습니다.")
 		   form.productManufacturer.focus();
@@ -185,24 +176,35 @@
 		   form.productOrigin.focus();
 		   return false;
 	   }
-	   if (confirm("상품을 등록하시겠습니까?")){ //확인
-	    	
+	   /*if(form.productContentImage.value==""){
+		   alert("상품상세이미지를 입력하지 않았습니다.")
+		   form.productContentImage.focus();
+		   return false;
+	   }*/
+	   if (confirm("상품을 수정하시겠습니까?")){ //확인
+	    	 form.submit();
 	    } else { //취소
 	     	return false;
 	    }
 
-	   form.submit();
-	   alert("상품 수정이 완료되었습니다.");
+	  
    }
 
+ 
 </script>
 </head>
-<title>주문결제창</title>
+<title>관리자상품</title>
 <body>
 <img src="${contextPath}/resources/images/product-01.jpg" width=100%
 		height=350px>
 
 
+<c:choose>
+	<c:when test="${empty productNum}">
+	 <b><span style="color:black;">등록된 상품이 없습니다.</sapn></b>
+	</c:when>
+     <c:when test="${!empty productNum}">
+     
 	<section class="ftco-section testimony-section"
 		style="padding-top: 50px;">
 		<div class="container">
@@ -218,11 +220,15 @@
 				aria-label="..." style="margin-bottom: 30px; margin-top: 10px;">
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-default" onclick="location.href='${contextPath}/product/admin_listProduct.do'"
-						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; margin-left: 10px; font-weight: bold;">*상품조회</button>
+						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; margin-left: 10px; ">상품조회</button>
 				</div>
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-default" onclick="location.href='${contextPath}/product/add_product.do'"
-						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white;">상품등록</button>
+						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; ">상품등록</button>
+				</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" 
+						style="font-size: 25px; border: none; color: #5a5a5a; padding-right: 210px; background-color: white; font-weight: bold;">*상품수정</button>
 				</div>
 			
 			</div>
@@ -231,55 +237,72 @@
 
 			<section class="ftco-section testimony-section"
 				style="padding-top: 40px;">
+				<form name=ProductUpdate method="post" action="${contextPath}/product/modNewProduct.do" enctype="multipart/form-data">
 				<div class="container">
+				
 					<section class="Easy-sgin-in-wrap4">
-						<div id="LeftBox">
-							<h3 id="login_text">상품등록</h3>
-							<form name="newProduct" action="${contextPath}/product/modProduct.do" method="post">
+						<div id="LeftBox" style="height:580px">
+							<h3 id="login_text">상품수정</h3>
+						
 								<div style="padding-left: 107px;"> 
-                                     <label>상품번호</label>
-                                          <input type="text" name="productNum" value="">
+                                     <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품번호</label>
+                                          <input type="text" name="productNum" value="${productNum.productNum}" readonly>
                                </div>
                                <div style="padding-left: 107px;"> 
-                                     <label>상품이름</label>
-                                         <input type="text" name="productName" value="">
+                                     <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품이름</label>
+                                         <input type="text" name="productName" value="${productNum.productName}">
                                </div>
                                <div style="padding-left: 107px;"> 
-                                    <label>상품가격</label>
-                                         <input type="text" name="productPrice" value="">
+                                    <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품가격</label>
+                                         <input type="text" name="productPrice" value="${productNum.productPrice}">
                                </div>
                                <div style="padding-left: 107px;"> 
-                                    <label>카테고리</label>
-                                        <input type="text" name="category" value="">
+                                    <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>카테고리</label>
+                                        <input type="text" name="category" value="${productNum.category}">
                                </div>
                                <div style="padding-left: 75px;"> 
-                                   <label>하위카테고리</label>
-                                        <input type="text" name="subcategory" value="">
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>하위카테고리</label>
+                                        <input type="text" name="subcategory" value="${productNum.subcategory}">
                                </div>
                                <div style="padding-left: 90px;"> 
-                                   <label>상품이미지</label>
-                                        <input type="file" name="productImage" size=40 value="">
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품이미지</label>
+                                   <input type="hidden" name="OrignProductImage" value="${productNum.productImage}" />
+                                   <input type="file" name="productImage" value="${productNum.productImage}" >
+                                   <div style="padding-left: 90px;"> 
+                                   <label style="font-size: 10px;">기존파일: ${productNum.productImage}</label>
+                               </div>
+                               
+                              
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품제조사</label>
+                                        <input type="text" name="productManufacturer" value="${productNum.productManufacturer}">
                                </div>
                                <div style="padding-left: 90px;"> 
-                                   <label>상품제조사</label>
-                                        <input type="text" name="productManufacturer" value="">
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품원산지</label>
+                                        <input type="text" name="productOrigin" value="${productNum.productOrigin}">
                                </div>
-                               <div style="padding-left: 90px;"> 
-                                   <label>상품원산지</label>
-                                        <input type="text" name="productOrigin" value="">
+                               <div style="padding-left: 58px;"> 
+                                   <label><a style="color: red; padding-right: 5px; write-space: nowrap;">*</a>상품상세이미지</label>
+                                        <input type="file" name="productContentImage" value="">
                                </div>
-							</form>
-							
-							
+                               <div style="padding-left: 109px;"> 
+                                   <label>상품옵션1</label>
+                                        <input type="text" name="option1" value="">
+                               </div>
+                               <div style="padding-left: 109px;"> 
+                                   <label>상품옵션2</label>
+                                        <input type="text" name="option2" value="">
+                               </div>
+					
 						</div>
 					</section>
 				</div>
+				</form>
 				<div class="container">
 					<section class="Easy-sgin-in-wrap4">
 						<ul class="sign-button-list4">
-							<li><button onclick="new_Product()"
+							<li><button onclick="Product_update()"
 									style="background-color: #212529; color: white;">
-									<i class="sgin-up"></i><span>등록</span>
+									<i class="sgin-up"></i><span>수정</span>
 								</button></li>
 							<li><button  onclick="location.href='${contextPath}/product/admin_listProduct.do'"
 									style="background-color: #212529; color: white;">
@@ -292,6 +315,8 @@
 			</section>
 		</div>
 	</section>
+	</c:when>
+	</c:choose>
 
 
 </body>
