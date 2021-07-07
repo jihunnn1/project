@@ -17,5 +17,7 @@ public interface MemberService{
 	public int removeMember(MemberVO removemember) throws DataAccessException;
 	
 	public MemberVO login(MemberVO memberVO) throws Exception;
+
+	public MemberVO login_naver(MemberVO memberVO) throws Exception;
 	
 }

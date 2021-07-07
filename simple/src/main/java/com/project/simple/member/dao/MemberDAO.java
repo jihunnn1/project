@@ -12,4 +12,5 @@ public interface MemberDAO{
 	public int deleteMember(MemberVO removemember) throws DataAccessException;
 	public int updateMember(MemberVO modmember) throws DataAccessException;
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
+	public MemberVO loginBynaver(MemberVO memberVO) throws DataAccessException;
 }

@@ -1,6 +1,8 @@
 package com.project.simple.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,16 +10,25 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.project.simple.member.service.MemberService;
+import com.project.simple.member.vo.MemberVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class LoginController {
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private MemberVO memberVO;
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -42,8 +53,8 @@ public class LoginController {
 
 //네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/join_03", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
-			throws IOException, ParseException {
+	public String callback(Model model, HttpServletRequest request, @RequestParam String code, @RequestParam String state, HttpSession session)
+			throws Exception {
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 //1. 로그인 사용자 정보를 읽어온다.
@@ -66,36 +77,52 @@ public class LoginController {
 		System.out.println(Mobile);
 		System.out.println(Name);
 
+//response값 DB에 존재여부 조회 
+
+		MemberVO member = new MemberVO();
+		member.setmemId(Id);
+		member.setmemName(Name);
+		memberVO = memberService.login_naver(member);
+
+		if (memberVO != null) {
+			ModelAndView mav = new ModelAndView();
+			HttpSession session1 = request.getSession();
+			session1.setAttribute("member", memberVO);
+			session1.setAttribute("isLogOn", true);
+			return "main";
+			
+		} else {
+
 //4.파싱  세션으로 저장//세션 생성
-		model.addAttribute("Id", Id);
-		model.addAttribute("Email", Email);
-		model.addAttribute("Mobile", Mobile);
-		model.addAttribute("Name", Name);
-		model.addAttribute("result", apiResult);
-		System.out.println(apiResult);
+			model.addAttribute("Id",Id);
+			model.addAttribute("Email", Email);
+			model.addAttribute("Mobile", Mobile);
+			model.addAttribute("Name", Name);
+			model.addAttribute("result", apiResult);
+			System.out.println(apiResult);
 
-		String FullmemPhoneNum = Mobile;
-		String FullmemEmail = Email;
+			String FullmemPhoneNum = Mobile;
+			String FullmemEmail = Email;
 
-		String e1 = "@";
-		String p1 = "-";
+			String e1 = "@";
+			String p1 = "-";
 
-		String[] memEmail = FullmemEmail.split(e1);
-		String[] memPhoneNum = FullmemPhoneNum.split(p1);
+			String[] memEmail = FullmemEmail.split(e1);
+			String[] memPhoneNum = FullmemPhoneNum.split(p1);
 
-		for (int i = 0; i < memEmail.length; i++) {
+			for (int i = 0; i < memEmail.length; i++) {
+			}
+			for (int i = 0; i < memPhoneNum.length; i++) {
+			}
+
+			model.addAttribute("Email0", memEmail[0]);
+			model.addAttribute("Email1", memEmail[1]);
+
+			model.addAttribute("Mobile0", memPhoneNum[0]);
+			model.addAttribute("Mobile1", memPhoneNum[1]);
+			model.addAttribute("Mobile2", memPhoneNum[2]);
+
+			return "join_03";
 		}
-		for (int i = 0; i < memPhoneNum.length; i++) {
-		}
-
-		model.addAttribute("Email0", memEmail[0]);
-		model.addAttribute("Email1", memEmail[1]);
-
-		model.addAttribute("Mobile0", memPhoneNum[0]);
-		model.addAttribute("Mobile1", memPhoneNum[1]);
-		model.addAttribute("Mobile2", memPhoneNum[2]);
-
-		return "join_03";
 	}
-
 }

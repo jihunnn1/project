@@ -45,6 +45,12 @@ public class MemberDAOImpl implements MemberDAO{
 		return vo;
 	}
 	
+	//네이버로로그인 기능 구현 추가
+		public MemberVO loginBynaver(MemberVO memberVO) throws DataAccessException{
+			MemberVO vo = sqlSession.selectOne("mapper.member.loginBynaver", memberVO);
+			return vo;
+		}
+	
 	public int updateMember(MemberVO modmember) throws DataAccessException{
 		int result = sqlSession.update("mapper.member.updateMember", modmember);
 		return result;

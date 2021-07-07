@@ -289,11 +289,11 @@ h3 {
 										<td class="user_name">
 											<div align="right" style="width: 80px;">
 												<a
-													style="color: red; padding-right: 5px; write-space: nowrap;">*</a>이름
+													style="color: red; padding-right: 5px; write-space: nowrap;">
 											</div>
 										</td>
 										<td colspan="3" class="user_name" style="padding-left: 10px;">
-											<input type="text" name="memName" readonly size="20" value="${Name}"
+											<input type="hidden" name="memName" readonly size="20" value="${Name}"
 											style="margin-bottom: 10px;">
 										</td>
 									</tr>

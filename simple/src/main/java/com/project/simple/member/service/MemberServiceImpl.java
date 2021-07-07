@@ -44,6 +44,12 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.loginById(memberVO);
 	}
 	
+	//네아로 로그인 기능 구현 추가
+		@Override
+		public MemberVO login_naver(MemberVO memberVO) throws Exception{
+			return memberDAO.loginBynaver(memberVO);
+		}
+	
 	@Override
 	public int modMember(MemberVO modmember) throws DataAccessException {
 		return memberDAO.updateMember(modmember);

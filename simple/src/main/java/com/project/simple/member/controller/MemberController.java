@@ -16,7 +16,7 @@ public interface MemberController{
 	public ModelAndView addMember(@ModelAttribute("info")
 	MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView addMember_naver(@ModelAttribute("info")
-	MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	MemberVO memberVO, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView removeMember(@ModelAttribute("removemember")
 	MemberVO removemember, HttpServletRequest request, HttpServletResponse response,RedirectAttributes rAttr) throws Exception;
 	public ModelAndView modMember(@ModelAttribute("modmember")

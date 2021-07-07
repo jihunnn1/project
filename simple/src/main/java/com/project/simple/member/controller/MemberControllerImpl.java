@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -66,13 +67,13 @@ public class MemberControllerImpl implements MemberController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
+			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-	
-	
-	//회원가입작업
+
+	// 회원가입작업
 	@Override
 	@RequestMapping(value = "/addMembers.do", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
@@ -83,21 +84,46 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView("redirect:/join_02.do");
 		return mav;
 	}
-	
-	
-	//네아로 추가정보작업
+
+	// 네아로 DB에 추가정보작업 후 로그인작업
 	@Override
 	@RequestMapping(value = "/addMembers_naver.do", method = RequestMethod.POST)
-	public ModelAndView addMember_naver(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView addMember_naver(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
 		result = memberService.addMember_naver(member);
-		ModelAndView mav = new ModelAndView("redirect:/join_02.do");
+
+		// 로그인작업
+		memberVO = memberService.login_naver(member);
+
+		if (memberVO != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("member", memberVO);
+			session.setAttribute("isLogOn", true);
+			mav.setViewName("redirect:/main.do");
+		} else {
+			rAttr.addAttribute("result", "loginFailed");
+			mav.setViewName("redirect:/login_01.do");
+		}
 		return mav;
 	}
-	
-	
+
+	// 네이버로그인시 DB에 값이 있으면 추가정보 거치지 않고 바로 로그인
+	@RequestMapping(value = "/login_naver.do", method = RequestMethod.GET)
+	public ModelAndView naver_login(RedirectAttributes rAttr,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		session.setAttribute("member", memberVO);
+		session.setAttribute("isLogOn", true);
+		mav.setViewName("redirect:/main.do");
+
+		return mav;
+	}
+
 	// 회원탈퇴작업
 	@RequestMapping(value = "/removeMember.do", method = RequestMethod.POST)
 	public ModelAndView removeMember(@ModelAttribute("removemember") MemberVO removemember, HttpServletRequest request,
@@ -121,9 +147,8 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 
 	}
-	
 
-	// 회원정보수정  
+	// 회원정보수정
 	@RequestMapping(value = "/modMember.do", method = RequestMethod.POST)
 	public ModelAndView modMember(@ModelAttribute("modmember") MemberVO modmember, HttpServletRequest request,
 			HttpServletResponse response, RedirectAttributes rAttr) throws Exception {
@@ -132,11 +157,10 @@ public class MemberControllerImpl implements MemberController {
 		int result = 0;
 		result = memberService.modMember(modmember);
 		session.removeAttribute("member");
-		session.removeAttribute("isLogOn");				
+		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView("redirect:/mypage_10.do");
 		return mav;
 	}
-	
 
 	// 회원수정 비밀번호확인
 	@RequestMapping(value = "/mypage_03.do", method = RequestMethod.POST)
@@ -190,7 +214,6 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-
 	@RequestMapping(value = "/mypage_02.do", method = RequestMethod.GET)
 	private ModelAndView mypage_02(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -206,7 +229,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/mypage_10.do", method = RequestMethod.GET)
 	private ModelAndView mypage_10(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -214,7 +237,6 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
 
 	@RequestMapping(value = "/join_02.do", method = RequestMethod.GET)
 	private ModelAndView join_02(HttpServletRequest request, HttpServletResponse response) {
@@ -239,8 +261,6 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-
-	
 
 	@Override
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
