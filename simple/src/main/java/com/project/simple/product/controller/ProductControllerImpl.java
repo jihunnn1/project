@@ -254,6 +254,7 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 
+	/*
 	@RequestMapping(value = "/product/modNewProduct.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public ResponseEntity modProduct(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -311,6 +312,7 @@ public class ProductControllerImpl implements ProductController {
 		}
 		return resEnt;
 	}
+	*/
 
 	@Override
 	@RequestMapping(value = "/product/removeProduct.do", method = RequestMethod.POST)
