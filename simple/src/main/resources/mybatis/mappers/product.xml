@@ -21,10 +21,18 @@
 
 
 	<!-- 상품 조회 -->
-	<select id="selectAllProductList" resultMap="proResult" parameterType="String">
-	<![CDATA[
-		select * from product where category = #{sort};
-	]]>
+
+	<select id="selectAllProductList" resultMap="proResult"
+		parameterType="java.util.Map">
+	
+		<if test='subsort == "x"'>
+			select * from product where category = #{sort}
+		</if>
+		<if test='subsort != "x"'>
+			select * from product where category = #{sort} and subCategory = #{subsort}
+		</if>
+		
+
 	</select>
 	
 	
