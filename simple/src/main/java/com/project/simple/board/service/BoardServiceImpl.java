@@ -77,9 +77,6 @@ public class BoardServiceImpl implements BoardService{
 	//inquiry 게시판
 	public Map<String ,Object> listInquiry(Map<String ,Object> inquiryMap) throws Exception{
 		List<ArticleVO> inquiryList=boardDAO.selectInquiryList(inquiryMap);
-		if(inquiryList.size()==0){ 
-			return null;
-		}
 		inquiryMap.put("inquiryList", inquiryList);
 		return inquiryMap;
 	}
@@ -94,6 +91,7 @@ public class BoardServiceImpl implements BoardService{
 		List<ArticleVO> inquirySearchList=boardDAO.inquirySearchList(inquirySearchMap);
 
 		inquirySearchMap.put("inquirySearchList", inquirySearchList);
+		
 		System.out.println(inquirySearchMap);
 		return inquirySearchMap;
 	}
@@ -133,11 +131,24 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
+	//AS센터
+	@Override
+	public List<ArticleVO> listAsCenter(Criteria cri) throws Exception{
+		List<ArticleVO> ascenterList = boardDAO.selectAllAsCenterList(cri);
+		return ascenterList;
+	}
+	
+	@Override
+	public int asCenterCount() throws Exception{
+		int ascenterCount = boardDAO.selectAsCenterCount();
+		return ascenterCount;
+	}
 
-
-
-
-
-
+	@Override
+	public ArticleVO viewAsCenter(int asCenterNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectAsCenter(asCenterNum);
+		return articleVO;
+	}
+	
 	
 }	

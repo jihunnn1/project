@@ -80,7 +80,6 @@ function removeInquiry(obj) {
 				<thead class="table-dark" align=center>
 					<tr style="border-bottom: 1px solid grey; height: 30px;">
 						<td><a>${inquiry.inquiryTitle}</a></td>
-						<td><a>${inquiry.inquiryNum}</a></td>
 					</tr>	
 
 					
@@ -111,9 +110,17 @@ function removeInquiry(obj) {
 		
 				</thead>
 			</table>
-
+			
+			<c:choose>
+	<c:when test= "${!empty search1}">
+							<button type="button" class="btn btn-dark" id="buttonmy"
+				style="float: left; margin-left: 590px; margin-top: 30px;" onclick="location.href='${contextPath}/board/inquirySearch.do?search1=${search1}&search2=${search2}&page=${pageNum}'">목록</button>
+			</c:when>
+			<c:otherwise>
 			<button type="button" class="btn btn-dark" id="buttonmy"
 				style="float: left; margin-left: 590px; margin-top: 30px;" onclick="location.href='${contextPath}/board/listInquiry.do'">목록</button>
+			</c:otherwise>	
+			</c:choose>	
 				<button type="submit" class="btn btn-dark" id="buttonmy" 
 					style="float: left; margin-left: 1100px; margin-top: -30px; " >수정</button>
 				<button type="button" class="btn btn-dark" id="buttonmy" 
