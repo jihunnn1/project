@@ -1,11 +1,13 @@
 package com.project.simple.product.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.sf.json.JSONObject;
 
@@ -59,11 +61,15 @@ public class ProductControllerImpl implements ProductController{
 			String name = (String) enu.nextElement();
 			String value = multipartRequest.getParameter(name);
 			productMap.put(name, value);
-			System.out.println(name);
+			Set set = productMap.keySet();
+			System.out.println(set);
+
+
+
 
 		}
 
-		String productImage = upload(multipartRequest);
+		List<String> productImage = upload(multipartRequest);
 		//HttpSession session = multipartRequest.getSession();
 		//MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		//String memId = memberVO.getmemId();
@@ -77,11 +83,23 @@ public class ProductControllerImpl implements ProductController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			productService.addProduct(productMap);
-			if (productImage != null && productImage.length() != 0) {
-				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImage);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + productNum);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+
+			if (productImage != null && productImage.size() != 0) {
+				Iterator<String> it = productImage.iterator();
+				while(it.hasNext()) {
+					String productImg =it.next();
+					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImg);
+					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + productNum);
+					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+					
+					productMap.put(productImg, productImg);
+			
+				}
+
+			productService.addProduct(productMap);	
+			
+			
+
 			}
 
 			message = "<script>";
@@ -91,8 +109,14 @@ public class ProductControllerImpl implements ProductController{
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImage);
-			srcFile.delete();
+			Iterator<String> it = productImage.iterator();
+			while(it.hasNext()) {
+				String productImg =it.next();
+				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImg);
+				srcFile.delete();
+			}
+
+			
 
 			message = "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해주세요');";
@@ -103,11 +127,14 @@ public class ProductControllerImpl implements ProductController{
 		}
 		return resEnt;
 	}
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+
+	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
 		String productImage = null;
+		List<String> product = new ArrayList<String>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		while (fileNames.hasNext()) {
 			String fileName = fileNames.next();
+
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			productImage = mFile.getOriginalFilename();
 			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
@@ -115,13 +142,14 @@ public class ProductControllerImpl implements ProductController{
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();
 					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImage));// 임시로 저장되 multipartFile을 실제 파일로 전송
+					product.add(productImage);
 																							
 				}
 					
 				
 			}
 		}
-		return productImage;
+		return product;
 
 	}
 	//상품추가뷰
@@ -137,7 +165,7 @@ public class ProductControllerImpl implements ProductController{
 	@Override //상품목록 조회
 	@RequestMapping(value="product/listProduct.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listProduct(@RequestParam("sort") String sort, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(sort);
+
 		String viewName = (String)request.getAttribute("viewName");
 		List<ProductVO> productList = productService.listProduct(sort);
 		ModelAndView mav = new ModelAndView(viewName);
@@ -148,8 +176,7 @@ public class ProductControllerImpl implements ProductController{
 	//세부상품목록 조회
 	@RequestMapping(value="product/listProduct_detail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listProduct_detail(@RequestParam("sort") String sort, @RequestParam("subsort")String subsort, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(sort);
-		System.out.println(subsort);
+
 		String viewName = (String)request.getAttribute("viewName");
 		List<ProductVO> productList = productService.listProduct(sort);
 		
@@ -174,13 +201,13 @@ public class ProductControllerImpl implements ProductController{
 	@RequestMapping(value = "/product/modProduct.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView productForm(@RequestParam("productNum") String productNum,
 			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
-			System.out.println(productNum);
+
 			String viewName = (String) multipartRequest.getAttribute("viewName");
 			productVO = productService.productForm(productNum);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName(viewName);
 			mav.addObject("productNum", productVO);
-			System.out.println(productVO);
+
 			return mav;
 		}
 	@RequestMapping(value="/product/modNewProduct.do",method = {RequestMethod.GET, RequestMethod.POST})
@@ -209,12 +236,12 @@ public class ProductControllerImpl implements ProductController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {		
-			System.out.println(productMap);
+
 			productService.modProduct(productMap);
 		
 			if(productImage!= null && productImage.length()!=0) {
 				String OrignProductImage = (String)productMap.get("OrignProductImage");
-				System.out.println(OrignProductImage);
+
 				File oldFile = new File(ARTICLE_IMAGE_REPO+ "\\"+ productNum+"\\"+OrignProductImage);
 				oldFile.delete();
 				
@@ -283,7 +310,7 @@ public class ProductControllerImpl implements ProductController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("product", productVO);
-		System.out.println(productVO);
+
 		return mav;
 		
 	}
@@ -295,7 +322,7 @@ public class ProductControllerImpl implements ProductController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("product", productVO);
-		System.out.println(productVO);
+
 		return mav;
 	}
 	

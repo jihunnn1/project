@@ -40,10 +40,12 @@
 	<!-- 상품추가 -->
 	<insert id="insertProduct"  parameterType="java.util.Map">
 		<![CDATA[ 
-			insert into simple.product(productNum, productName, productPrice, category, subcategory, productImage,productManufacturer,productOrigin) 
-			values(#{productNum},#{productName},#{productPrice},#{category},#{subcategory},#{productImage},#{productManufacturer},#{productOrigin})
+			insert into simple.product(productNum, productName, productPrice, category, subcategory, productImage,productManufacturer,productOrigin,productContentImage) 
+			values(#{productNum},#{productName},#{productPrice},#{category},#{subcategory},#{productImage},#{productManufacturer},#{productOrigin},#{productContentImage})
 		
 		]]>
+
+		
 	</insert>
 	<!-- 상품수정 -->
 			<!-- into simple.productoption(productNum, option1, option2) 
@@ -61,7 +63,7 @@
 			productManufacturer = #{productManufacturer},
 			productOrigin =#{productOrigin}
 			 <if test="productImage!='' and productImage!=null">
-			  , productImage=#{productImage}
+			  , productImage=#{productImage},productContentImage=#{productContentImage},
 			</if>
 			where productNum=#{productNum}
 	</update>
