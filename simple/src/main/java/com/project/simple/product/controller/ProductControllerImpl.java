@@ -46,11 +46,10 @@ public class ProductControllerImpl implements ProductController {
 	private ProductVO productVO;
 	private static final Logger logger = LoggerFactory.getLogger(ProductControllerImpl.class);
 
-	@Override // 상품등록하기
-	@RequestMapping(value = "product/addProduct.do", method = RequestMethod.POST)
+	@Override //상품등록하기
+	@RequestMapping(value="product/addProduct.do", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addProduct(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
+	public ResponseEntity addProduct(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String, Object> productMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
@@ -58,19 +57,28 @@ public class ProductControllerImpl implements ProductController {
 			String name = (String) enu.nextElement();
 			String value = multipartRequest.getParameter(name);
 			productMap.put(name, value);
-			Set set = productMap.keySet();
-			System.out.println(set);
+
+
+
+
+
 
 		}
 
-		List<String> productImage = upload(multipartRequest);
-		// HttpSession session = multipartRequest.getSession();
-		// MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		// String memId = memberVO.getmemId();
-
-		// inquiryMap.put("memId", memId);
+		List<String> productImage1 = upload(multipartRequest);
+		String productImage = productImage1.get(0).toString();
+		String productContentImage = productImage1.get(1).toString();
 		productMap.put("productImage", productImage);
+		productMap.put("productContentImage", productContentImage);
+		System.out.println(productMap);
+		//HttpSession session = multipartRequest.getSession();
+		//MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		//String memId = memberVO.getmemId();
+		
+		//inquiryMap.put("memId", memId);
+
 		String productNum = (String) productMap.get("productNum");
+
 
 		String message;
 		ResponseEntity resEnt = null;
@@ -78,19 +86,20 @@ public class ProductControllerImpl implements ProductController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 
-			if (productImage != null && productImage.size() != 0) {
-				Iterator<String> it = productImage.iterator();
-				while (it.hasNext()) {
-					String productImg = it.next();
+			if (productImage1 != null && productImage1.size() != 0) {
+				Iterator<String> it = productImage1.iterator();
+				while(it.hasNext()) {
+					String productImg =it.next();
 					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImg);
 					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + productNum);
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
-
-					productMap.put(productImg, productImg);
-
+					
+			
 				}
 
-				productService.addProduct(productMap);
+			productService.addProduct(productMap);	
+			
+			
 
 			}
 
@@ -101,12 +110,14 @@ public class ProductControllerImpl implements ProductController {
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
 		} catch (Exception e) {
-			Iterator<String> it = productImage.iterator();
-			while (it.hasNext()) {
-				String productImg = it.next();
+			Iterator<String> it = productImage1.iterator();
+			while(it.hasNext()) {
+				String productImg =it.next();
 				File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImg);
 				srcFile.delete();
 			}
+
+			
 
 			message = "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해주세요');";
@@ -131,13 +142,12 @@ public class ProductControllerImpl implements ProductController {
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImage));// 임시로 저장되
-																											// multipartFile을
-																											// 실제 파일로 전송
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + productImage));// 임시로 저장되 multipartFile을 실제 파일로 전송
 					product.add(productImage);
-
+																							
 				}
-
+					
+				
 			}
 		}
 		return product;
@@ -257,6 +267,7 @@ public class ProductControllerImpl implements ProductController {
 			productMap.put(name, value);
 
 		}
+		
 		String productImage = upload(multipartRequest);
 		productMap.put("productImage", productImage);
 

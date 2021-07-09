@@ -51,10 +51,11 @@
 			insert into simple.product(productNum, productName, productPrice, category, subcategory, productImage,productManufacturer,productOrigin,productContentImage) 
 			values(#{productNum},#{productName},#{productPrice},#{category},#{subcategory},#{productImage},#{productManufacturer},#{productOrigin},#{productContentImage})
 		
-		]]>
-
-		
+		]]>	
 	</insert>
+	
+	
+	
 	<!-- 상품수정 -->
 			<!-- into simple.productoption(productNum, option1, option2) 
 			values(#{productNum},#{option1},#{option2})
