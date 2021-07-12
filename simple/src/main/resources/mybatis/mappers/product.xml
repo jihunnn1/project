@@ -17,6 +17,8 @@
         <result property="productContentImage" column="productContentImage" />
         <result property="option1" column="option1" />
         <result property="option2" column="option2" />
+        <result property="option1price" column="option1price" />
+        <result property="option2price" column="option2price" /> 
 	</resultMap>
 
 
@@ -87,8 +89,23 @@
 	<select id="selectProduct" resultType="productVO" parameterType="string"> 
 	<![CDATA[
 			
-			select * from product
-			where productNum = #{productNum};
+			select product.productNum,
+			product.productName, 
+			product.productPrice, 
+			product.productImage, 
+			product.productManufacturer, 
+			product.productOrigin, 
+			product.productContentImage, 
+			product.productquantity, 
+			productoption.option1, 
+			productoption.option2, 
+			productoption.option1price, 
+			productoption.option2price	
+			from product
+			left join productoption on product.productNum=productoption.productNum
+			where product.productNum = #{productNum};
+		
+			
 			
 	]]>
 	</select>

@@ -20,10 +20,12 @@ public class ProductVO {
 	private String productOrigin;         //상품 원산지
 	private Date productDate;             //상품 등록날짜
 	private String productContentImage;    //상품 상세이미지
-	
+
 	private int productOptionNum;      //상품 옵션 번호
 	private String option1;            //상품 옵션1
 	private String option2;           //상품 옵션2
+	private String option1price;	//상품 옵션1 가격
+	private String option2price;	//상품 옵션2 가격 
 	
 	public ProductVO() {
 
@@ -141,6 +143,19 @@ public class ProductVO {
 	}
 	public void setoption1(String option1) {
 		this.option1 = option1;
+	}
+	public String getoption2price() {
+		return option2price;
+	}
+	public void setoption2price(String option2) {
+		this.option2price = option2price;
+	}
+	
+	public String getoption1price() {
+		return option1price;
+	}
+	public void setoption1price(String option1) {
+		this.option1price = option1price;
 	}
 
 

@@ -254,9 +254,10 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 
-	/*
-	@RequestMapping(value = "/product/modNewProduct.do", method = { RequestMethod.GET, RequestMethod.POST })
+	
+	/*@RequestMapping(value = "/product/modNewProduct.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
+	
 	public ResponseEntity modProduct(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
@@ -311,8 +312,8 @@ public class ProductControllerImpl implements ProductController {
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}
 		return resEnt;
-	}
-	*/
+	}*/
+	
 
 	@Override
 	@RequestMapping(value = "/product/removeProduct.do", method = RequestMethod.POST)
