@@ -165,41 +165,42 @@ textarea {
 
 	<section class="ftco-section" style="padding-top: 20px;">
 		<div class="container">
+
+			<div class="row justify-content-center mb-5 pb-3"
+				style="background-color: #f5f5f5; border: 1px solid #e7e7e7;">
+				<div class="col-md-20 heading-section ftco-animate"
+					style="height: 60px;">
+					<h2 class="mb-4" style="font-size: 35px; margin-top: 18px;">${product.productName}</h2>
+				</div>
+			</div>
+			<!-- 최근 본 상품 -->
+			<div id="recentlyProduct"
+				style="position: absolute; left: 180px; width: 120px; height: 310px; margin-left: 1570px; border: 1px solid #d2d2d2; margin-top: 0px;">
+				<ul
+					style="list-style: none; margin-top: 10px; padding-left: 20px; margin-bottom: 10px;">
+					<li><a href="#"
+						style="padding-left: -10px; padding-bottom: 1px; color: black;">최근본상품</a></li>
+				</ul>
+				<hr style="margin-top: 0px; margin-bottom: 0px; color: #d2d2d2;">
+				<ul style="list-style: none; padding-top: 5px;">
+					<li><a href="#"><img
+							src="${contextPath}/resources/images/image_1.jpg"
+							style="width: 100px; height: 100px; padding-top: 10px; margin-left: -30px;"></a></li>
+					<li><a href="#"><img
+							src="${contextPath}/resources/images/image_2.jpg"
+							style="width: 100px; height: 100px; padding-top: 10px; padding-top: 10px; margin-left: -30px;"></a></li>
+				</ul>
+				<hr style="margin-top: 0px; margin-bottom: 0px; color: #d2d2d2;">
+				<ul
+					style="list-style: none; padding-left: 30px; margin-bottom: 10px; margin-top: 8px;">
+					<li><a href="#"
+						style="color: black; text-align: center; margin-top: 8px; padding-top: 30px;">더보기▼</a></li>
+				</ul>
+			</div>
+			<!-- 최근 본 상품 끝 -->
+			<!-- 내용 -->
 			<form method="post" id="addCartForm"
 				action="${contextPath}/product/viewProduct.do?productNum=${product.productNum}">
-				<div class="row justify-content-center mb-5 pb-3"
-					style="background-color: #f5f5f5; border: 1px solid #e7e7e7;">
-					<div class="col-md-20 heading-section ftco-animate"
-						style="height: 60px;">
-						<h2 class="mb-4" style="font-size: 35px; margin-top: 18px;">${product.productName}</h2>
-					</div>
-				</div>
-				<!-- 최근 본 상품 -->
-				<div id="recentlyProduct"
-					style="position: absolute; left: 180px; width: 120px; height: 310px; margin-left: 1570px; border: 1px solid #d2d2d2; margin-top: 0px;">
-					<ul
-						style="list-style: none; margin-top: 10px; padding-left: 20px; margin-bottom: 10px;">
-						<li><a href="#"
-							style="padding-left: -10px; padding-bottom: 1px; color: black;">최근본상품</a></li>
-					</ul>
-					<hr style="margin-top: 0px; margin-bottom: 0px; color: #d2d2d2;">
-					<ul style="list-style: none; padding-top: 5px;">
-						<li><a href="#"><img
-								src="${contextPath}/resources/images/image_1.jpg"
-								style="width: 100px; height: 100px; padding-top: 10px; margin-left: -30px;"></a></li>
-						<li><a href="#"><img
-								src="${contextPath}/resources/images/image_2.jpg"
-								style="width: 100px; height: 100px; padding-top: 10px; padding-top: 10px; margin-left: -30px;"></a></li>
-					</ul>
-					<hr style="margin-top: 0px; margin-bottom: 0px; color: #d2d2d2;">
-					<ul
-						style="list-style: none; padding-left: 30px; margin-bottom: 10px; margin-top: 8px;">
-						<li><a href="#"
-							style="color: black; text-align: center; margin-top: 8px; padding-top: 30px;">더보기▼</a></li>
-					</ul>
-				</div>
-				<!-- 최근 본 상품 끝 -->
-				<!-- 내용 -->
 				<div class="row">
 					<section>
 						<div class="col-md-4 ftco-animate">
@@ -210,15 +211,65 @@ textarea {
 							</div>
 						</div>
 					</section>
-					
-					
-					<section style="width:540px;">
-					
+
+
+					<section style="width: 685px;">
+
+						<h3 class="heading">
+							<a
+								style="position: absolute; white-space: nowrap; margin-top: 5px; margin-left: 50px; float: left; font-size: 18px;">판매가ㅤㅤ
+								ㅤ</a>
+						</h3>
+
+						<h3 class="heading">
+							<a
+								style="position: absolute; white-space: nowrap; margin-top: 50px; margin-left: 51px; float: left; font-size: 18px;">제조사ㅤㅤ
+								ㅤ</a><a
+								style="position: absolute; white-space: nowrap; margin-top: 50px; margin-left: 180px; font-size: 18px;">${product.productManufacturer}</a>
+						</h3>
+						<br> <br>
+						<h3 class="heading">
+							<a
+								style="position: absolute; white-space: nowrap; margin-top: 50px; margin-left: 51px; float: left; font-size: 18px;">원산지ㅤㅤ
+								ㅤ</a>
+						</h3>
+						<h3 class="heading">
+							<a
+								style="position: absolute; white-space: nowrap; margin-top: 40px; margin-left: 180px; font-size: 18px;">${product.productOrigin}</a>
+						</h3>
+						<br>
+						<h3 class="heading">
+							<a
+								style="position: absolute; white-space: nowrap; margin-top: 80px; margin-left: 51px; float: left; font-size: 18px;">옵션1ㅤㅤ
+								ㅤ</a>
+						</h3>
+
+						<select id="selectBox" name="selectBox"
+							style="margin-left: 180px; margin-top: 70px; float: left !important; width: 300px; height: 30px;">
+							<option value="" selected="selected">옵션 선택</option>
+							<option value="${product.option1}">${product.option1}</option>
+						</select> <br><br>
+						<h3 class="heading">
+							<a
+								style=" white-space: nowrap; margin-top: 100px; margin-left: -430px; float: left; font-size: 13px;">추가
+								옵션(추가 구매를 원하시면 클릭하세요)</a>
+						</h3>
+						<br><br>
+						<h3 class="heading">
+							<a
+								style="position: absolute; white-space: nowrap; margin-top: 80px; margin-left: 51px; float: left; font-size: 18px;">옵션2ㅤㅤ
+								ㅤ</a>
+						</h3>
+						<select
+							style="margin-left: 180px; margin-top: 70px; float: left !important; width: 300px; height: 30px;">
+							<option value="" selected="selected">옵션 선택</option>
+							<option value="${product.option2}">${product.option2}</option>
+						</select> <br>
 					</section>
 
 
 				</div>
-				
+
 
 			</form>
 
