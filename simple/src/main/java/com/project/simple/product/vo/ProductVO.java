@@ -22,9 +22,14 @@ public class ProductVO {
 	private String productContentImage;    //惑前 惑技捞固瘤
 	
 	private int productOptionNum;      //惑前 可记 锅龋
-	private String option1;            //惑前 可记1
-	private String option2;           //惑前 可记2
-
+	private String option1Name;            //惑前 可记1
+	private String option2Name;           //惑前 可记2
+	private int option1price;	//惑前 可记1 啊拜
+	private int option2price;	//惑前 可记2 啊拜
+	private String option1value; //可记1 格废
+	private String option2value; //可记2 格废
+	private int favoriteCount;
+	
 	//惑前 府轰
 	private int reviewNum;
 	private int memOrderSeqNum;
@@ -36,19 +41,19 @@ public class ProductVO {
 	private String reviewFile;
 	
 	//惑前 巩狼
+	private int productQuestionNum;
 	private String productQuestionTitle;
 	private String productQuestionContent;
 	private Date productQuestionDate;
 	private String productAnswerContent;
-	
-	
+	private String answerWhether;
 	
 	public ProductVO() {
 
 	}
 	public ProductVO(String productNum, String productName, String productPrice,String category, String subcategory,
 			String productImage,String productManufacturer,String productOrigin,String productContentImage
-			, int productOptionNum, String option1, String option2) {
+			, int productOptionNum, String option1Name, String option2Name) {
 		this.productNum = productNum;
 		this.productName = productName;
 		this.productPrice = productPrice;
@@ -59,9 +64,8 @@ public class ProductVO {
 		this.productOrigin = productOrigin;
 		this.productContentImage = productContentImage;
 		this.productOptionNum = productOptionNum;
-		this.option1 = option1;
-		this.option2 = option2;
-	
+		this.option1Name = option1Name;
+		this.option2Name = option2Name;
 	}
 	public String getproductNum() {
 		return productNum;
@@ -147,19 +151,50 @@ public class ProductVO {
 		this.productOptionNum = productOptionNum;
 	}
 	
-	public String getoption2() {
-		return option2;
+
+	
+	public int getOption1price() {
+		return option1price;
 	}
-	public void setoption2(String option2) {
-		this.option2 = option2;
+	public void setOption1price(int option1price) {
+		this.option1price = option1price;
+	}
+	public int getOption2price() {
+		return option2price;
+	}
+	public void setOption2price(int option2price) {
+		this.option2price = option2price;
+	}
+	public String getOption1value() {
+		return option1value;
+	}
+	public void setOption1value(String option1value) {
+		this.option1value = option1value;
+	}
+	public String getOption2value() {
+		return option2value;
+	}
+	public void setOption2value(String option2value) {
+		this.option2value = option2value;
+	}
+	public String getOption1Name() {
+		return option1Name;
+	}
+	public void setOption1Name(String option1Name) {
+		this.option1Name = option1Name;
 	}
 	
-	public String getoption1() {
-		return option1;
+	public String getOption2Name() {
+		return option2Name;
 	}
-	public void setoption1(String option1) {
-		this.option1 = option1;
+	public void setOption2Name(String option2Name) {
+		this.option2Name = option2Name;
 	}
+
+	
+	
+	
+	
 
 	//惑前 府轰
 	public int getReviewNum() {
@@ -219,6 +254,13 @@ public class ProductVO {
 	}
 	
 	//惑前 巩狼
+	public int getProductQuestionNum() {
+		return productQuestionNum;
+	}
+	public void setProductQuestionNum(int productQuestionNum) {
+		this.productQuestionNum = productQuestionNum;
+	}
+	
 	public String getProductQuestionTitle() {
 		return productQuestionTitle;
 	}
@@ -247,7 +289,20 @@ public class ProductVO {
 		this.productAnswerContent = productAnswerContent;
 	}
 	
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
 	
+	public String getAnswerWhether() {
+		return answerWhether;
+	}
+	public void setAnswerWhether(String answerWhether) {
+		this.answerWhether = answerWhether;
+	}
+
 
 
 }
